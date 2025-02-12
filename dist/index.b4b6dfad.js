@@ -18790,7 +18790,7 @@ const MainView = ()=>{
         //Find similar movies array
         let similarMovies = movies.filter((arrayMovie)=>selectedMovie.Genre.Name === arrayMovie.Genre.Name && selectedMovie._id !== arrayMovie._id);
         if (similarMovies.length > 0) {
-            console.log("Found ${similarMovies.length} similar movies by Genre: ");
+            console.log(`Found ${similarMovies.length} movies similar to "${selectedMovie.Title}" by Genre: `);
             console.log(similarMovies);
             return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
@@ -18845,7 +18845,7 @@ const MainView = ()=>{
                 columnNumber: 9
             }, undefined);
         } else {
-            console.log("No similar movies found by Genre.");
+            console.log(`Found no movies similar to "${selectedMovie.Title}" by Genre.`);
             return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
                 movie: selectedMovie,
                 onBackClick: ()=>{

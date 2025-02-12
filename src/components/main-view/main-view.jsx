@@ -60,7 +60,7 @@ const MainView = () => {
     let similarMovies = movies.filter((arrayMovie) => selectedMovie.Genre.Name === arrayMovie.Genre.Name && selectedMovie._id !== arrayMovie._id);
 
     if (similarMovies.length > 0) {
-      console.log("Found ${similarMovies.length} similar movies by Genre: ");
+      console.log(`Found ${similarMovies.length} movies similar to "${selectedMovie.Title}" by Genre: `);
       console.log(similarMovies);
 
       return (
@@ -84,7 +84,7 @@ const MainView = () => {
         </div>
       );
     } else {
-      console.log("No similar movies found by Genre.");
+      console.log(`Found no movies similar to "${selectedMovie.Title}" by Genre.`);
 
       return (
         <MovieView movie={selectedMovie} onBackClick={() => { setSelectedMovie(null) }} />
