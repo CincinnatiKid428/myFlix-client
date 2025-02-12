@@ -1,4 +1,10 @@
-$color: crimson;
+$color: black;
+
+.clickable-movie-title:hover {
+    color: crimson;
+    cursor: pointer;
+    text-decoration: wavy;
+}
 
 .my-flix {
     color: $color;

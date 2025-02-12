@@ -15,33 +15,8 @@ const MainView = () => {
   //API call to get list of all movies from remote Heroku server running movie_api app
   useEffect(() => {
 
-    /* -- Attempt 1
-    fetch('https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies')
-      .then((response) => { response.json() })
-      .then((movieData) => {
-        console.log("The API get hook returned data:");
-        console.log(movieData);
-        setMovies(movieData);
-      })
-      .catch(err) {
-      console.error("Caught error in API hook: " + err);
-    }
-    */
+    /* Suggestion from ChatGPT on best method for API fetch in React application to make an async func like:
 
-    /* -- Attempt 2
-    try {
-      console.log("API request...");
-      const response = fetch(API_GET_ALL_MOVIES);
-      console.log("API request response:");
-      console.log(response);
-      setMovies(response);
-    } catch (err) {
-      console.error("Error in API call hook:");
-      console.error(err);
-    }
-    */
-
-    // --Attempt 3
     // Define an async function inside useEffect
     const fetchMovies = async () => {
       try {
@@ -55,9 +30,23 @@ const MainView = () => {
         console.error(error.message);  // Update error state if something goes wrong
       }
     };
-
     fetchMovies();  // Call the async function
+    */
 
+    const getMovies = async () => {
+      try {
+        console.log("API request...");
+        const response = await fetch(API_GET_ALL_MOVIES);
+        let movieData = await response.json();
+        console.log("API request response:");
+        console.log(movieData);
+        setMovies(movieData);
+      } catch (err) {
+        console.error("Error in API call:");
+        console.error(err.message);
+      }
+    };
+    getMovies();
 
   }, []);
 
@@ -66,9 +55,41 @@ const MainView = () => {
   }
 
   if (selectedMovie) {
-    return (
-      <MovieView movie={selectedMovie} onBackClick={() => { setSelectedMovie(null) }} />
-    );
+
+    //Find similar movies array
+    let similarMovies = movies.filter((arrayMovie) => selectedMovie.Genre.Name === arrayMovie.Genre.Name && selectedMovie._id !== arrayMovie._id);
+
+    if (similarMovies.length > 0) {
+      console.log("Found ${similarMovies.length} similar movies by Genre: ");
+      console.log(similarMovies);
+
+      return (
+        <div>
+          <MovieView movie={selectedMovie} onBackClick={() => { setSelectedMovie(null) }} />
+          <br />
+          <hr />
+          <h2>Similar Movies:</h2>
+          {similarMovies.map((movie) => {
+            return (
+              <MovieCard
+                key={movie._id}
+                movie={movie}
+                onMovieClick={(newSelectedMovie) => {
+                  setSelectedMovie(newSelectedMovie);
+                }}
+              />
+            );
+          })}
+          <br />
+        </div>
+      );
+    } else {
+      console.log("No similar movies found by Genre.");
+
+      return (
+        <MovieView movie={selectedMovie} onBackClick={() => { setSelectedMovie(null) }} />
+      );
+    }
   }
 
   return (

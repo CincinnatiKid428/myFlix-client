@@ -18748,59 +18748,116 @@ const MainView = ()=>{
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     //API call to get list of all movies from remote Heroku server running movie_api app
     (0, _react.useEffect)(()=>{
-        /* -- Attempt 1
-    fetch('https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies')
-      .then((response) => { response.json() })
-      .then((movieData) => {
-        console.log("The API get hook returned data:");
-        console.log(movieData);
-        setMovies(movieData);
-      })
-      .catch(err) {
-      console.error("Caught error in API hook: " + err);
-    }
-    */ /* -- Attempt 2
-    try {
-      console.log("API request...");
-      const response = fetch(API_GET_ALL_MOVIES);
-      console.log("API request response:");
-      console.log(response);
-      setMovies(response);
-    } catch (err) {
-      console.error("Error in API call hook:");
-      console.error(err);
-    }
-    */ // --Attempt 3
-        // Define an async function inside useEffect
-        const fetchMovies = async ()=>{
+        /* Suggestion from ChatGPT on best method for API fetch in React application to make an async func like:
+
+    // Define an async function inside useEffect
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch(API_GET_ALL_MOVIES);  // API request
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();  // Parse the JSON response
+        setMovies(data);  // Update state with the fetched data
+      } catch (error) {
+        console.error(error.message);  // Update error state if something goes wrong
+      }
+    };
+    fetchMovies();  // Call the async function
+    */ const getMovies = async ()=>{
             try {
-                const response = await fetch(API_GET_ALL_MOVIES); // API request
-                if (!response.ok) throw new Error('Network response was not ok');
-                const data = await response.json(); // Parse the JSON response
-                setMovies(data); // Update state with the fetched data
-            } catch (error) {
-                console.error(error.message); // Update error state if something goes wrong
+                console.log("API request...");
+                const response = await fetch(API_GET_ALL_MOVIES);
+                let movieData = await response.json();
+                console.log("API request response:");
+                console.log(movieData);
+                setMovies(movieData);
+            } catch (err) {
+                console.error("Error in API call:");
+                console.error(err.message);
             }
         };
-        fetchMovies(); // Call the async function
+        getMovies();
     }, []);
     if (movies.length === 0 || movies === null) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "There are no movies in the list!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 65,
+        lineNumber: 54,
         columnNumber: 12
     }, undefined);
-    if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-        movie: selectedMovie,
-        onBackClick: ()=>{
-            setSelectedMovie(null);
+    if (selectedMovie) {
+        //Find similar movies array
+        let similarMovies = movies.filter((arrayMovie)=>selectedMovie.Genre.Name === arrayMovie.Genre.Name && selectedMovie._id !== arrayMovie._id);
+        if (similarMovies.length > 0) {
+            console.log("Found ${similarMovies.length} similar movies by Genre: ");
+            console.log(similarMovies);
+            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+                        movie: selectedMovie,
+                        onBackClick: ()=>{
+                            setSelectedMovie(null);
+                        }
+                    }, void 0, false, {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 68,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 69,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 70,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                        children: "Similar Movies:"
+                    }, void 0, false, {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 71,
+                        columnNumber: 11
+                    }, undefined),
+                    similarMovies.map((movie)=>{
+                        return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                            movie: movie,
+                            onMovieClick: (newSelectedMovie)=>{
+                                setSelectedMovie(newSelectedMovie);
+                            }
+                        }, movie._id, false, {
+                            fileName: "src/components/main-view/main-view.jsx",
+                            lineNumber: 74,
+                            columnNumber: 15
+                        }, undefined);
+                    }),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 83,
+                        columnNumber: 11
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/main-view/main-view.jsx",
+                lineNumber: 67,
+                columnNumber: 9
+            }, undefined);
+        } else {
+            console.log("No similar movies found by Genre.");
+            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+                movie: selectedMovie,
+                onBackClick: ()=>{
+                    setSelectedMovie(null);
+                }
+            }, void 0, false, {
+                fileName: "src/components/main-view/main-view.jsx",
+                lineNumber: 90,
+                columnNumber: 9
+            }, undefined);
         }
-    }, void 0, false, {
-        fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 70,
-        columnNumber: 7
-    }, undefined);
+    }
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: movies.map((movie)=>{
             return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
@@ -18810,13 +18867,13 @@ const MainView = ()=>{
                 }
             }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 78,
+                lineNumber: 99,
                 columnNumber: 11
             }, undefined);
         })
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 75,
+        lineNumber: 96,
         columnNumber: 5
     }, undefined);
 };
@@ -18845,6 +18902,7 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _propTypes = require("prop-types");
 const MovieCard = ({ movie, onMovieClick })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "clickable-movie-title",
         onClick: ()=>{
             onMovieClick(movie);
         },
