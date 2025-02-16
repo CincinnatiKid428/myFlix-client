@@ -24,26 +24,7 @@ const MainView = () => {
     console.log("main-view.jsx | [localStorage.token] is: ", localStorage.token);
     console.log("main-view.jsx | [localStorage.user] is: ", localStorage.user);
 
-    /* Suggestion from ChatGPT on best method for API fetch in React application to make an async func like:
 
-            // Define an async function inside useEffect
-            const fetchMovies = async () => {
-              try {
-                const response = await fetch(API_GET_ALL_MOVIES);  // API request
-                if (!response.ok) {
-                  throw new Error('Network response was not ok');
-                }
-                const data = await response.json();  // Parse the JSON response
-                setMovies(data);  // Update state with the fetched data
-              } catch (error) {
-                console.error(error.message);  // Update error state if something goes wrong
-              }
-            };
-            fetchMovies();  // Call the async function
-    */
-
-
-    /**/
     if (!token) {
       console.log("Skipping fetch until authenticated user logged in...");
       return;
@@ -69,10 +50,24 @@ const MainView = () => {
         console.error("main-view.jsx | Error in API call:");
         console.error(err.message);
       });
-    /**/
 
-
-
+    /* Suggestion from ChatGPT on best method for API fetch in React application to make an async func like:
+ 
+     // Define an async function inside useEffect
+     const fetchMovies = async () => {
+       try {
+         const response = await fetch(API_GET_ALL_MOVIES);  // API request
+         if (!response.ok) {
+           throw new Error('Network response was not ok');
+         }
+         const data = await response.json();  // Parse the JSON response
+         setMovies(data);  // Update state with the fetched data
+       } catch (error) {
+         console.error(error.message);  // Update error state if something goes wrong
+       }
+     };
+     fetchMovies();  // Call the async function
+   */
 
     /* Option 2 : Fetch using async function as suggested by ChatGPT
     

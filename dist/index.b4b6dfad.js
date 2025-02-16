@@ -18757,23 +18757,7 @@ const MainView = ()=>{
         console.log("main-view.jsx | [user] is: ", user);
         console.log("main-view.jsx | [localStorage.token] is: ", localStorage.token);
         console.log("main-view.jsx | [localStorage.user] is: ", localStorage.user);
-        /* Suggestion from ChatGPT on best method for API fetch in React application to make an async func like:
-
-            // Define an async function inside useEffect
-            const fetchMovies = async () => {
-              try {
-                const response = await fetch(API_GET_ALL_MOVIES);  // API request
-                if (!response.ok) {
-                  throw new Error('Network response was not ok');
-                }
-                const data = await response.json();  // Parse the JSON response
-                setMovies(data);  // Update state with the fetched data
-              } catch (error) {
-                console.error(error.message);  // Update error state if something goes wrong
-              }
-            };
-            fetchMovies();  // Call the async function
-    */ /**/ if (!token) {
+        if (!token) {
             console.log("Skipping fetch until authenticated user logged in...");
             return;
         }
@@ -18792,7 +18776,23 @@ const MainView = ()=>{
             console.error("main-view.jsx | Error in API call:");
             console.error(err.message);
         });
-    /**/ /* Option 2 : Fetch using async function as suggested by ChatGPT
+    /* Suggestion from ChatGPT on best method for API fetch in React application to make an async func like:
+ 
+     // Define an async function inside useEffect
+     const fetchMovies = async () => {
+       try {
+         const response = await fetch(API_GET_ALL_MOVIES);  // API request
+         if (!response.ok) {
+           throw new Error('Network response was not ok');
+         }
+         const data = await response.json();  // Parse the JSON response
+         setMovies(data);  // Update state with the fetched data
+       } catch (error) {
+         console.error(error.message);  // Update error state if something goes wrong
+       }
+     };
+     fetchMovies();  // Call the async function
+   */ /* Option 2 : Fetch using async function as suggested by ChatGPT
     
         const getMovies = async () => {
           try {
@@ -18832,32 +18832,32 @@ const MainView = ()=>{
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 112,
+                lineNumber: 107,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: "or"
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 118,
+                lineNumber: 113,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signupView.SignupView), {}, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 119,
+                lineNumber: 114,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 111,
+        lineNumber: 106,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0 || movies === null) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
         children: "There are no movies in the list!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 125,
+        lineNumber: 120,
         columnNumber: 12
     }, undefined);
     if (selectedMovie) {
@@ -18875,24 +18875,24 @@ const MainView = ()=>{
                         }
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 139,
+                        lineNumber: 134,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 140,
+                        lineNumber: 135,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 141,
+                        lineNumber: 136,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                         children: "Similar Movies:"
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 142,
+                        lineNumber: 137,
                         columnNumber: 11
                     }, undefined),
                     similarMovies.map((movie)=>{
@@ -18903,19 +18903,19 @@ const MainView = ()=>{
                             }
                         }, movie._id, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 145,
+                            lineNumber: 140,
                             columnNumber: 15
                         }, undefined);
                     }),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 154,
+                        lineNumber: 149,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 138,
+                lineNumber: 133,
                 columnNumber: 9
             }, undefined);
         } else {
@@ -18927,7 +18927,7 @@ const MainView = ()=>{
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 161,
+                lineNumber: 156,
                 columnNumber: 9
             }, undefined);
         }
@@ -18942,7 +18942,7 @@ const MainView = ()=>{
                 ]
             }, void 0, true, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 168,
+                lineNumber: 163,
                 columnNumber: 7
             }, undefined),
             movies.map((movie)=>{
@@ -18953,7 +18953,7 @@ const MainView = ()=>{
                     }
                 }, movie._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 171,
+                    lineNumber: 166,
                     columnNumber: 11
                 }, undefined);
             }),
@@ -18966,13 +18966,13 @@ const MainView = ()=>{
                 children: "Logout"
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 179,
+                lineNumber: 174,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 167,
+        lineNumber: 162,
         columnNumber: 5
     }, undefined);
 };
@@ -20202,11 +20202,11 @@ const SignupView = ()=>{
             }
         }).then((response)=>{
             if (response.ok) {
-                alert("Signup successful, you can now proceed with login.");
+                alert("Sign up successful, you can now log in.");
                 window.location.reload();
-            } else alert("Signup failed");
+            } else alert("Sign up failed, please try again.");
         }).catch((e)=>{
-            console.error("signup-view.jsx | Error during submit caught: ", e);
+            console.error("signup-view.jsx | Error during sign up submit : ", e);
         });
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -20220,21 +20220,21 @@ const SignupView = ()=>{
                         value: username,
                         onChange: (e)=>setUsername(e.target.value),
                         required: true,
-                        minLength: "3"
+                        minLength: "6"
                     }, void 0, false, {
                         fileName: "src/components/signup-view/signup-view.jsx",
-                        lineNumber: 47,
+                        lineNumber: 48,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/signup-view/signup-view.jsx",
-                lineNumber: 45,
+                lineNumber: 46,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                 fileName: "src/components/signup-view/signup-view.jsx",
-                lineNumber: 55,
+                lineNumber: 56,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -20244,21 +20244,22 @@ const SignupView = ()=>{
                         type: "password",
                         value: password,
                         onChange: (e)=>setPassword(e.target.value),
-                        required: true
+                        required: true,
+                        minLength: "8"
                     }, void 0, false, {
                         fileName: "src/components/signup-view/signup-view.jsx",
-                        lineNumber: 58,
+                        lineNumber: 59,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/signup-view/signup-view.jsx",
-                lineNumber: 56,
+                lineNumber: 57,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                 fileName: "src/components/signup-view/signup-view.jsx",
-                lineNumber: 65,
+                lineNumber: 67,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -20271,18 +20272,18 @@ const SignupView = ()=>{
                         required: true
                     }, void 0, false, {
                         fileName: "src/components/signup-view/signup-view.jsx",
-                        lineNumber: 68,
+                        lineNumber: 70,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/signup-view/signup-view.jsx",
-                lineNumber: 66,
+                lineNumber: 68,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                 fileName: "src/components/signup-view/signup-view.jsx",
-                lineNumber: 75,
+                lineNumber: 77,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -20295,18 +20296,18 @@ const SignupView = ()=>{
                         required: true
                     }, void 0, false, {
                         fileName: "src/components/signup-view/signup-view.jsx",
-                        lineNumber: 78,
+                        lineNumber: 80,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/signup-view/signup-view.jsx",
-                lineNumber: 76,
+                lineNumber: 78,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                 fileName: "src/components/signup-view/signup-view.jsx",
-                lineNumber: 85,
+                lineNumber: 87,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -20314,13 +20315,13 @@ const SignupView = ()=>{
                 children: "Sign up"
             }, void 0, false, {
                 fileName: "src/components/signup-view/signup-view.jsx",
-                lineNumber: 86,
+                lineNumber: 88,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/signup-view/signup-view.jsx",
-        lineNumber: 44,
+        lineNumber: 45,
         columnNumber: 5
     }, undefined);
 };

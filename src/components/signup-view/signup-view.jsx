@@ -20,6 +20,7 @@ export const SignupView = () => {
     };
 
     console.log("signup-view.jsx | Attempting signup with data:", signupData);
+
     fetch(SIGNUP_URL, {
       method: "POST",
       body: JSON.stringify(signupData),
@@ -29,14 +30,14 @@ export const SignupView = () => {
     })
       .then((response) => {
         if (response.ok) {
-          alert("Signup successful, you can now proceed with login.");
+          alert("Sign up successful, you can now log in.");
           window.location.reload();
         } else {
-          alert("Signup failed");
+          alert("Sign up failed, please try again.");
         }
       })
       .catch((e) => {
-        console.error("signup-view.jsx | Error during submit caught: ", e);
+        console.error("signup-view.jsx | Error during sign up submit : ", e);
       });
   };
 
@@ -49,7 +50,7 @@ export const SignupView = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          minLength="3"
+          minLength="6"
         />
       </label>
       <br />
@@ -60,6 +61,7 @@ export const SignupView = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          minLength="8"
         />
       </label>
       <br />
