@@ -1,4 +1,5 @@
 import { useState } from "react";
+const SIGNUP_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/users";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -6,10 +7,42 @@ export const SignupView = () => {
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
 
-  const handleSubmit = (event) => { };
+  const handleSignupSubmit = (event) => {
+    event.preventDefault();
+
+    console.log("signup-view.jsx | Starting handleSignupSubmit()");
+
+    signupData = {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthdate: birthday,
+    };
+
+    console.log("signup-view.jsx | Attempting signup with data:", signupData);
+
+    fetch(SIGNUP_URL, {
+      method: "POST",
+      body: JSON.stringify(signupData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Sign up successful, you can now log in.");
+          window.location.reload();
+        } else {
+          alert("Sign up failed, please try again.");
+        }
+      })
+      .catch((e) => {
+        console.error("signup-view.jsx | Error during sign up submit : ", e);
+      });
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSignupSubmit}>
       <label>
         Username:
         <input
@@ -17,9 +50,10 @@ export const SignupView = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          minLength="3"
+          minLength="6"
         />
       </label>
+      <br />
       <label>
         Password:
         <input
@@ -27,8 +61,10 @@ export const SignupView = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          minLength="8"
         />
       </label>
+      <br />
       <label>
         Email:
         <input
@@ -38,6 +74,7 @@ export const SignupView = () => {
           required
         />
       </label>
+      <br />
       <label>
         Birthday:
         <input
@@ -47,7 +84,8 @@ export const SignupView = () => {
           required
         />
       </label>
-      <button type="submit">Submit</button>
+      <br />
+      <button type="submit">Sign up</button>
     </form>
   );
 };

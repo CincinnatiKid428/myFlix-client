@@ -1,4 +1,10 @@
-.my-flix {
+.clickable-movie-title:hover {
   color: #dc143c;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.my-flix {
+  color: #000;
 }
 /*# sourceMappingURL=index.2212206d.css.map */
