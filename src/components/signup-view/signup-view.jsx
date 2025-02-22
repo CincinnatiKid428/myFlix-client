@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 const SIGNUP_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/users";
 
 export const SignupView = () => {
@@ -42,50 +44,52 @@ export const SignupView = () => {
   };
 
   return (
-    <form onSubmit={handleSignupSubmit}>
-      <label>
-        Username:
-        <input
+    <Form onSubmit={handleSignupSubmit}>
+      <Form.Group controlId="formSignupUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          minLength="6"
+          minLength="3"
         />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
+      </Form.Group>
+
+      <Form.Group controlId="formSignupPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          minLength="8"
+          minLength="6"
         />
-      </label>
-      <br />
-      <label>
-        Email:
-        <input
+      </Form.Group>
+
+      <Form.Group controlId="formSignupEmail">
+        <Form.Label>Email:</Form.Label>
+        <Form.Control
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-      </label>
-      <br />
-      <label>
-        Birthday:
-        <input
+      </Form.Group>
+
+      <Form.Group controlId="formSignupBirthday">
+        <Form.Label>Birthday:</Form.Label>
+        <Form.Control
           type="date"
           value={birthday}
           onChange={(e) => setBirthday(e.target.value)}
           required
         />
-      </label>
-      <br />
-      <button type="submit">Sign up</button>
-    </form>
+      </Form.Group>
+
+      <Button variant="primary" type="submit" className="mt-2 mb-5">
+        Sign Up
+      </Button>
+    </Form>
   );
 };

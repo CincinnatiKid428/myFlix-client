@@ -1,4 +1,8 @@
+//import React from "react";
 import { useState, useEffect } from "react";
+import Row from "react-bootstrap/Row";
+import Col from 'react-bootstrap/Col';
+import Button from "react-bootstrap/Button";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
@@ -15,22 +19,21 @@ const MainView = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);  //State: auth JWT token when logged in
   const [movies, setMovies] = useState([]);  //State: list of MovieCards
   const [selectedMovie, setSelectedMovie] = useState(null);   //State : selecting a movie by clicking on a MovieCard
+  //const [similarMovies, setSimilarMovies] = useState([]);  //State: stores movies array with same genre as selectedMovie
 
   //API call to get list of all movies from remote Heroku server running movie_api app
   useEffect(() => {
     console.log("main-view.jsx | Starting useEffect() hook...");
-    console.log("main-view.jsx | [token] is: ", token);
-    console.log("main-view.jsx | [user] is: ", user);
-    console.log("main-view.jsx | [localStorage.token] is: ", localStorage.token);
-    console.log("main-view.jsx | [localStorage.user] is: ", localStorage.user);
+    //console.log("main-view.jsx | [token] is: ", token);
+    //console.log("main-view.jsx | [user] is: ", user);
+    //console.log("main-view.jsx | [localStorage.token] is: ", localStorage.token);
+    //console.log("main-view.jsx | [localStorage.user] is: ", localStorage.user);
 
 
     if (!token) {
       console.log("Skipping fetch until authenticated user logged in...");
       return;
     }
-
-    // Add if() to check if movies.length === 0 to prevent extra fetch() calls to API?
 
     fetch(API_GET_ALL_MOVIES, {
       method: "GET",
@@ -101,86 +104,99 @@ const MainView = () => {
 
   }, [token]);
 
-  if (!user) {
-    return (
-      <div>
-        <LoginView
-          onLoggedIn={(user, token) => {
-            setUser(user);
-            setToken(token);
-          }}
-        />
-        <p>or</p>
-        <SignupView />
-      </div>
-    );
-  }
-
-  if (movies.length === 0 || movies === null) {
-    return <h2>There are no movies in the list!</h2>;
-  }
-
-  if (selectedMovie) {
-
-    //Find similar movies array
-    let similarMovies = movies.filter((arrayMovie) => selectedMovie.Genre.Name === arrayMovie.Genre.Name && selectedMovie._id !== arrayMovie._id);
-
-    if (similarMovies.length > 0) {
-      console.log(`main-view.jsx | Found ${similarMovies.length} movies similar to "${selectedMovie.Title}" by Genre: `);
-      console.log(similarMovies);
-
-      return (
-        <div>
-          <MovieView movie={selectedMovie} onBackClick={() => { setSelectedMovie(null) }} />
-          <br />
-          <hr />
-          <h2>Similar Movies:</h2>
-          {similarMovies.map((movie) => {
-            return (
-              <MovieCard
-                key={movie._id}
-                movie={movie}
-                onMovieClick={(newSelectedMovie) => {
-                  setSelectedMovie(newSelectedMovie);
-                }}
-              />
-            );
-          })}
-          <br />
-        </div>
-      );
-    } else {
-      console.log(`main-view.jsx | Found no movies similar to "${selectedMovie.Title}" by Genre.`);
-
-      return (
-        <MovieView movie={selectedMovie} onBackClick={() => { setSelectedMovie(null) }} />
-      );
-    }
-  }
 
   return (
-    <div>
-      <h2>Welcome, {user.Username}!</h2>
-      {movies.map((movie) => {
-        return (
-          <MovieCard
-            key={movie._id}
-            movie={movie}
-            onMovieClick={(newSelectedMovie) => {
-              setSelectedMovie(newSelectedMovie);
-            }} />
-        );
-      })}
-      <button
-        onClick={() => {
-          setUser(null);
-          setToken(null);
-          localStorage.clear();
-        }}
-      >
-        Logout
-      </button>
-    </div>
+    <>
+      <Row className="d-flex justify-content-center">
+        {
+          !user ? ( // No user logged in yet
+
+            <Col md={6}>
+              <h4>Log in with username and password:</h4>
+              <LoginView
+                onLoggedIn={(user, token) => {
+                  setUser(user);
+                  setToken(token);
+                }}
+              />
+
+              <hr />
+              <h4>Or sign up for an account:</h4>
+
+              <SignupView />
+            </Col>
+
+          ) : (movies.length === 0 || movies === null) ? ( // Movie list state var is empty
+            <h2>There are no movies in the list!</h2>
+
+          ) : selectedMovie ? ( // Movie selected
+            <>
+              <Col md={10}>
+                <MovieView movie={selectedMovie} onBackClick={() => {
+                  setSelectedMovie(null);
+                }}
+                />
+
+                <hr />
+                <h2>Similar Movies:</h2>
+              </Col>
+              {
+                movies.filter((arrayMovie) => selectedMovie.Genre.Name === arrayMovie.Genre.Name && selectedMovie._id !== arrayMovie._id).map((movie) => {
+                  console.log("Placing MovieCard for :", movie.Title);
+                  return (
+                    <Col key={movie._id} md={3} className="mb-5">
+                      <MovieCard
+                        movie={movie}
+                        onMovieClick={(newSelectedMovie) => {
+                          setSelectedMovie(newSelectedMovie);
+                          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                        }}
+                      />
+                    </Col>
+                  );
+                })
+              }
+            </>
+
+          ) : ( // Default logged in main-view movie listing
+
+            <>
+              <div>
+                <span className="fs-4">Welcome, {user.Username}!</span>
+                <Button
+                  variant="primary"
+                  className="mb-2 mt-2"
+                  style={{ float: "right" }}
+                  onClick={() => {
+                    setUser(null)
+                    setToken(null)
+                    localStorage.clear()
+                  }}
+                >
+                  Logout
+                </Button>
+              </div>
+              {movies.map((movie) => {
+                return (
+                  <Col key={movie._id} md={3} className="mb-3">
+                    <MovieCard
+                      movie={movie}
+                      onMovieClick={(newSelectedMovie) => {
+                        setSelectedMovie(newSelectedMovie);
+                        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                      }}
+                    />
+                  </Col>
+                );
+              })}
+
+
+
+            </>
+          )
+        }
+      </Row>
+    </>
   );
 };
 

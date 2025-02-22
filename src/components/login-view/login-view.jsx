@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const LOGIN_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/login";
 
@@ -44,30 +46,31 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <form onSubmit={handleLoginSubmit}>
-      <label>
-        Username:
-        <input
+    <Form onSubmit={handleLoginSubmit}>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username: </Form.Label>
+        <Form.Control
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          minLength={5}
           required
+          minLength="5"
         />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
+      </Form.Group>
+
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password: </Form.Label>
+        <Form.Control
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          minLength={6}
           required
+          minLength="6"
         />
-      </label>
-      <br />
-      <button type="submit">Login</button>
-    </form>
+      </Form.Group>
+      <Button variant="primary" type="submit" className="mt-2">
+        Log in
+      </Button>
+    </Form>
   );
 };

@@ -1,11 +1,7 @@
-$color: black;
+$primary: #f8ac66;
+$body-bg: #fce0c0;
 
-.clickable-movie-title:hover {
-    color: crimson;
-    cursor: pointer;
-    text-decoration: wavy;
-}
+$input-bg: #FFF;
+//$input-border-color: #000;
 
-.my-flix {
-    color: $color;
-}
+@import '~bootstrap/scss/bootstrap.scss';
