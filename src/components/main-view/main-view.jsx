@@ -1,4 +1,3 @@
-//import React from "react";
 import { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
@@ -19,7 +18,6 @@ const MainView = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);  //State: auth JWT token when logged in
   const [movies, setMovies] = useState([]);  //State: list of MovieCards
   const [selectedMovie, setSelectedMovie] = useState(null);   //State : selecting a movie by clicking on a MovieCard
-  //const [similarMovies, setSimilarMovies] = useState([]);  //State: stores movies array with same genre as selectedMovie
 
   //API call to get list of all movies from remote Heroku server running movie_api app
   useEffect(() => {
