@@ -6,6 +6,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 const API_GET_ALL_MOVIES = 'https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies'; //move to environment var later
 
@@ -17,16 +18,16 @@ const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);  //State: user object when logged in
   const [token, setToken] = useState(storedToken ? storedToken : null);  //State: auth JWT token when logged in
   const [movies, setMovies] = useState([]);  //State: list of MovieCards
-  const [selectedMovie, setSelectedMovie] = useState(null);   //State : selecting a movie by clicking on a MovieCard
 
   //API call to get list of all movies from remote Heroku server running movie_api app
   useEffect(() => {
     console.log("main-view.jsx | Starting useEffect() hook...");
-    //console.log("main-view.jsx | [token] is: ", token);
-    //console.log("main-view.jsx | [user] is: ", user);
-    //console.log("main-view.jsx | [localStorage.token] is: ", localStorage.token);
-    //console.log("main-view.jsx | [localStorage.user] is: ", localStorage.user);
-
+    /*
+    console.log("main-view.jsx | [token] is: ", token);
+    console.log("main-view.jsx | [user] is: ", user);
+    console.log("main-view.jsx | [localStorage.token] is: ", localStorage.token);
+    console.log("main-view.jsx | [localStorage.user] is: ", localStorage.user);
+    */
 
     if (!token) {
       console.log("Skipping fetch until authenticated user logged in...");
@@ -45,67 +46,121 @@ const MainView = () => {
         console.log("main-view.jsx | Return from movie_api: ");
         console.log(movieData);
 
-        setMovies(movieData);
+        movieData ? setMovies(movieData) : setMovies([]);
       })
       .catch((err) => {
         console.error("main-view.jsx | Error in API call:");
         console.error(err.message);
       });
 
-    /* Suggestion from ChatGPT on best method for API fetch in React application to make an async func like:
- 
-     // Define an async function inside useEffect
-     const fetchMovies = async () => {
-       try {
-         const response = await fetch(API_GET_ALL_MOVIES);  // API request
-         if (!response.ok) {
-           throw new Error('Network response was not ok');
-         }
-         const data = await response.json();  // Parse the JSON response
-         setMovies(data);  // Update state with the fetched data
-       } catch (error) {
-         console.error(error.message);  // Update error state if something goes wrong
-       }
-     };
-     fetchMovies();  // Call the async function
-   */
-
-    /* Option 2 : Fetch using async function as suggested by ChatGPT
-    
-        const getMovies = async () => {
-          try {
-            console.log("API request...");
-            const response = await fetch(API_GET_ALL_MOVIES, {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-              }
-            });
-            let movieData = await response.json();
-            console.log("main-view.jsx | API request response:");
-            console.log(movieData);
-            setMovies(movieData);
-          } catch (err) {
-            console.error("main-view.jsx | Error in API call:");
-            console.error(err.message);
-          }
-        };
-    
-        if (!token) {
-          console.log("Skipping fetch until authenticated user logged in...");
-          return;
-        }
-        getMovies();
-    
-    */
-
   }, [token]);
 
 
   return (
-    <>
+    <BrowserRouter>
       <Row className="d-flex justify-content-center">
+        <Routes>
+          <Route
+            path="/signup"
+            element={
+              <>
+                {user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Col md={6}>
+                    <h4>Sign up for an account:</h4>
+                    <SignupView />
+                  </Col>
+                )}
+              </>
+            }
+          />
+
+          <Route
+            path="/login"
+            element={
+              <>
+                {user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Col md={6}>
+                    <h4>Log in with username and password:</h4>
+                    <LoginView
+                      onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                      }}
+                    />
+                  </Col>
+                )}
+              </>
+            }
+          />
+
+          <Route
+            path="/movies/:movieId"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col>There are no movies in the list!</Col>
+                ) : (
+                  <Col md={10}>
+                    <MovieView movies={movies} />
+                  </Col>
+                )
+                }
+              </>
+            }
+          />
+
+          <Route
+            path="/"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col>There are no movies in the list!</Col>
+                ) : (
+                  <>
+                    {/*Move this <div> to the <Navbar> </Navbar>*/}
+                    <div>
+                      <span className="fs-4">Welcome, {user.Username}!</span>
+                      <Button
+                        variant="primary"
+                        className="mb-2 mt-2"
+                        style={{ float: "right" }}
+                        onClick={() => {
+                          setUser(null)
+                          setToken(null)
+                          localStorage.clear()
+                        }}
+                      >
+                        Logout
+                      </Button>
+                    </div>
+
+
+                    {movies.map((movie) => (
+                      <Col key={movie._id} md={3} className="mb-3">
+                        <MovieCard movie={movie} />
+                      </Col>
+                    ))}
+                  </>
+                )}
+              </>
+            }
+          />
+        </Routes>
+      </Row>
+    </BrowserRouter>
+  );
+};
+
+
+/*
         {
           !user ? ( // No user logged in yet
 
@@ -119,9 +174,7 @@ const MainView = () => {
               />
 
               <hr />
-              <h4>Or sign up for an account:</h4>
 
-              <SignupView />
             </Col>
 
           ) : (movies.length === 0 || movies === null) ? ( // Movie list state var is empty
@@ -188,14 +241,8 @@ const MainView = () => {
                 );
               })}
 
-
-
             </>
-          )
-        }
-      </Row>
-    </>
-  );
-};
+            */
+
 
 export default MainView;
