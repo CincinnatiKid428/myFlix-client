@@ -24,8 +24,8 @@ export const MovieView = ({ movies }) => {
     <>
       {window.scrollTo({ top: 0, left: 0, behavior: 'instant' }) /*Return screen to top each time user is in a new MovieView*/}
 
-      <div className="justify-content-center" style={{ display: 'flex', justifyContent: 'center' }}>
-        <img className="w-50 mt-3" src={movie.ImageURL} style={{ borderRadius: '5px' }} />
+      <div style={{ display: 'flex', justifyContent: 'left' }}>
+        <img className="w-35 mt-3" src={movie.ImageURL} style={{ borderRadius: '5px' }} />
       </div>
       <div>
         <span>Title: </span>
