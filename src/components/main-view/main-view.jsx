@@ -9,6 +9,9 @@ import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
+// Image imports - Matinee images created using www.recraft.ai and are owned by Recraft.
+//import matineeLogin from "../../img/matinee6.png";
+
 const API_GET_ALL_MOVIES = 'https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies'; //move to environment var later
 
 const MainView = () => {
@@ -74,8 +77,7 @@ const MainView = () => {
                 {user ? (
                   <Navigate to="/" />
                 ) : (
-                  <Col md={6}>
-                    <h4>Sign up for an account:</h4>
+                  <Col xs={12} sm={9} lg={6} xl={5} className="mt-5">
                     <SignupView />
                   </Col>
                 )}
@@ -90,15 +92,16 @@ const MainView = () => {
                 {user ? (
                   <Navigate to="/" />
                 ) : (
-                  <Col md={6}>
-                    <h4>Log in with username and password:</h4>
-                    <LoginView
-                      onLoggedIn={(user, token) => {
-                        setUser(user);
-                        setToken(token);
-                      }}
-                    />
-                  </Col>
+                  <>
+                    <Col xs={12} sm={9} lg={6} xl={5} className="mt-5">
+                      <LoginView
+                        onLoggedIn={(user, token) => {
+                          setUser(user);
+                          setToken(token);
+                        }}
+                      />
+                    </Col>
+                  </>
                 )}
               </>
             }
@@ -132,24 +135,6 @@ const MainView = () => {
                   <Col>There are no movies in the list!</Col>
                 ) : (
                   <>
-                    {/*Move this <div> to the <Navbar> </Navbar>*/}
-                    <div>
-                      <span className="fs-4">Welcome, {user.Username}!</span>
-                      <Button
-                        variant="primary"
-                        className="mb-2 mt-2"
-                        style={{ float: "right" }}
-                        onClick={() => {
-                          setUser(null)
-                          setToken(null)
-                          localStorage.clear()
-                        }}
-                      >
-                        Logout
-                      </Button>
-                    </div>
-
-
                     {movies.map((movie) => (
                       <Col key={movie._id} md={3} className="mb-3">
                         <MovieCard movie={movie} />
@@ -165,91 +150,5 @@ const MainView = () => {
     </BrowserRouter>
   );
 };
-
-
-/*
-        {
-          !user ? ( // No user logged in yet
-
-            <Col md={6}>
-              <h4>Log in with username and password:</h4>
-              <LoginView
-                onLoggedIn={(user, token) => {
-                  setUser(user);
-                  setToken(token);
-                }}
-              />
-
-              <hr />
-
-            </Col>
-
-          ) : (movies.length === 0 || movies === null) ? ( // Movie list state var is empty
-            <h2>There are no movies in the list!</h2>
-
-          ) : selectedMovie ? ( // Movie selected
-            <>
-              <Col md={10}>
-                <MovieView movie={selectedMovie} onBackClick={() => {
-                  setSelectedMovie(null);
-                }}
-                />
-
-                <hr />
-                <h2>Similar Movies:</h2>
-              </Col>
-              {
-                movies.filter((arrayMovie) => selectedMovie.Genre.Name === arrayMovie.Genre.Name && selectedMovie._id !== arrayMovie._id).map((movie) => {
-                  console.log("Placing MovieCard for :", movie.Title);
-                  return (
-                    <Col key={movie._id} md={3} className="mb-5">
-                      <MovieCard
-                        movie={movie}
-                        onMovieClick={(newSelectedMovie) => {
-                          setSelectedMovie(newSelectedMovie);
-                          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-                        }}
-                      />
-                    </Col>
-                  );
-                })
-              }
-            </>
-
-          ) : ( // Default logged in main-view movie listing
-
-            <>
-              <div>
-                <span className="fs-4">Welcome, {user.Username}!</span>
-                <Button
-                  variant="primary"
-                  className="mb-2 mt-2"
-                  style={{ float: "right" }}
-                  onClick={() => {
-                    setUser(null)
-                    setToken(null)
-                    localStorage.clear()
-                  }}
-                >
-                  Logout
-                </Button>
-              </div>
-              {movies.map((movie) => {
-                return (
-                  <Col key={movie._id} md={3} className="mb-3">
-                    <MovieCard
-                      movie={movie}
-                      onMovieClick={(newSelectedMovie) => {
-                        setSelectedMovie(newSelectedMovie);
-                        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-                      }}
-                    />
-                  </Col>
-                );
-              })}
-
-            </>
-            */
-
 
 export default MainView;

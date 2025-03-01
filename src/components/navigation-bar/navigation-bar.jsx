@@ -1,12 +1,19 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router";
 
+//Set to 1px for debug border
+const debugBorder = "0px solid red";
+
+// Image imports - Matinee images created using www.recraft.ai and are owned by Recraft.
+import matineeNavbarBrand from "../../img/matinee-logo2-navbar-sm.png";
+
 export const NavigationBar = ({ user, onLoggedOut }) => {
+
   return (
-    <Navbar expand="lg" className="sticky-top custom-navbar">
+    <Navbar expand="md" className="sticky-top custom-navbar">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          myFlix {/** Add logo image here later */}
+          <img src={matineeNavbarBrand} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -25,12 +32,22 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                 <Nav.Link as={Link} to="/">
                   Home
                 </Nav.Link>
-                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+                <Nav.Link onClick={onLoggedOut}>
+                  Logout
+                </Nav.Link>
               </>
             )}
           </Nav>
+
         </Navbar.Collapse>
+
       </Container>
-    </Navbar>
+      {user ? (
+        <span style={{ float: "right", marginLeft: "10px", border: debugBorder }}>Welcome, {user.Username}!</span>
+      ) : (
+        <></>
+      )
+      }
+    </Navbar >
   );
 };

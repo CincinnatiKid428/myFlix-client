@@ -8,4 +8,13 @@ $input-bg: #FFF;
   background-color: #fac665
 }
 
+.img-rounded-corners {
+  border-radius: 10px
+}
+
+.movie-view-info-field {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
 @import '~bootstrap/scss/bootstrap.scss';
