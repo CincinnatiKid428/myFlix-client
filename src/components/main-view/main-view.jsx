@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
-import Button from "react-bootstrap/Button";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import { ProfileView } from "../profile-view/profile-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
-
-// Image imports - Matinee images created using www.recraft.ai and are owned by Recraft.
-//import matineeLogin from "../../img/matinee6.png";
 
 const API_GET_ALL_MOVIES = 'https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies'; //move to environment var later
 
@@ -26,12 +23,6 @@ const MainView = () => {
   //API call to get list of all movies from remote Heroku server running movie_api app
   useEffect(() => {
     console.log("main-view.jsx | Starting useEffect() hook...");
-    /*
-    console.log("main-view.jsx | [token] is: ", token);
-    console.log("main-view.jsx | [user] is: ", user);
-    console.log("main-view.jsx | [localStorage.token] is: ", localStorage.token);
-    console.log("main-view.jsx | [localStorage.user] is: ", localStorage.user);
-    */
 
     if (!token) {
       console.log("Skipping fetch until authenticated user logged in...");
@@ -70,6 +61,7 @@ const MainView = () => {
       />
       <Row className="d-flex justify-content-center">
         <Routes>
+
           <Route
             path="/signup"
             element={
@@ -140,6 +132,23 @@ const MainView = () => {
                         <MovieCard movie={movie} />
                       </Col>
                     ))}
+                  </>
+                )}
+              </>
+            }
+          />
+
+          <Route
+            path="/profile"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" />
+                ) : (
+                  <>
+                    <ProfileView user={user} token={token} UpdateMainViewUser={(updatedUser) => {
+                      setUser(updatedUser);
+                    }} />
                   </>
                 )}
               </>
