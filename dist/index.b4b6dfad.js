@@ -19393,6 +19393,7 @@ const MainView = ()=>{
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {
                                         user: user,
+                                        movies: movies,
                                         token: token,
                                         UpdateMainViewUser: (updatedUser)=>{
                                             setUser(updatedUser);
@@ -35340,7 +35341,7 @@ $RefreshReg$(_c, "MovieView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","../movie-card/movie-card":"bwuIu","prop-types":"7wKI2","react-bootstrap/Button":"aPzUt","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"9YtA0":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","../movie-card/movie-card":"bwuIu","react-bootstrap/Button":"aPzUt","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"9YtA0":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -35477,7 +35478,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Button":"aPzUt","react-bootstrap/Form":"iBZ80","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe","prop-types":"7wKI2"}],"4OGiN":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react":"21dqq","react-bootstrap/Button":"aPzUt","react-bootstrap/Form":"iBZ80","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"4OGiN":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$73d1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -35679,6 +35680,7 @@ var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
 var _updateUser = require("./update-user");
+var _favoriteMoviesView = require("./favorite-movies-view");
 //Image imports - Matinee images created using www.recraft.ai and are owned by Recraft.
 var _matinee4TransparentPng = require("../../img/matinee4-transparent.png");
 var _matinee4TransparentPngDefault = parcelHelpers.interopDefault(_matinee4TransparentPng);
@@ -35694,11 +35696,12 @@ const debugBorder = "0px solid blue";
     if (dateParts.length !== 3) return "Invalid date";
     else return dateParts[1] + "/" + dateParts[2] + "/" + dateParts[0];
 }
-const ProfileView = ({ user, token, UpdateMainViewUser })=>{
+const ProfileView = ({ user, movies, token, UpdateMainViewUser })=>{
+    console.log("profile-view.jsx | Starting - movies props is:", movies);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
-                className: "justify-content-center mt-2",
+                className: "d-flex justify-content-center mt-2",
                 style: {
                     border: debugBorder
                 },
@@ -35721,7 +35724,7 @@ const ProfileView = ({ user, token, UpdateMainViewUser })=>{
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 35,
+                                lineNumber: 37,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -35731,7 +35734,7 @@ const ProfileView = ({ user, token, UpdateMainViewUser })=>{
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 36,
+                                lineNumber: 38,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -35741,27 +35744,32 @@ const ProfileView = ({ user, token, UpdateMainViewUser })=>{
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 37,
+                                lineNumber: 39,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 34,
+                        lineNumber: 36,
                         columnNumber: 11
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 33,
+                    lineNumber: 35,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 32,
+                lineNumber: 34,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
+                fileName: "src/components/profile-view/profile-view.jsx",
+                lineNumber: 43,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
-                className: "justify-content-center mb-3",
+                className: "d-flex justify-content-center",
                 style: {
                     border: debugBorder
                 },
@@ -35780,17 +35788,17 @@ const ProfileView = ({ user, token, UpdateMainViewUser })=>{
                         }
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 43,
+                        lineNumber: 46,
                         columnNumber: 11
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 42,
+                    lineNumber: 45,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 41,
+                lineNumber: 44,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -35805,18 +35813,55 @@ const ProfileView = ({ user, token, UpdateMainViewUser })=>{
                         alt: "Image created using www.recraft.ai and is owned by Recraft."
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 50,
+                        lineNumber: 53,
                         columnNumber: 11
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 49,
+                    lineNumber: 52,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 48,
+                lineNumber: 51,
                 columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h5", {
+                children: [
+                    user.Username,
+                    "'s Favorite Movies:"
+                ]
+            }, void 0, true, {
+                fileName: "src/components/profile-view/profile-view.jsx",
+                lineNumber: 56,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
+                fileName: "src/components/profile-view/profile-view.jsx",
+                lineNumber: 57,
+                columnNumber: 7
+            }, undefined),
+            user.FavoriteMovies.length !== 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteMoviesView.FavoriteMoviesView), {
+                        movies: movies,
+                        favoritesIdArray: user.FavoriteMovies
+                    }, void 0, false, {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 61,
+                        columnNumber: 13
+                    }, undefined)
+                }, void 0, false, {
+                    fileName: "src/components/profile-view/profile-view.jsx",
+                    lineNumber: 60,
+                    columnNumber: 11
+                }, undefined)
+            }, void 0, false) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                children: "No movies added to favorites"
+            }, void 0, false, {
+                fileName: "src/components/profile-view/profile-view.jsx",
+                lineNumber: 65,
+                columnNumber: 9
             }, undefined)
         ]
     }, void 0, true);
@@ -35828,6 +35873,25 @@ ProfileView.propTypes = {
         Email: (0, _propTypes.PropTypes).string.isRequired,
         Birthdate: (0, _propTypes.PropTypes).string.isRequired
     }).isRequired,
+    movies: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).shape({
+        ImageURL: (0, _propTypes.PropTypes).string.isRequired,
+        Title: (0, _propTypes.PropTypes).string.isRequired,
+        ReleaseYear: (0, _propTypes.PropTypes).number.isRequired,
+        Description: (0, _propTypes.PropTypes).string.isRequired,
+        Rating: (0, _propTypes.PropTypes).number,
+        Actors: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).string).isRequired,
+        Genre: (0, _propTypes.PropTypes).exact({
+            Name: (0, _propTypes.PropTypes).string.isRequired,
+            Description: (0, _propTypes.PropTypes).string.isRequired
+        }).isRequired,
+        Director: (0, _propTypes.PropTypes).shape({
+            Name: (0, _propTypes.PropTypes).string.isRequired,
+            Bio: (0, _propTypes.PropTypes).string,
+            BirthYear: (0, _propTypes.PropTypes).number.isRequired,
+            DeathYear: (0, _propTypes.PropTypes).number,
+            Movies: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).string).isRequired
+        }).isRequired
+    }).isRequired),
     token: (0, _propTypes.PropTypes).string.isRequired,
     UpdateMainViewUser: (0, _propTypes.PropTypes).func.isRequired
 };
@@ -35839,45 +35903,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","../../img/matinee4-transparent.png":"eMurD","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe","prop-types":"7wKI2","./update-user":"2SBwg"}],"eMurD":[function(require,module,exports,__globalThis) {
-module.exports = require("8de70d037922c7fb").getBundleURL('byUka') + "matinee4-transparent.c33bebb0.png" + "?" + Date.now();
-
-},{"8de70d037922c7fb":"gw4EE"}],"gw4EE":[function(require,module,exports,__globalThis) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return '/';
-}
-function getBaseURL(url) {
-    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
-    if (!matches) throw new Error('Origin not found');
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"2SBwg":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","./update-user":"2SBwg","./favorite-movies-view":"cxlUu","../../img/matinee4-transparent.png":"eMurD","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"2SBwg":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$95d1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -36084,7 +36110,124 @@ $RefreshReg$(_c, "UpdateUser");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe","prop-types":"7wKI2"}],"bsPVM":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react":"21dqq","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"cxlUu":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$ea69 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$ea69.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "FavoriteMoviesView", ()=>FavoriteMoviesView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _movieCard = require("../movie-card/movie-card");
+var _col = require("react-bootstrap/Col");
+var _colDefault = parcelHelpers.interopDefault(_col);
+const FavoriteMoviesView = ({ movies, favoritesIdArray })=>{
+    console.log("favorite-movies-view.jsx | favoritesIdArray prop is: ", favoritesIdArray);
+    //const [favoritesUpdated, setFavoritesUpdated] = useState(false);
+    /**
+   * 
+   * @returns An array of movie objects based on their _id being included in the user.FavoriteMovies array.
+   */ function loadFavorites() {
+        // Use filter to select movies whose _id is in favoritesIdArray
+        const favoriteMovies = movies.filter((movie)=>favoritesIdArray.includes(movie._id));
+        console.log("favorite-movies-view.jsx|loadFavorites() | returning favoriteMovies: ", favoriteMovies);
+        return favoriteMovies;
+    }
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+        children: loadFavorites().map((movie)=>{
+            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                md: 4,
+                className: "mb-3",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                    movie: movie
+                }, void 0, false, {
+                    fileName: "src/components/profile-view/favorite-movies-view.jsx",
+                    lineNumber: 30,
+                    columnNumber: 13
+                }, undefined)
+            }, movie._id, false, {
+                fileName: "src/components/profile-view/favorite-movies-view.jsx",
+                lineNumber: 29,
+                columnNumber: 11
+            }, undefined);
+        })
+    }, void 0, false);
+};
+_c = FavoriteMoviesView;
+FavoriteMoviesView.propTypes = {
+    movies: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).shape({
+        ImageURL: (0, _propTypes.PropTypes).string.isRequired,
+        Title: (0, _propTypes.PropTypes).string.isRequired,
+        ReleaseYear: (0, _propTypes.PropTypes).number.isRequired,
+        Description: (0, _propTypes.PropTypes).string.isRequired,
+        Rating: (0, _propTypes.PropTypes).number,
+        Actors: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).string).isRequired,
+        Genre: (0, _propTypes.PropTypes).exact({
+            Name: (0, _propTypes.PropTypes).string.isRequired,
+            Description: (0, _propTypes.PropTypes).string.isRequired
+        }).isRequired,
+        Director: (0, _propTypes.PropTypes).shape({
+            Name: (0, _propTypes.PropTypes).string.isRequired,
+            Bio: (0, _propTypes.PropTypes).string,
+            BirthYear: (0, _propTypes.PropTypes).number.isRequired,
+            DeathYear: (0, _propTypes.PropTypes).number,
+            Movies: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).string).isRequired
+        }).isRequired
+    }).isRequired),
+    favoritesIdArray: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).string).isRequired
+};
+var _c;
+$RefreshReg$(_c, "FavoriteMoviesView");
+
+  $parcel$ReactRefreshHelpers$ea69.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","../movie-card/movie-card":"bwuIu","react-bootstrap/Col":"2L2I6","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"eMurD":[function(require,module,exports,__globalThis) {
+module.exports = require("8de70d037922c7fb").getBundleURL('byUka') + "matinee4-transparent.c33bebb0.png" + "?" + Date.now();
+
+},{"8de70d037922c7fb":"gw4EE"}],"gw4EE":[function(require,module,exports,__globalThis) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"bsPVM":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$abf5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

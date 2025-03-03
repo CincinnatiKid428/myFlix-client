@@ -146,7 +146,7 @@ const MainView = () => {
                   <Navigate to="/login" />
                 ) : (
                   <>
-                    <ProfileView user={user} token={token} UpdateMainViewUser={(updatedUser) => {
+                    <ProfileView user={user} movies={movies} token={token} UpdateMainViewUser={(updatedUser) => {
                       setUser(updatedUser);
                     }} />
                   </>
