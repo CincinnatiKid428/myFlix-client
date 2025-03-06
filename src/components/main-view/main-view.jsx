@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+//import AppContext, { AppContextProvider } from "../app-context/app-context";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import { MovieCard } from "../movie-card/movie-card";
@@ -19,6 +20,7 @@ const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);  //State: user object when logged in
   const [token, setToken] = useState(storedToken ? storedToken : null);  //State: auth JWT token when logged in
   const [movies, setMovies] = useState([]);  //State: list of MovieCards
+
 
   //API call to get list of all movies from remote Heroku server running movie_api app
   useEffect(() => {
@@ -50,15 +52,20 @@ const MainView = () => {
 
   }, [token]);
 
+  const onLoggedIn = (authenticatedUser, AuthenticatedToken) => {
+    setUser(authenticatedUser);
+    setToken(AuthenticatedToken);
+  }
+
+  const onLoggedOut = () => {
+    setUser(null);
+    setToken(null);
+    localStorage.clear();
+  };
 
   return (
     <BrowserRouter>
-      <NavigationBar user={user} onLoggedOut={() => {
-        setUser(null)
-        setToken(null)
-        localStorage.clear()
-      }}
-      />
+      <NavigationBar user={user} onLoggedOut={onLoggedOut} />
       <Row className="d-flex justify-content-center">
         <Routes>
 
@@ -86,12 +93,7 @@ const MainView = () => {
                 ) : (
                   <>
                     <Col xs={12} sm={9} lg={6} xl={5} className="mt-5">
-                      <LoginView
-                        onLoggedIn={(user, token) => {
-                          setUser(user);
-                          setToken(token);
-                        }}
-                      />
+                      <LoginView onLoggedIn={onLoggedIn} />
                     </Col>
                   </>
                 )}
@@ -109,7 +111,25 @@ const MainView = () => {
                   <Col>There are no movies in the list!</Col>
                 ) : (
                   <Col md={10}>
-                    <MovieView movies={movies} />
+                    <MovieView user={user} setUser={setUser} movies={movies} token={token} prev="/" />
+                  </Col>
+                )
+                }
+              </>
+            }
+          />
+
+          <Route
+            path="/fav/movies/:movieId"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col>There are no movies in the list!</Col>
+                ) : (
+                  <Col md={10}>
+                    <MovieView user={user} setUser={setUser} movies={movies} token={token} prev="/profile" />
                   </Col>
                 )
                 }
@@ -129,7 +149,7 @@ const MainView = () => {
                   <>
                     {movies.map((movie) => (
                       <Col key={movie._id} md={3} className="mb-3">
-                        <MovieCard movie={movie} />
+                        <MovieCard user={user} setUser={setUser} movie={movie} token={token} prev="/" />
                       </Col>
                     ))}
                   </>
@@ -146,9 +166,7 @@ const MainView = () => {
                   <Navigate to="/login" />
                 ) : (
                   <>
-                    <ProfileView user={user} movies={movies} token={token} UpdateMainViewUser={(updatedUser) => {
-                      setUser(updatedUser);
-                    }} />
+                    <ProfileView user={user} setUser={setUser} movies={movies} token={token} />
                   </>
                 )}
               </>

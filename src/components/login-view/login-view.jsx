@@ -1,11 +1,12 @@
 import { PropTypes } from "prop-types";
-import { useState } from "react";
+import { useState, useContext } from "react";
+//import { AppContext } from "../app-context/app-context";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 const LOGIN_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/login";
 
-export const LoginView = ({ onLoggedIn }) => {
+export const LoginView = ({ onLoggedIn }) => { // Use context vs props?
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -31,7 +32,6 @@ export const LoginView = ({ onLoggedIn }) => {
       .then((data) => {
         console.log("login-view.jsx | Login response: ", data);
         if (data.user) {
-          console.log("login-view.jsx | Setting localStorage (data & token)... onLoggedIn() called...");
           localStorage.setItem("user", JSON.stringify(data.user));
           localStorage.setItem("token", data.token);
           onLoggedIn(data.user, data.token);
@@ -75,6 +75,8 @@ export const LoginView = ({ onLoggedIn }) => {
   );
 };
 
+// If we use context, won't need propTypes?
+
 LoginView.propTypes = {
   onLoggedIn: PropTypes.func.isRequired
-}
+};

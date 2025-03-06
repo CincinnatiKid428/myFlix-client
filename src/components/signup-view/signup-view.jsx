@@ -12,8 +12,6 @@ export const SignupView = () => {
   const handleSignupSubmit = (event) => {
     event.preventDefault();
 
-    console.log("signup-view.jsx | Starting handleSignupSubmit()");
-
     signupData = {
       Username: username,
       Password: password,

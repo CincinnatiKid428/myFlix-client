@@ -26,7 +26,7 @@ function formatUserBday(bday) {
     return dateParts[1] + "/" + dateParts[2] + "/" + dateParts[0];
 }
 
-export const ProfileView = ({ user, movies, token, UpdateMainViewUser }) => {
+export const ProfileView = ({ user, setUser, movies, token }) => {
   console.log("profile-view.jsx | Starting - movies props is:", movies);
 
   return (
@@ -44,7 +44,7 @@ export const ProfileView = ({ user, movies, token, UpdateMainViewUser }) => {
       <Row className="d-flex justify-content-center" style={{ border: debugBorder }}>
         <Col sm={10} md={6} className="align-self-center" style={{ border: debugBorder }}>
           <UpdateUser user={user} token={token} onUpdatedUser={(updatedUser) => {
-            UpdateMainViewUser(updatedUser);
+            setUser(updatedUser);
           }} />
         </Col>
       </Row >
@@ -58,7 +58,7 @@ export const ProfileView = ({ user, movies, token, UpdateMainViewUser }) => {
       {user.FavoriteMovies.length !== 0 ? (
         <>
           <Row>
-            <FavoriteMoviesView movies={movies} favoritesIdArray={user.FavoriteMovies} />
+            <FavoriteMoviesView user={user} setUser={setUser} movies={movies} token={token} favoritesIdArray={user.FavoriteMovies} />
           </Row>
         </>
       ) : (
@@ -69,11 +69,16 @@ export const ProfileView = ({ user, movies, token, UpdateMainViewUser }) => {
 };
 
 ProfileView.propTypes = {
+
   user: PropTypes.shape({
     Username: PropTypes.string.isRequired,
     Email: PropTypes.string.isRequired,
-    Birthdate: PropTypes.string.isRequired
+    Birthdate: PropTypes.string.isRequired,
+    FavoriteMovies: PropTypes.arrayOf(PropTypes.string).isRequired
   }).isRequired,
+
+  setUser: PropTypes.func.isRequired,
+
   movies: PropTypes.arrayOf(PropTypes.shape({
     ImageURL: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
@@ -95,6 +100,6 @@ ProfileView.propTypes = {
       Movies: PropTypes.arrayOf(PropTypes.string).isRequired
     }).isRequired
   }).isRequired),
+
   token: PropTypes.string.isRequired,
-  UpdateMainViewUser: PropTypes.func.isRequired
 }

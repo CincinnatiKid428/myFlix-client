@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
 import { PropTypes } from "prop-types";
 import { MovieCard } from "../movie-card/movie-card";
 import Col from "react-bootstrap/Col";
 
-export const FavoriteMoviesView = ({ movies, favoritesIdArray, }) => {
+export const FavoriteMoviesView = ({ user, setUser, movies, token, favoritesIdArray }) => {
   console.log("favorite-movies-view.jsx | favoritesIdArray prop is: ", favoritesIdArray);
 
-  //const [favoritesUpdated, setFavoritesUpdated] = useState(false);
   /**
    * 
    * @returns An array of movie objects based on their _id being included in the user.FavoriteMovies array.
@@ -27,7 +25,7 @@ export const FavoriteMoviesView = ({ movies, favoritesIdArray, }) => {
       {loadFavorites().map((movie => {
         return (
           <Col key={movie._id} md={4} className="mb-3">
-            <MovieCard movie={movie} />
+            <MovieCard user={user} setUser={setUser} movie={movie} token={token} prev="/profile" />
           </Col>
         );
       }))}
@@ -37,6 +35,16 @@ export const FavoriteMoviesView = ({ movies, favoritesIdArray, }) => {
 };
 
 FavoriteMoviesView.propTypes = {
+
+  user: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired,
+    Birthdate: PropTypes.string.isRequired,
+    FavoriteMovies: PropTypes.arrayOf(PropTypes.string).isRequired
+  }).isRequired,
+
+  setUser: PropTypes.func.isRequired,
+
   movies: PropTypes.arrayOf(PropTypes.shape({
     ImageURL: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
@@ -58,5 +66,8 @@ FavoriteMoviesView.propTypes = {
       Movies: PropTypes.arrayOf(PropTypes.string).isRequired
     }).isRequired
   }).isRequired),
+
+  token: PropTypes.string.isRequired,
+
   favoritesIdArray: PropTypes.arrayOf(PropTypes.string).isRequired
 }

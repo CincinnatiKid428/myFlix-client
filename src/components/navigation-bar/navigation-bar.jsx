@@ -10,7 +10,7 @@ import matineeNavbarBrand from "../../img/matinee-logo2-navbar-sm.png";
 export const NavigationBar = ({ user, onLoggedOut }) => {
 
   return (
-    <Navbar expand="md" className="sticky-top custom-navbar">
+    <Navbar expand="md" className="sticky-top custom-navbar mb-2">
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img src={matineeNavbarBrand} />

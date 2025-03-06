@@ -1,4 +1,7 @@
 import { PropTypes } from "prop-types";
+import { useState } from "react";
+//import { useContext } from "react";
+//import AppContext from "../app-context/app-context";
 import { MovieCard } from "../movie-card/movie-card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -6,25 +9,75 @@ import Col from "react-bootstrap/Col";
 import { useParams } from "react-router";
 import { Link } from "react-router";
 
+const DB_FAVORITES_URI = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies/favorites/";
+
 //Increase to 1px to add debug borders
 const debugBorder = "0px solid blue";
 
-export const MovieView = ({ movies }) => {
+export const MovieView = ({ user, setUser, movies, token, prev }) => { //Use context vs props?
 
   const { movieId } = useParams();
-  console.log("movie-view.jsx | movieId from useParms() is :" + movieId);
-  console.log("movie-view.jsx | movies array from props is :");
-  console.log(movies);
+  const [isFavorite, setIsFavorite] = useState((user.FavoriteMovies).includes(movieId));
 
-  //Find movie to display in MovieView
+  //Find movie to display
   const movie = movies.find((foundMovie) => foundMovie._id === movieId);
-  console.log("movie-view.jsx | movie from .find() is :");
-  console.log(movie);
 
   //Find similar movies array
   const similarMovieArray = movies.filter((arrayMovie) => (movie.Genre.Name === arrayMovie.Genre.Name && movieId !== arrayMovie._id)) || [];
-  console.log("movie-view.jsx | similarMovieArray :");
-  console.log(similarMovieArray);
+
+
+  /**
+ * Handles API call to add favorite movie to user.FavoriteMovies
+ */
+  const handleAddFav = async () => {
+    console.log("movie-view.jsx|handleAddFav()|Adding fav movie: " + movie.Title + " " + movie._id);
+    try {
+      const addFavResponse = await fetch((DB_FAVORITES_URI + movie._id), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      });
+      const responseData = await addFavResponse.json();
+      console.log("movie-view.jsx|handleAddFav()|responseData:", responseData);
+      if (responseData) {
+        setUser(responseData);
+        setIsFavorite(true);
+      } else {
+        alert("Something went wrong trying to add favorite, please try again.");
+      }
+    } catch (e) {
+      console.error("movie-view.jsx|handleAddFav()|ERROR during add handler:", e);
+    }
+  };
+
+  /**
+   * Handles API call to remove favorite movie to user.FavoriteMovies
+   */
+  const handleRemoveFav = async () => {
+    console.log("movie-view.jsx|handleRemoveFav|Removing fav movie: " + movie.Title + " " + movie._id);
+
+    try {
+      const removeFavResponse = await fetch((DB_FAVORITES_URI + movie._id), {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      });
+      const responseData = await removeFavResponse.json();
+      console.log("movie-view.jsx|handleRemoveFav()|responseData:", responseData);
+      if (responseData) {
+        setUser(responseData);
+        setIsFavorite(false);
+      } else {
+        alert("Something went wrong trying to remove favorite, please try again.");
+      }
+    } catch (e) {
+      console.error("movie-view.jsx|handleRemoveFav()|ERROR during remove handler:", e);
+    }
+  };
 
   return (
     <>
@@ -63,11 +116,18 @@ export const MovieView = ({ movies }) => {
             <span> {movie.Actors.join(', ')}</span>
           </div>
 
-          <Link to="/">
-            <div className="d-flex justify-content-center mt-3" style={{ border: debugBorder }}>
-              <Button type="button">Back</Button>
-            </div>
-          </Link>
+
+          <div className="d-flex justify-content-around mt-3" style={{ border: debugBorder }}>
+            <Link to={prev}>
+              <Button className="btn-md" type="button">Back</Button>
+            </Link>
+            {isFavorite ? (
+              <Button variant="danger" className="btn-md" onClick={handleRemoveFav}>Remove Favorite</Button>
+            ) : (
+              <Button variant="success" className="btn-md" onClick={handleAddFav}>Add Favorite</Button>
+            )}
+          </div>
+
 
         </Col>
       </Row>
@@ -79,10 +139,9 @@ export const MovieView = ({ movies }) => {
           <Row className="justify-content-center mt-3" style={{ border: debugBorder }}>
             {
               similarMovieArray.map((similarMovie) => {
-                console.log("movie-view.jsx | Similar movies - Placing MovieCard for :", similarMovie.Title);
                 return (
                   <Col key={similarMovie._id} md={4} className="mb-5" style={{ border: debugBorder }}>
-                    <MovieCard movie={similarMovie} />
+                    <MovieCard user={user} setUser={setUser} movie={similarMovie} token={token} prev={prev} />
                   </Col>
                 );
               })
@@ -100,6 +159,14 @@ export const MovieView = ({ movies }) => {
 
 //PropTypes for MovieView component (contains additional validation for genre and director data)
 MovieView.propTypes = {
+
+  user: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired,
+    Birthdate: PropTypes.string.isRequired
+  }).isRequired,
+
+  setUser: PropTypes.func.isRequired,
 
   movies: PropTypes.arrayOf(PropTypes.shape({
     ImageURL: PropTypes.string.isRequired,
@@ -121,6 +188,10 @@ MovieView.propTypes = {
       DeathYear: PropTypes.number,
       Movies: PropTypes.arrayOf(PropTypes.string).isRequired
     }).isRequired
-  }).isRequired)
+  }).isRequired),
+
+  token: PropTypes.string.isRequired,
+
+  prev: PropTypes.string.isRequired
 
 };

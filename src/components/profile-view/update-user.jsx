@@ -38,7 +38,7 @@ export const UpdateUser = ({ user, token, onUpdatedUser }) => {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
-      },
+      }
     })
       .then((response) => response.json())
       .then((updatedUserData) => {
