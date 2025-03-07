@@ -24,7 +24,7 @@ export const FavoriteMoviesView = ({ user, setUser, movies, token, favoritesIdAr
     <>
       {loadFavorites().map((movie => {
         return (
-          <Col key={movie._id} md={4} className="mb-3">
+          <Col key={movie._id} md={3} className="mb-3">
             <MovieCard user={user} setUser={setUser} movie={movie} token={token} prev="/profile" />
           </Col>
         );
