@@ -1,5 +1,7 @@
-import { useState, useEffect, useContext } from "react";
-//import AppContext, { AppContextProvider } from "../app-context/app-context";
+import { useState, useEffect } from "react";
+import { AppContextProvider } from "../app-context/app-context";
+import TestContextView from "../test-context-view/test-context-view";
+
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import { MovieCard } from "../movie-card/movie-card";
@@ -9,6 +11,7 @@ import { SignupView } from "../signup-view/signup-view";
 import { ProfileView } from "../profile-view/profile-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+
 
 const API_GET_ALL_MOVIES = 'https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies'; //move to environment var later
 
@@ -68,6 +71,19 @@ const MainView = () => {
       <NavigationBar user={user} onLoggedOut={onLoggedOut} />
       <Row className="d-flex justify-content-center">
         <Routes>
+
+          <Route
+            path="/testcontext"
+            element={
+              <>
+                <Col xs={12} sm={9} lg={6} xl={5} className="mt-5">
+                  <AppContextProvider>
+                    <TestContextView />
+                  </AppContextProvider>
+                </Col>
+              </>
+            }
+          />
 
           <Route
             path="/signup"

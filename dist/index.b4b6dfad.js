@@ -19175,7 +19175,9 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
-//import AppContext, { AppContextProvider } from "../app-context/app-context";
+var _appContext = require("../app-context/app-context");
+var _testContextView = require("../test-context-view/test-context-view");
+var _testContextViewDefault = parcelHelpers.interopDefault(_testContextView);
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
@@ -19236,7 +19238,7 @@ const MainView = ()=>{
                 onLoggedOut: onLoggedOut
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 68,
+                lineNumber: 71,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -19244,13 +19246,44 @@ const MainView = ()=>{
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Routes), {
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Route), {
+                            path: "/testcontext",
+                            element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                                    xs: 12,
+                                    sm: 9,
+                                    lg: 6,
+                                    xl: 5,
+                                    className: "mt-5",
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appContext.AppContextProvider), {
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _testContextViewDefault.default), {}, void 0, false, {
+                                            fileName: "src/components/main-view/main-view.jsx",
+                                            lineNumber: 81,
+                                            columnNumber: 21
+                                        }, void 0)
+                                    }, void 0, false, {
+                                        fileName: "src/components/main-view/main-view.jsx",
+                                        lineNumber: 80,
+                                        columnNumber: 19
+                                    }, void 0)
+                                }, void 0, false, {
+                                    fileName: "src/components/main-view/main-view.jsx",
+                                    lineNumber: 79,
+                                    columnNumber: 17
+                                }, void 0)
+                            }, void 0, false)
+                        }, void 0, false, {
+                            fileName: "src/components/main-view/main-view.jsx",
+                            lineNumber: 75,
+                            columnNumber: 11
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Route), {
                             path: "/signup",
                             element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                                 children: user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Navigate), {
                                     to: "/"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 77,
+                                    lineNumber: 93,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     xs: 12,
@@ -19260,18 +19293,18 @@ const MainView = ()=>{
                                     className: "mt-5",
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signupView.SignupView), {}, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 80,
+                                        lineNumber: 96,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 79,
+                                    lineNumber: 95,
                                     columnNumber: 19
                                 }, void 0)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 72,
+                            lineNumber: 88,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Route), {
@@ -19281,7 +19314,7 @@ const MainView = ()=>{
                                     to: "/"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 92,
+                                    lineNumber: 108,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
@@ -19294,19 +19327,19 @@ const MainView = ()=>{
                                             onLoggedIn: onLoggedIn
                                         }, void 0, false, {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 96,
+                                            lineNumber: 112,
                                             columnNumber: 23
                                         }, void 0)
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 95,
+                                        lineNumber: 111,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 87,
+                            lineNumber: 103,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Route), {
@@ -19317,13 +19350,13 @@ const MainView = ()=>{
                                     replace: true
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 109,
+                                    lineNumber: 125,
                                     columnNumber: 19
                                 }, void 0) : movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     children: "There are no movies in the list!"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 111,
+                                    lineNumber: 127,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     md: 10,
@@ -19335,18 +19368,18 @@ const MainView = ()=>{
                                         prev: "/"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 114,
+                                        lineNumber: 130,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 113,
+                                    lineNumber: 129,
                                     columnNumber: 19
                                 }, void 0)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 104,
+                            lineNumber: 120,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Route), {
@@ -19357,13 +19390,13 @@ const MainView = ()=>{
                                     replace: true
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 127,
+                                    lineNumber: 143,
                                     columnNumber: 19
                                 }, void 0) : movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     children: "There are no movies in the list!"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 129,
+                                    lineNumber: 145,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     md: 10,
@@ -19375,18 +19408,18 @@ const MainView = ()=>{
                                         prev: "/profile"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 132,
+                                        lineNumber: 148,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 131,
+                                    lineNumber: 147,
                                     columnNumber: 19
                                 }, void 0)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 122,
+                            lineNumber: 138,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Route), {
@@ -19397,13 +19430,13 @@ const MainView = ()=>{
                                     replace: true
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 145,
+                                    lineNumber: 161,
                                     columnNumber: 19
                                 }, void 0) : movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     children: "There are no movies in the list!"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 147,
+                                    lineNumber: 163,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                                     children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
@@ -19417,19 +19450,19 @@ const MainView = ()=>{
                                                 prev: "/"
                                             }, void 0, false, {
                                                 fileName: "src/components/main-view/main-view.jsx",
-                                                lineNumber: 152,
+                                                lineNumber: 168,
                                                 columnNumber: 25
                                             }, void 0)
                                         }, movie._id, false, {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 151,
+                                            lineNumber: 167,
                                             columnNumber: 23
                                         }, void 0))
                                 }, void 0, false)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 140,
+                            lineNumber: 156,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Route), {
@@ -19439,7 +19472,7 @@ const MainView = ()=>{
                                     to: "/login"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 166,
+                                    lineNumber: 182,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {
@@ -19449,31 +19482,31 @@ const MainView = ()=>{
                                         token: token
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 169,
+                                        lineNumber: 185,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 161,
+                            lineNumber: 177,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 70,
+                    lineNumber: 73,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 69,
+                lineNumber: 72,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 67,
+        lineNumber: 70,
         columnNumber: 5
     }, undefined);
 };
@@ -19488,7 +19521,394 @@ $RefreshReg$(_c, "MainView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","../login-view/login-view":"9YtA0","../signup-view/signup-view":"4OGiN","../profile-view/profile-view":"2vVqf","../navigation-bar/navigation-bar":"bsPVM","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"cMC39":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../app-context/app-context":"41vw9","../test-context-view/test-context-view":"egOzY","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","../login-view/login-view":"9YtA0","../signup-view/signup-view":"4OGiN","../profile-view/profile-view":"2vVqf","../navigation-bar/navigation-bar":"bsPVM","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"41vw9":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$01c4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$01c4.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "AppContextProvider", ()=>AppContextProvider);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _s = $RefreshSig$();
+const API_GET_ALL_MOVIES = 'https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies'; //move to environment var later
+const AppContext = /*#__PURE__*/ (0, _react.createContext)();
+const AppContextProvider = ({ children })=>{
+    _s();
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedToken = localStorage.getItem("token");
+    const [user, setUser] = (0, _react.useState)(storedUser ? storedUser : null); //State: user object when logged in
+    const [token, setToken] = (0, _react.useState)(storedToken ? storedToken : null); //State: auth JWT token when logged in
+    const [movies, setMovies] = (0, _react.useState)([]); //State: list of all movies form DB
+    //API call to get list of all movies from remote Heroku server running movie_api app
+    (0, _react.useEffect)(()=>{
+        console.log("app-context.jsx| Starting useEffect() hook...");
+        if (!token) {
+            console.log("Skipping fetch until authenticated user logged in...");
+            return;
+        }
+        if (movies.length === 0) fetch(API_GET_ALL_MOVIES, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        }).then((response)=>response.json()).then((movieData)=>{
+            console.log("app-context.jsx | Return from movie_api: ");
+            console.log(movieData);
+            movieData ? setMovies(movieData) : setMovies([]);
+        }).catch((err)=>{
+            console.error("app-context.jsx | Error in API call:");
+            console.error(err.message);
+        });
+    }, [
+        token
+    ]);
+    const onLoggedIn = (authenticatedUser, AuthenticatedToken)=>{
+        console.log("app-context.jsx|onLoggedIn()| Updating user/token via context component.");
+        setUser(authenticatedUser);
+        setToken(AuthenticatedToken);
+    };
+    const onLoggedOut = ()=>{
+        console.log("app-context.jsx|onLoggedOut()| Clearing user/token/localStorage via context component.");
+        setUser(null);
+        setToken(null);
+        localStorage.clear();
+    };
+    const contextValue = {
+        user,
+        setUser,
+        movies,
+        setMovies,
+        token,
+        onLoggedIn,
+        onLoggedOut
+    };
+    console.log("app-context.jsx|contextValue:", contextValue);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(AppContext.Provider, {
+        value: contextValue,
+        children: children
+    }, void 0, false, {
+        fileName: "src/components/app-context/app-context.jsx",
+        lineNumber: 69,
+        columnNumber: 5
+    }, undefined);
+};
+_s(AppContextProvider, "vrQobkEX5jhNcI69dtstaSSmWyg=");
+_c = AppContextProvider;
+exports.default = AppContext;
+var _c;
+$RefreshReg$(_c, "AppContextProvider");
+
+  $parcel$ReactRefreshHelpers$01c4.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"eidxe":[function(require,module,exports,__globalThis) {
+"use strict";
+var Refresh = require("d0349a6232b762a7");
+var { version } = require("370a05339886f768");
+function debounce(func, delay) {
+    {
+        let timeout = undefined;
+        let lastTime = 0;
+        return function(args) {
+            // Call immediately if last call was more than the delay ago.
+            // Otherwise, set a timeout. This means the first call is fast
+            // (for the common case of a single update), and subsequent updates
+            // are batched.
+            let now = Date.now();
+            if (now - lastTime > delay) {
+                lastTime = now;
+                func.call(null, args);
+            } else {
+                clearTimeout(timeout);
+                timeout = setTimeout(function() {
+                    timeout = undefined;
+                    lastTime = Date.now();
+                    func.call(null, args);
+                }, delay);
+            }
+        };
+    }
+}
+var enqueueUpdate = debounce(function() {
+    Refresh.performReactRefresh();
+}, 30);
+// Everything below is either adapted or copied from
+// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
+// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
+module.exports.prelude = function(module1) {
+    window.__REACT_REFRESH_VERSION_TRANSFORMER = version;
+    window.$RefreshReg$ = function(type, id) {
+        if (window.__REACT_REFRESH_VERSION_TRANSFORMER && window.__REACT_REFRESH_VERSION_RUNTIME && window.__REACT_REFRESH_VERSION_TRANSFORMER !== window.__REACT_REFRESH_VERSION_RUNTIME) // Both versions were set and they did not match
+        throw new Error(`react-refresh versions did not match between transformer and runtime. Please check your dependencies. Transformer: ${window.__REACT_REFRESH_VERSION_TRANSFORMER}, Runtime: ${window.__REACT_REFRESH_VERSION_RUNTIME}`);
+        Refresh.register(type, module1.id + ' ' + id);
+    };
+    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
+};
+module.exports.postlude = function(module1) {
+    if (isReactRefreshBoundary(module1.exports)) {
+        registerExportsForReactRefresh(module1);
+        if (module1.hot) {
+            module1.hot.dispose(function(data) {
+                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
+                data.prevExports = module1.exports;
+            });
+            module1.hot.accept(function(getParents) {
+                var prevExports = module1.hot.data.prevExports;
+                var nextExports = module1.exports;
+                // Since we just executed the code for it, it's possible
+                // that the new exports make it ineligible for being a boundary.
+                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports);
+                // It can also become ineligible if its exports are incompatible
+                // with the previous exports.
+                // For example, if you add/remove/change exports, we'll want
+                // to re-execute the importing modules, and force those components
+                // to re-render. Similarly, if you convert a class component
+                // to a function, we want to invalidate the boundary.
+                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
+                if (isNoLongerABoundary || didInvalidate) {
+                    // We'll be conservative. The only case in which we won't do a full
+                    // reload is if all parent modules are also refresh boundaries.
+                    // In that case we'll add them to the current queue.
+                    var parents = getParents();
+                    if (parents.length === 0) {
+                        // Looks like we bubbled to the root. Can't recover from that.
+                        window.location.reload();
+                        return;
+                    }
+                    return parents;
+                }
+                enqueueUpdate();
+            });
+        }
+    }
+};
+function isReactRefreshBoundary(exports) {
+    if (Refresh.isLikelyComponentType(exports)) return true;
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    return false;
+    var hasExports = false;
+    var areAllExportsComponents = true;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        hasExports = true;
+        if (key === '__esModule') continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
+        return false;
+        var exportValue = exports[key];
+        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
+    }
+    return hasExports && areAllExportsComponents;
+}
+function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
+    var prevSignature = getRefreshBoundarySignature(prevExports);
+    var nextSignature = getRefreshBoundarySignature(nextExports);
+    if (prevSignature.length !== nextSignature.length) return true;
+    for(var i = 0; i < nextSignature.length; i++){
+        if (prevSignature[i] !== nextSignature[i]) return true;
+    }
+    return false;
+}
+// When this signature changes, it's unsafe to stop at this refresh boundary.
+function getRefreshBoundarySignature(exports) {
+    var signature = [];
+    signature.push(Refresh.getFamilyByType(exports));
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return signature;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        if (key === '__esModule') continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        signature.push(key);
+        signature.push(Refresh.getFamilyByType(exportValue));
+    }
+    return signature;
+}
+function registerExportsForReactRefresh(module1) {
+    var exports = module1.exports, id = module1.id;
+    Refresh.register(exports, id + ' %exports%');
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        var typeID = id + ' %exports% ' + key;
+        Refresh.register(exportValue, typeID);
+    }
+}
+
+},{"d0349a6232b762a7":"2XXld","370a05339886f768":"1sgPB"}],"1sgPB":[function(require,module,exports,__globalThis) {
+module.exports = JSON.parse("{\"name\":\"react-refresh\",\"description\":\"React is a JavaScript library for building user interfaces.\",\"keywords\":[\"react\"],\"version\":\"0.14.2\",\"homepage\":\"https://reactjs.org/\",\"bugs\":\"https://github.com/facebook/react/issues\",\"license\":\"MIT\",\"files\":[\"LICENSE\",\"README.md\",\"babel.js\",\"runtime.js\",\"cjs/\",\"umd/\"],\"main\":\"runtime.js\",\"exports\":{\".\":\"./runtime.js\",\"./runtime\":\"./runtime.js\",\"./babel\":\"./babel.js\",\"./package.json\":\"./package.json\"},\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/facebook/react.git\",\"directory\":\"packages/react\"},\"engines\":{\"node\":\">=0.10.0\"},\"devDependencies\":{\"react-16-8\":\"npm:react@16.8.0\",\"react-dom-16-8\":\"npm:react-dom@16.8.0\",\"scheduler-0-13\":\"npm:scheduler@0.13.0\"}}");
+
+},{}],"egOzY":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$2d40 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$2d40.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _appContext = require("../app-context/app-context");
+var _appContextDefault = parcelHelpers.interopDefault(_appContext);
+var _s = $RefreshSig$();
+const TestContextView = ()=>{
+    _s();
+    console.log("test-context-view.jsx| GOT HERE... trying to get context values...");
+    console.log("AppContext", (0, _appContextDefault.default));
+    const { user, setUser, movies, setMovies, token, onLoggedIn, onLoggedOut } = (0, _react.useContext)((0, _appContextDefault.default));
+    console.log("test-context.view.jsx|Got the context values...");
+    console.log("user", user);
+    console.log("movies", movies);
+    console.log("token", token);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h5", {
+                        children: "user context values: "
+                    }, void 0, false, {
+                        fileName: "src/components/test-context-view/test-context-view.jsx",
+                        lineNumber: 16,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        children: [
+                            "Username: ",
+                            user.Username
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/test-context-view/test-context-view.jsx",
+                        lineNumber: 17,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                        fileName: "src/components/test-context-view/test-context-view.jsx",
+                        lineNumber: 17,
+                        columnNumber: 47
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        children: [
+                            "Email: ",
+                            user.Email
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/test-context-view/test-context-view.jsx",
+                        lineNumber: 18,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                        fileName: "src/components/test-context-view/test-context-view.jsx",
+                        lineNumber: 18,
+                        columnNumber: 41
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        children: [
+                            "Birthdate: ",
+                            user.Birthdate
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/test-context-view/test-context-view.jsx",
+                        lineNumber: 19,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                        fileName: "src/components/test-context-view/test-context-view.jsx",
+                        lineNumber: 19,
+                        columnNumber: 49
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        children: [
+                            "FavoriteMovies: ",
+                            user.FavoriteMovies.join(', ')
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/test-context-view/test-context-view.jsx",
+                        lineNumber: 20,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/test-context-view/test-context-view.jsx",
+                lineNumber: 15,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h5", {
+                        children: "movies context value: "
+                    }, void 0, false, {
+                        fileName: "src/components/test-context-view/test-context-view.jsx",
+                        lineNumber: 23,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        children: JSON.stringify(movies)
+                    }, void 0, false, {
+                        fileName: "src/components/test-context-view/test-context-view.jsx",
+                        lineNumber: 24,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/test-context-view/test-context-view.jsx",
+                lineNumber: 22,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h5", {
+                        children: "token context value: "
+                    }, void 0, false, {
+                        fileName: "src/components/test-context-view/test-context-view.jsx",
+                        lineNumber: 27,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        children: token
+                    }, void 0, false, {
+                        fileName: "src/components/test-context-view/test-context-view.jsx",
+                        lineNumber: 28,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/test-context-view/test-context-view.jsx",
+                lineNumber: 26,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true);
+};
+_s(TestContextView, "dHLKgE6E5pZbc8vOuBYUO+Hh7E8=");
+_c = TestContextView;
+exports.default = TestContextView;
+var _c;
+$RefreshReg$(_c, "TestContextView");
+
+  $parcel$ReactRefreshHelpers$2d40.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../app-context/app-context":"41vw9","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"cMC39":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _classnames = require("classnames");
@@ -34951,151 +35371,6 @@ module.exports.parse = parse;
 module.exports.parseString = parseString;
 module.exports.splitCookiesString = splitCookiesString;
 
-},{}],"eidxe":[function(require,module,exports,__globalThis) {
-"use strict";
-var Refresh = require("d0349a6232b762a7");
-var { version } = require("370a05339886f768");
-function debounce(func, delay) {
-    {
-        let timeout = undefined;
-        let lastTime = 0;
-        return function(args) {
-            // Call immediately if last call was more than the delay ago.
-            // Otherwise, set a timeout. This means the first call is fast
-            // (for the common case of a single update), and subsequent updates
-            // are batched.
-            let now = Date.now();
-            if (now - lastTime > delay) {
-                lastTime = now;
-                func.call(null, args);
-            } else {
-                clearTimeout(timeout);
-                timeout = setTimeout(function() {
-                    timeout = undefined;
-                    lastTime = Date.now();
-                    func.call(null, args);
-                }, delay);
-            }
-        };
-    }
-}
-var enqueueUpdate = debounce(function() {
-    Refresh.performReactRefresh();
-}, 30);
-// Everything below is either adapted or copied from
-// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
-// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
-module.exports.prelude = function(module1) {
-    window.__REACT_REFRESH_VERSION_TRANSFORMER = version;
-    window.$RefreshReg$ = function(type, id) {
-        if (window.__REACT_REFRESH_VERSION_TRANSFORMER && window.__REACT_REFRESH_VERSION_RUNTIME && window.__REACT_REFRESH_VERSION_TRANSFORMER !== window.__REACT_REFRESH_VERSION_RUNTIME) // Both versions were set and they did not match
-        throw new Error(`react-refresh versions did not match between transformer and runtime. Please check your dependencies. Transformer: ${window.__REACT_REFRESH_VERSION_TRANSFORMER}, Runtime: ${window.__REACT_REFRESH_VERSION_RUNTIME}`);
-        Refresh.register(type, module1.id + ' ' + id);
-    };
-    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
-};
-module.exports.postlude = function(module1) {
-    if (isReactRefreshBoundary(module1.exports)) {
-        registerExportsForReactRefresh(module1);
-        if (module1.hot) {
-            module1.hot.dispose(function(data) {
-                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
-                data.prevExports = module1.exports;
-            });
-            module1.hot.accept(function(getParents) {
-                var prevExports = module1.hot.data.prevExports;
-                var nextExports = module1.exports;
-                // Since we just executed the code for it, it's possible
-                // that the new exports make it ineligible for being a boundary.
-                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports);
-                // It can also become ineligible if its exports are incompatible
-                // with the previous exports.
-                // For example, if you add/remove/change exports, we'll want
-                // to re-execute the importing modules, and force those components
-                // to re-render. Similarly, if you convert a class component
-                // to a function, we want to invalidate the boundary.
-                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
-                if (isNoLongerABoundary || didInvalidate) {
-                    // We'll be conservative. The only case in which we won't do a full
-                    // reload is if all parent modules are also refresh boundaries.
-                    // In that case we'll add them to the current queue.
-                    var parents = getParents();
-                    if (parents.length === 0) {
-                        // Looks like we bubbled to the root. Can't recover from that.
-                        window.location.reload();
-                        return;
-                    }
-                    return parents;
-                }
-                enqueueUpdate();
-            });
-        }
-    }
-};
-function isReactRefreshBoundary(exports) {
-    if (Refresh.isLikelyComponentType(exports)) return true;
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    return false;
-    var hasExports = false;
-    var areAllExportsComponents = true;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        hasExports = true;
-        if (key === '__esModule') continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
-        return false;
-        var exportValue = exports[key];
-        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
-    }
-    return hasExports && areAllExportsComponents;
-}
-function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
-    var prevSignature = getRefreshBoundarySignature(prevExports);
-    var nextSignature = getRefreshBoundarySignature(nextExports);
-    if (prevSignature.length !== nextSignature.length) return true;
-    for(var i = 0; i < nextSignature.length; i++){
-        if (prevSignature[i] !== nextSignature[i]) return true;
-    }
-    return false;
-}
-// When this signature changes, it's unsafe to stop at this refresh boundary.
-function getRefreshBoundarySignature(exports) {
-    var signature = [];
-    signature.push(Refresh.getFamilyByType(exports));
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return signature;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        if (key === '__esModule') continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        signature.push(key);
-        signature.push(Refresh.getFamilyByType(exportValue));
-    }
-    return signature;
-}
-function registerExportsForReactRefresh(module1) {
-    var exports = module1.exports, id = module1.id;
-    Refresh.register(exports, id + ' %exports%');
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        var typeID = id + ' %exports% ' + key;
-        Refresh.register(exportValue, typeID);
-    }
-}
-
-},{"d0349a6232b762a7":"2XXld","370a05339886f768":"1sgPB"}],"1sgPB":[function(require,module,exports,__globalThis) {
-module.exports = JSON.parse("{\"name\":\"react-refresh\",\"description\":\"React is a JavaScript library for building user interfaces.\",\"keywords\":[\"react\"],\"version\":\"0.14.2\",\"homepage\":\"https://reactjs.org/\",\"bugs\":\"https://github.com/facebook/react/issues\",\"license\":\"MIT\",\"files\":[\"LICENSE\",\"README.md\",\"babel.js\",\"runtime.js\",\"cjs/\",\"umd/\"],\"main\":\"runtime.js\",\"exports\":{\".\":\"./runtime.js\",\"./runtime\":\"./runtime.js\",\"./babel\":\"./babel.js\",\"./package.json\":\"./package.json\"},\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/facebook/react.git\",\"directory\":\"packages/react\"},\"engines\":{\"node\":\">=0.10.0\"},\"devDependencies\":{\"react-16-8\":\"npm:react@16.8.0\",\"react-dom-16-8\":\"npm:react-dom@16.8.0\",\"scheduler-0-13\":\"npm:scheduler@0.13.0\"}}");
-
 },{}],"ggaUx":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$e9f6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
@@ -35558,7 +35833,7 @@ $RefreshReg$(_c, "MovieView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","../movie-card/movie-card":"bwuIu","react-bootstrap/Button":"aPzUt","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe","react":"21dqq"}],"9YtA0":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react":"21dqq","../movie-card/movie-card":"bwuIu","react-bootstrap/Button":"aPzUt","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"9YtA0":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -36469,40 +36744,57 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "NavigationBar", ()=>NavigationBar);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
-var _reactRouter = require("react-router");
+var _reactRouter = require("react-router"); // Make sure you use "react-router-dom" if you're using it for routing
 // Image imports - Matinee images created using www.recraft.ai and are owned by Recraft.
 var _matineeLogo2NavbarSmPng = require("../../img/matinee-logo2-navbar-sm.png");
 var _matineeLogo2NavbarSmPngDefault = parcelHelpers.interopDefault(_matineeLogo2NavbarSmPng);
+var _s = $RefreshSig$();
 //Set to 1px for debug border
 const debugBorder = "0px solid red";
 const NavigationBar = ({ user, onLoggedOut })=>{
+    _s();
+    // State to track whether the navbar is expanded
+    const [expanded, setExpanded] = (0, _react.useState)(false);
+    // Function to handle closing the navbar after a NavLink is clicked
+    const handleNavLinkClick = ()=>{
+        setExpanded(false); // Collapse the navbar after the link is clicked
+    };
+    const handleNavLinkLogout = ()=>{
+        setExpanded(false);
+        onLoggedOut();
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar), {
         expand: "md",
         className: "sticky-top custom-navbar mb-2",
+        expanded: expanded,
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Brand, {
                         as: (0, _reactRouter.Link),
                         to: "/",
+                        onClick: handleNavLinkClick,
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                             src: (0, _matineeLogo2NavbarSmPngDefault.default)
                         }, void 0, false, {
                             fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                            lineNumber: 16,
+                            lineNumber: 29,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                        lineNumber: 15,
+                        lineNumber: 28,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Toggle, {
-                        "aria-controls": "basic-navbar-nav"
+                        "aria-controls": "basic-navbar-nav",
+                        onClick: ()=>setExpanded(!expanded)
                     }, void 0, false, {
                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                        lineNumber: 18,
+                        lineNumber: 31,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Collapse, {
@@ -36514,19 +36806,21 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
                                         as: (0, _reactRouter.Link),
                                         to: "/login",
+                                        onClick: handleNavLinkClick,
                                         children: "Log in"
                                     }, void 0, false, {
                                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                        lineNumber: 23,
+                                        lineNumber: 39,
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
                                         as: (0, _reactRouter.Link),
                                         to: "/signup",
+                                        onClick: handleNavLinkClick,
                                         children: "Sign up"
                                     }, void 0, false, {
                                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                        lineNumber: 26,
+                                        lineNumber: 42,
                                         columnNumber: 17
                                     }, undefined)
                                 ]
@@ -36535,45 +36829,47 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
                                         as: (0, _reactRouter.Link),
                                         to: "/",
+                                        onClick: handleNavLinkClick,
                                         children: "Home"
                                     }, void 0, false, {
                                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                        lineNumber: 32,
+                                        lineNumber: 48,
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
                                         as: (0, _reactRouter.Link),
                                         to: "/profile",
+                                        onClick: handleNavLinkClick,
                                         children: "Profile"
                                     }, void 0, false, {
                                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                        lineNumber: 35,
+                                        lineNumber: 51,
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
-                                        onClick: onLoggedOut,
+                                        onClick: handleNavLinkLogout,
                                         children: "Logout"
                                     }, void 0, false, {
                                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                        lineNumber: 38,
+                                        lineNumber: 54,
                                         columnNumber: 17
                                     }, undefined)
                                 ]
                             }, void 0, true)
                         }, void 0, false, {
                             fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                            lineNumber: 20,
+                            lineNumber: 36,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                        lineNumber: 19,
+                        lineNumber: 35,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                lineNumber: 14,
+                lineNumber: 27,
                 columnNumber: 7
             }, undefined),
             user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -36589,16 +36885,17 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                 ]
             }, void 0, true, {
                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                lineNumber: 49,
+                lineNumber: 63,
                 columnNumber: 9
             }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {}, void 0, false)
         ]
     }, void 0, true, {
         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-        lineNumber: 13,
+        lineNumber: 26,
         columnNumber: 5
     }, undefined);
 };
+_s(NavigationBar, "DuL5jiiQQFgbn7gBKAyxwS/H4Ek=");
 _c = NavigationBar;
 var _c;
 $RefreshReg$(_c, "NavigationBar");
@@ -36608,7 +36905,7 @@ $RefreshReg$(_c, "NavigationBar");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-bootstrap":"3AD9A","react-router":"dXVwI","../../img/matinee-logo2-navbar-sm.png":"kvi26","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"kvi26":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","react-router":"dXVwI","../../img/matinee-logo2-navbar-sm.png":"kvi26","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"kvi26":[function(require,module,exports,__globalThis) {
 module.exports = require("b0c60f9034a93d25").getBundleURL('byUka') + "matinee-logo2-navbar-sm.c71418a1.png" + "?" + Date.now();
 
 },{"b0c60f9034a93d25":"gw4EE"}],"lJZlQ":[function() {},{}]},["8ecef","bmfvp","d8Dch"], "d8Dch", "parcelRequire94c2")
