@@ -164,7 +164,7 @@ const MainView = () => {
                 ) : (
                   <>
                     {movies.map((movie) => (
-                      <Col key={movie._id} md={3} className="mb-3">
+                      <Col key={movie._id} md={3} sm={6} className="mb-3">
                         <MovieCard user={user} setUser={setUser} movie={movie} token={token} prev="/" />
                       </Col>
                     ))}
@@ -182,7 +182,7 @@ const MainView = () => {
                   <Navigate to="/login" />
                 ) : (
                   <>
-                    <ProfileView user={user} setUser={setUser} movies={movies} token={token} />
+                    <ProfileView user={user} setUser={setUser} movies={movies} token={token} onLoggedOut={onLoggedOut} />
                   </>
                 )}
               </>

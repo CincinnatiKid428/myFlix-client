@@ -1,12 +1,14 @@
 import { PropTypes } from "prop-types";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 import { UpdateUser } from "./update-user";
 import { FavoriteMoviesView } from "./favorite-movies-view";
 
 //Image imports - Matinee images created using www.recraft.ai and are owned by Recraft.
 import matinee4Transparent from "../../img/matinee4-transparent.png";
 
+const DELETE_USER_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/users";
 
 //Increase to 1px to add debug borders
 const debugBorder = "0px solid blue";
@@ -26,8 +28,37 @@ function formatUserBday(bday) {
     return dateParts[1] + "/" + dateParts[2] + "/" + dateParts[0];
 }
 
-export const ProfileView = ({ user, setUser, movies, token }) => {
-  console.log("profile-view.jsx | Starting - movies props is:", movies);
+export const ProfileView = ({ user, setUser, movies, token, onLoggedOut }) => {
+  console.log("profile-view.jsx | Starting");
+
+  //Handles account removal with user confirmation required before DELETE call
+  const handleDeleteAcct = () => {
+
+    const confirmDelete = window.confirm("Are you sure you want to delete your account? This cannot be undone. Click OK to delete your account.");
+
+    if (confirmDelete) {
+      fetch((DELETE_USER_URL), {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      })
+        .then((response) => {
+          if (response.ok) {
+            alert("Account removal successful");
+            console.log(`profile-view.jsx|handleDeleteAcct() | Successful delete, removed user ${user.Username}`, response);
+            onLoggedOut(); //Logout and clear all the local storage & state variables
+          } else {
+            alert("Delete failed, please try again.");
+          }
+        })
+        .catch((e) => {
+          console.error("profile-view.jsx|handleDeleteAcct()  | Error during delete submit : ", e);
+        });
+    } else alert("Your account was not removed.");
+
+  };
 
   return (
     <>
@@ -39,6 +70,13 @@ export const ProfileView = ({ user, setUser, movies, token }) => {
             <p>Birthdate : {formatUserBday(user.Birthdate)}</p>
           </div>
         </Col>
+
+        <div className="d-flex justify-content-center">
+          <Button variant="danger" type="button" className="mt-2 mb-5" onClick={() => handleDeleteAcct()}>
+            Delete Account
+          </Button>
+        </div>
+
       </Row>
       <hr />
       <Row className="d-flex justify-content-center" style={{ border: debugBorder }}>
@@ -102,4 +140,5 @@ ProfileView.propTypes = {
   }).isRequired),
 
   token: PropTypes.string.isRequired,
+  onLoggedOut: PropTypes.func.isRequired
 }

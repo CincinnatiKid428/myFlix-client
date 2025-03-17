@@ -1,13 +1,18 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 const SIGNUP_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/users";
+
+
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSignupSubmit = (event) => {
     event.preventDefault();
@@ -31,7 +36,7 @@ export const SignupView = () => {
       .then((response) => {
         if (response.ok) {
           alert("Sign up successful, you can now log in.");
-          window.location.reload();
+          navigate("/login"); //Hook to navigate back to /login
         } else {
           alert("Sign up failed, please try again.");
         }

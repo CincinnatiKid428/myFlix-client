@@ -140,7 +140,7 @@ export const MovieView = ({ user, setUser, movies, token, prev }) => { //Use con
             {
               similarMovieArray.map((similarMovie) => {
                 return (
-                  <Col key={similarMovie._id} md={4} className="mb-5" style={{ border: debugBorder }}>
+                  <Col key={similarMovie._id} md={4} sm={6} className="mb-5" style={{ border: debugBorder }}>
                     <MovieCard user={user} setUser={setUser} movie={similarMovie} token={token} prev={prev} />
                   </Col>
                 );
