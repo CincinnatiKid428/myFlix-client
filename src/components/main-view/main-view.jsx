@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
-import { AppContextProvider } from "../app-context/app-context";
-import TestContextView from "../test-context-view/test-context-view";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
 
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
+
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { ProfileView } from "../profile-view/profile-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router";
-
+import { setMovies } from "../../redux/reducers/movies";
 
 const API_GET_ALL_MOVIES = 'https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies'; //move to environment var later
 
@@ -19,11 +19,12 @@ const MainView = () => {
 
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
+  const dispatch = useDispatch();
 
   const [user, setUser] = useState(storedUser ? storedUser : null);  //State: user object when logged in
   const [token, setToken] = useState(storedToken ? storedToken : null);  //State: auth JWT token when logged in
-  const [movies, setMovies] = useState([]);  //State: list of MovieCards
 
+  const movies = useSelector((state) => state.movies.list); //Redux State: movies list from API
 
   //API call to get list of all movies from remote Heroku server running movie_api app
   useEffect(() => {
@@ -34,6 +35,7 @@ const MainView = () => {
       return;
     }
 
+    //WRAP TRY-CATCH BLOCK HERE
     fetch(API_GET_ALL_MOVIES, {
       method: "GET",
       headers: {
@@ -43,14 +45,11 @@ const MainView = () => {
     })
       .then((response) => response.json())
       .then((movieData) => {
-        console.log("main-view.jsx | Return from movie_api: ");
-        console.log(movieData);
-
-        movieData ? setMovies(movieData) : setMovies([]);
+        console.log("main-view.jsx | Return from movie_api:", movieData);
+        movieData ? dispatch(setMovies(movieData)) : dispatch(setMovies([]));
       })
       .catch((err) => {
-        console.error("main-view.jsx | Error in API call:");
-        console.error(err.message);
+        console.error("main-view.jsx | Error in API call:", err.message);
       });
 
   }, [token]);
@@ -71,19 +70,6 @@ const MainView = () => {
       <NavigationBar user={user} onLoggedOut={onLoggedOut} />
       <Row className="d-flex justify-content-center">
         <Routes>
-
-          <Route
-            path="/testcontext"
-            element={
-              <>
-                <Col xs={12} sm={9} lg={6} xl={5} className="mt-5">
-                  <AppContextProvider>
-                    <TestContextView />
-                  </AppContextProvider>
-                </Col>
-              </>
-            }
-          />
 
           <Route
             path="/signup"

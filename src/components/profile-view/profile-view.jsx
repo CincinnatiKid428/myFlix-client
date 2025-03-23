@@ -72,13 +72,12 @@ export const ProfileView = ({ user, setUser, movies, token, onLoggedOut }) => {
         </Col>
 
         <div className="d-flex justify-content-center">
-          <Button variant="danger" type="button" className="mt-2 mb-5" onClick={() => handleDeleteAcct()}>
+          <Button variant="danger" type="button" className="mb-5" onClick={() => handleDeleteAcct()}>
             Delete Account
           </Button>
         </div>
-
       </Row>
-      <hr />
+
       <Row className="d-flex justify-content-center" style={{ border: debugBorder }}>
         <Col sm={10} md={6} className="align-self-center" style={{ border: debugBorder }}>
           <UpdateUser user={user} token={token} onUpdatedUser={(updatedUser) => {
@@ -86,11 +85,13 @@ export const ProfileView = ({ user, setUser, movies, token, onLoggedOut }) => {
           }} />
         </Col>
       </Row >
+
       <Row style={{ border: debugBorder }}>
         <Col className="d-flex justify-content-center">
           <img src={matinee4Transparent} className="img-rounded-corners" alt="Image created using www.recraft.ai and is owned by Recraft." />
         </Col>
       </Row>
+
       <h5>{user.Username}'s Favorite Movies:</h5>
       <hr />
       {user.FavoriteMovies.length !== 0 ? (

@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router";
 const UPDATE_USER_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/users";
 
-//Increase to 1px to add debug borders
+//Use 1px to add debug borders with style="border: {debugBorder}" element attrib
 const debugBorder = "0px solid purple";
 
 export const UpdateUser = ({ user, token, onUpdatedUser }) => {
@@ -16,7 +16,7 @@ export const UpdateUser = ({ user, token, onUpdatedUser }) => {
 
   const navigate = useNavigate();
 
-  const handleUpdateSubmit = (event) => {
+  const handleUpdateSubmit = async (event) => {
     event.preventDefault();
 
     console.log("update-user.jsx | Starting handleUpdateSubmit()");
@@ -30,38 +30,37 @@ export const UpdateUser = ({ user, token, onUpdatedUser }) => {
     console.log("update-user.jsx | Attempting update with data:", updateData);
     console.log("update-user.jsx | API call to:", (UPDATE_USER_URL + `/${user.Username}`));
 
-    //PUT THIS CALL IN A TRY-CATCH BLOCK
-
-    fetch((UPDATE_USER_URL + `/${user.Username}`), {
-      method: "PUT",
-      body: JSON.stringify(updateData),
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      }
-    })
-      .then((response) => response.json())
-      .then((updatedUserData) => {
-        if (updatedUserData) {
-          alert("Update successful");
-          console.log("update-user.jsx | Successful update, the response user object is: ");
-          console.log(updatedUserData);
-          onUpdatedUser(updatedUserData); //Pass this function the new user object
-          navigate("/profile"); //Hook to navigate back to /profile
-        } else {
-          alert("Update failed, please try again.");
+    try {
+      const apiResponse = await fetch((UPDATE_USER_URL + `/${user.Username}`), {
+        method: "PUT",
+        body: JSON.stringify(updateData),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         }
-      })
-      .catch((e) => {
-        console.error("update-user.jsx | Error during update submit : ", e);
       });
+
+      const apiResponseJSON = await apiResponse.json();
+      if (apiResponseJSON) {
+        alert("Update successful.");
+        console.log("update-user.jsx | Successful update, the response user object is: ", apiResponseJSON);
+        onUpdatedUser(apiResponseJSON); //Pass this function the new user object
+        navigate("/profile"); //Hook to navigate back to /profile
+      } else {
+        alert("Update failed, please try again.");
+      }
+    } catch (e) {
+      console.error("update-user.jsx|Error during update submit : ", e);
+    }
+
   };
 
   return (
     <>
-      <h5>Update account information :</h5>
-      <p>Please fill out ALL fields:</p>
-      <Form onSubmit={handleUpdateSubmit}>
+      <h5>Update Account Information</h5>
+      <hr />
+      <p>Please fill out <strong>ALL</strong> fields:</p>
+      <Form onSubmit={handleUpdateSubmit} style={{ border: debugBorder }}>
         <Form.Group controlId="formUpdatePassword">
           <Form.Label>Password:</Form.Label>
           <Form.Control

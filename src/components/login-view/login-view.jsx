@@ -1,8 +1,11 @@
 import { PropTypes } from "prop-types";
 import { useState, useContext } from "react";
-//import { AppContext } from "../app-context/app-context";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
+import { setUser } from "../../redux/reducers/user";
+import { setToken } from "../../redux/reducers/token";
+import { useDispatch } from "react-redux";
 
 const LOGIN_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/login";
 
