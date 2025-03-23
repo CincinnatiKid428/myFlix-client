@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../../redux/reducers/user";
+import { setToken } from "../../redux/reducers/token";
+import { setMovies } from "../../redux/reducers/movies";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router"; // Make sure you use "react-router-dom" if you're using it for routing
 
@@ -8,19 +12,31 @@ const debugBorder = "0px solid red";
 // Image imports - Matinee images created using www.recraft.ai and are owned by Recraft.
 import matineeNavbarBrand from "../../img/matinee-logo2-navbar-sm.png";
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = () => {
+
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   // State to track whether the navbar is expanded
   const [expanded, setExpanded] = useState(false);
 
   // Function to handle closing the navbar after a NavLink is clicked
-  const handleNavLinkClick = () => {
-    setExpanded(false); // Collapse the navbar after the link is clicked
-  };
+  const handleNavLinkClick = () => setExpanded(false);
 
   const handleNavLinkLogout = () => {
     setExpanded(false);
     onLoggedOut();
   }
+
+  const onLoggedOut = () => {
+    console.log("navigation-bar.jsx|Clearing localStorage and setting user/token/movies to null/[]...");
+    localStorage.clear();
+    dispatch(setUser(null));
+    dispatch(setToken(null));
+    dispatch(setMovies(null));
+    console.log("navigation-bar.jsx|Logout complete.");
+
+  };
 
   return (
     <Navbar expand="md" className="sticky-top custom-navbar mb-2" expanded={expanded}>

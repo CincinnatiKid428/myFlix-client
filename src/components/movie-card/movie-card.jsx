@@ -1,11 +1,19 @@
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../../redux/reducers/user";
+
 import { PropTypes } from "prop-types";
-import { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router";
 
 const DB_FAVORITES_URI = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies/favorites/";
 
-export const MovieCard = ({ user, setUser, movie, token, prev }) => {
+export const MovieCard = ({ movie, prev }) => {
+
+  const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const movies = useSelector((state) => state.movies.list);
+  const dispatch = useDispatch();
 
   const [isFavorite, setIsFavorite] = useState((user.FavoriteMovies).includes(movie._id));
 
@@ -25,7 +33,7 @@ export const MovieCard = ({ user, setUser, movie, token, prev }) => {
       const responseData = await addFavResponse.json();
       //console.log("movie-card.jsx|handleAddFav()|responseData:", responseData);
       if (responseData) {
-        setUser(responseData);
+        dispatch(setUser(responseData));
         setIsFavorite(true);
       } else {
         alert("Something went wrong trying to add favorite, please try again.");
@@ -53,7 +61,7 @@ export const MovieCard = ({ user, setUser, movie, token, prev }) => {
       const responseData = await removeFavResponse.json();
       console.log("movie-card.jsx|handleRemoveFav()|responseData:", responseData);
       if (responseData) {
-        setUser(responseData);
+        dispatch(setUser(responseData));
         setIsFavorite(false);
       } else {
         alert("Something went wrong trying to remove favorite, please try again.");
@@ -96,25 +104,29 @@ export const MovieCard = ({ user, setUser, movie, token, prev }) => {
   );
 };
 
-//PropTypes for MovieCard
+//PropTypes for MovieCard holds prev path ("/" or "/profile")
 MovieCard.propTypes = {
-
-  user: PropTypes.shape({
-    Username: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
-    Birthdate: PropTypes.string.isRequired,
-    FavoriteMovies: PropTypes.arrayOf(PropTypes.string).isRequired
-  }).isRequired,
-
-  setUser: PropTypes.func.isRequired,
-
   movie: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
     ImageURL: PropTypes.string.isRequired,
-    Title: PropTypes.string.isRequired
-  }).isRequired,
+    Title: PropTypes.string.isRequired,
+    ReleaseYear: PropTypes.number.isRequired,
+    Description: PropTypes.string.isRequired,
+    Rating: PropTypes.number,
+    Actors: PropTypes.arrayOf(PropTypes.string).isRequired,
 
-  token: PropTypes.string.isRequired,
+    Genre: PropTypes.exact({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired
+    }).isRequired,
+
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Bio: PropTypes.string,
+      BirthYear: PropTypes.number.isRequired,
+      DeathYear: PropTypes.number,
+      Movies: PropTypes.arrayOf(PropTypes.string).isRequired
+    }).isRequired
+  }).isRequired,
 
   prev: PropTypes.string.isRequired
 };

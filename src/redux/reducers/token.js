@@ -6,12 +6,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const tokenSlice = createSlice({
   name: "token",
-  initialState: "",
+  initialState: null,
   reducers: {
     setToken: (state, action) => {
-      state.token = action.payload;
-    }
-  }
+      console.log(
+        "REDUCER|token.js|setToken() to action.payload:",
+        action.payload
+      );
+      return action.payload;
+    },
+  },
 });
 
 export const { setToken } = tokenSlice.actions;

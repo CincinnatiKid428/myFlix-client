@@ -1,3 +1,7 @@
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../../redux/reducers/user";
+
 import { PropTypes } from "prop-types";
 import { MovieCard } from "../movie-card/movie-card";
 import Col from "react-bootstrap/Col";
@@ -25,7 +29,7 @@ export const FavoriteMoviesView = ({ user, setUser, movies, token, favoritesIdAr
       {loadFavorites().map((movie => {
         return (
           <Col key={movie._id} md={4} sm={6} className="mb-3">
-            <MovieCard user={user} setUser={setUser} movie={movie} token={token} prev="/profile" />
+            <MovieCard movie={movie} prev="/profile" />
           </Col>
         );
       }))}

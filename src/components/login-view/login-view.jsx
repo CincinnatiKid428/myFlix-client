@@ -1,17 +1,32 @@
-import { PropTypes } from "prop-types";
-import { useState, useContext } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 import { setUser } from "../../redux/reducers/user";
 import { setToken } from "../../redux/reducers/token";
+import { setMovies } from "../../redux/reducers/movies";
 import { useDispatch } from "react-redux";
 
+const ENABLE_DATA_CLEAR = false; //Set true to enable button to clear stored states/localStorage
 const LOGIN_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/login";
 
-export const LoginView = ({ onLoggedIn }) => { // Use context vs props?
+export const LoginView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const onLoggedIn = (user, token) => {
+    dispatch(setUser(user));
+    dispatch(setToken(token));
+  };
+
+  const onLoggedOut = () => {
+    localStorage.clear();
+    dispatch(setUser(null));
+    dispatch(setToken(null));
+    dispatch(setMovies([]));
+    console.log("login-view.jsx|...cleared localStorage and user/token/movies");
+  };
 
   //Handler for form submit
   const handleLoginSubmit = (event) => {
@@ -38,6 +53,7 @@ export const LoginView = ({ onLoggedIn }) => { // Use context vs props?
           localStorage.setItem("user", JSON.stringify(data.user));
           localStorage.setItem("token", data.token);
           onLoggedIn(data.user, data.token);
+          console.log("login-view.jsx|Login successful.");
         } else {
           alert("No such user");
         }
@@ -45,6 +61,13 @@ export const LoginView = ({ onLoggedIn }) => { // Use context vs props?
       .catch((e) => {
         alert("Something went wrong");
         console.log("login-view.jsx | Something went wrong :", e);
+        console.error("login-view.jsx | Error during authentication :", e);
+
+        localStorage.clear();
+        console.error("login-view.jsx | dispatch(setUser(null))...");
+        dispatch(setUser(null));
+        console.error("login-view.jsx | dispatch(setToken(null))...");
+        dispatch(setToken(null));
       });
   };
 
@@ -74,12 +97,9 @@ export const LoginView = ({ onLoggedIn }) => { // Use context vs props?
       <Button variant="primary" type="submit" className="mt-2">
         Log in
       </Button>
+      {ENABLE_DATA_CLEAR &&
+        <Button variant="danger" type="button" className="mt-2 ml-2" onClick={onLoggedOut}>Clear Data</Button>
+      }
     </Form>
   );
-};
-
-// If we use context, won't need propTypes?
-
-LoginView.propTypes = {
-  onLoggedIn: PropTypes.func.isRequired
 };

@@ -19184,8 +19184,10 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
-var _reactRouter = require("react-router");
+var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactRedux = require("react-redux");
+var _movies = require("../../redux/reducers/movies");
+var _reactRouter = require("react-router");
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
@@ -19196,7 +19198,6 @@ var _loginView = require("../login-view/login-view");
 var _signupView = require("../signup-view/signup-view");
 var _profileView = require("../profile-view/profile-view");
 var _navigationBar = require("../navigation-bar/navigation-bar");
-var _movies = require("../../redux/reducers/movies");
 var _s = $RefreshSig$();
 const API_GET_ALL_MOVIES = 'https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies'; //move to environment var later
 const MainView = ()=>{
@@ -19204,8 +19205,10 @@ const MainView = ()=>{
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
     const dispatch = (0, _reactRedux.useDispatch)();
-    const [user, setUser] = (0, _react.useState)(storedUser ? storedUser : null); //State: user object when logged in
-    const [token, setToken] = (0, _react.useState)(storedToken ? storedToken : null); //State: auth JWT token when logged in
+    //const [user, setUser] = useState(storedUser ? storedUser : null);  //State: user object when logged in
+    //const [token, setToken] = useState(storedToken ? storedToken : null);  //State: auth JWT token when logged in
+    const user = (0, _reactRedux.useSelector)((state)=>state.user);
+    const token = (0, _reactRedux.useSelector)((state)=>state.token);
     const movies = (0, _reactRedux.useSelector)((state)=>state.movies.list); //Redux State: movies list from API
     //API call to get list of all movies from remote Heroku server running movie_api app
     (0, _react.useEffect)(()=>{
@@ -19230,23 +19233,11 @@ const MainView = ()=>{
     }, [
         token
     ]);
-    const onLoggedIn = (authenticatedUser, AuthenticatedToken)=>{
-        setUser(authenticatedUser);
-        setToken(AuthenticatedToken);
-    };
-    const onLoggedOut = ()=>{
-        setUser(null);
-        setToken(null);
-        localStorage.clear();
-    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.BrowserRouter), {
         children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navigationBar.NavigationBar), {
-                user: user,
-                onLoggedOut: onLoggedOut
-            }, void 0, false, {
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navigationBar.NavigationBar), {}, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 70,
+                lineNumber: 63,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -19260,7 +19251,7 @@ const MainView = ()=>{
                                     to: "/"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 79,
+                                    lineNumber: 72,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     xs: 12,
@@ -19270,18 +19261,18 @@ const MainView = ()=>{
                                     className: "mt-5",
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signupView.SignupView), {}, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 82,
+                                        lineNumber: 75,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 81,
+                                    lineNumber: 74,
                                     columnNumber: 19
                                 }, void 0)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 74,
+                            lineNumber: 67,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Route), {
@@ -19291,7 +19282,7 @@ const MainView = ()=>{
                                     to: "/"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 94,
+                                    lineNumber: 87,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
@@ -19300,23 +19291,21 @@ const MainView = ()=>{
                                         lg: 6,
                                         xl: 5,
                                         className: "mt-5",
-                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
-                                            onLoggedIn: onLoggedIn
-                                        }, void 0, false, {
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {}, void 0, false, {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 98,
+                                            lineNumber: 91,
                                             columnNumber: 23
                                         }, void 0)
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 97,
+                                        lineNumber: 90,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 89,
+                            lineNumber: 82,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Route), {
@@ -19327,36 +19316,32 @@ const MainView = ()=>{
                                     replace: true
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 111,
+                                    lineNumber: 104,
                                     columnNumber: 19
                                 }, void 0) : movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     children: "There are no movies in the list!"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 113,
+                                    lineNumber: 106,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     md: 10,
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-                                        user: user,
-                                        setUser: setUser,
-                                        movies: movies,
-                                        token: token,
                                         prev: "/"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 116,
+                                        lineNumber: 109,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 115,
+                                    lineNumber: 108,
                                     columnNumber: 19
                                 }, void 0)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 106,
+                            lineNumber: 99,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Route), {
@@ -19367,36 +19352,32 @@ const MainView = ()=>{
                                     replace: true
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 129,
+                                    lineNumber: 122,
                                     columnNumber: 19
                                 }, void 0) : movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     children: "There are no movies in the list!"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 131,
+                                    lineNumber: 124,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     md: 10,
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-                                        user: user,
-                                        setUser: setUser,
-                                        movies: movies,
-                                        token: token,
                                         prev: "/profile"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 134,
+                                        lineNumber: 127,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 133,
+                                    lineNumber: 126,
                                     columnNumber: 19
                                 }, void 0)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 124,
+                            lineNumber: 117,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Route), {
@@ -19407,13 +19388,13 @@ const MainView = ()=>{
                                     replace: true
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 147,
+                                    lineNumber: 140,
                                     columnNumber: 19
                                 }, void 0) : movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     children: "There are no movies in the list!"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 149,
+                                    lineNumber: 142,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                                     children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
@@ -19421,26 +19402,23 @@ const MainView = ()=>{
                                             sm: 6,
                                             className: "mb-3",
                                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                                                user: user,
-                                                setUser: setUser,
                                                 movie: movie,
-                                                token: token,
                                                 prev: "/"
                                             }, void 0, false, {
                                                 fileName: "src/components/main-view/main-view.jsx",
-                                                lineNumber: 154,
+                                                lineNumber: 147,
                                                 columnNumber: 25
                                             }, void 0)
                                         }, movie._id, false, {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 153,
+                                            lineNumber: 146,
                                             columnNumber: 23
                                         }, void 0))
                                 }, void 0, false)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 142,
+                            lineNumber: 135,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Route), {
@@ -19450,48 +19428,44 @@ const MainView = ()=>{
                                     to: "/login"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 168,
+                                    lineNumber: 161,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {
-                                        user: user,
-                                        setUser: setUser,
-                                        movies: movies,
-                                        token: token,
-                                        onLoggedOut: onLoggedOut
-                                    }, void 0, false, {
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {}, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 171,
+                                        lineNumber: 164,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 163,
+                            lineNumber: 156,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 72,
+                    lineNumber: 65,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 71,
+                lineNumber: 64,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 69,
+        lineNumber: 62,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "i0l4RPctzI+sYvVbJsCXv69/nYA=", false, function() {
+_s(MainView, "uUVDwNCo3q9N9zpvLY1d4KuQBps=", false, function() {
     return [
         (0, _reactRedux.useDispatch),
+        (0, _reactRedux.useSelector),
+        (0, _reactRedux.useSelector),
         (0, _reactRedux.useSelector)
     ];
 });
@@ -19603,14 +19577,21 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _propTypes = require("prop-types");
 var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRedux = require("react-redux");
+var _user = require("../../redux/reducers/user");
+var _propTypes = require("prop-types");
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouter = require("react-router");
 var _s = $RefreshSig$();
 const DB_FAVORITES_URI = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies/favorites/";
-const MovieCard = ({ user, setUser, movie, token, prev })=>{
+const MovieCard = ({ movie, prev })=>{
     _s();
+    const user = (0, _reactRedux.useSelector)((state)=>state.user);
+    const token = (0, _reactRedux.useSelector)((state)=>state.token);
+    const movies = (0, _reactRedux.useSelector)((state)=>state.movies.list);
+    const dispatch = (0, _reactRedux.useDispatch)();
     const [isFavorite, setIsFavorite] = (0, _react.useState)(user.FavoriteMovies.includes(movie._id));
     /**
    * Handles API call to add favorite movie to user.FavoriteMovies
@@ -19627,7 +19608,7 @@ const MovieCard = ({ user, setUser, movie, token, prev })=>{
             const responseData = await addFavResponse.json();
             //console.log("movie-card.jsx|handleAddFav()|responseData:", responseData);
             if (responseData) {
-                setUser(responseData);
+                dispatch((0, _user.setUser)(responseData));
                 setIsFavorite(true);
             } else alert("Something went wrong trying to add favorite, please try again.");
         } catch (e) {
@@ -19649,7 +19630,7 @@ const MovieCard = ({ user, setUser, movie, token, prev })=>{
             const responseData = await removeFavResponse.json();
             console.log("movie-card.jsx|handleRemoveFav()|responseData:", responseData);
             if (responseData) {
-                setUser(responseData);
+                dispatch((0, _user.setUser)(responseData));
                 setIsFavorite(false);
             } else alert("Something went wrong trying to remove favorite, please try again.");
         } catch (e) {
@@ -19670,12 +19651,12 @@ const MovieCard = ({ user, setUser, movie, token, prev })=>{
                     src: movie.ImageURL
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 82,
+                    lineNumber: 90,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 81,
+                lineNumber: 89,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -19689,17 +19670,17 @@ const MovieCard = ({ user, setUser, movie, token, prev })=>{
                         children: movie.Title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 86,
+                        lineNumber: 94,
                         columnNumber: 11
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 85,
+                    lineNumber: 93,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 84,
+                lineNumber: 92,
                 columnNumber: 7
             }, undefined),
             isFavorite ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -19709,7 +19690,7 @@ const MovieCard = ({ user, setUser, movie, token, prev })=>{
                 children: "Remove Favorite"
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 90,
+                lineNumber: 98,
                 columnNumber: 9
             }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                 variant: "success",
@@ -19718,33 +19699,46 @@ const MovieCard = ({ user, setUser, movie, token, prev })=>{
                 children: "Add Favorite"
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 92,
+                lineNumber: 100,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 80,
+        lineNumber: 88,
         columnNumber: 5
     }, undefined);
 };
-_s(MovieCard, "Aer3irfJ5pdw7LDqMCXm6V/7iJw=");
+_s(MovieCard, "UfSGD81elp0tHPm/uoK0567ox3s=", false, function() {
+    return [
+        (0, _reactRedux.useSelector),
+        (0, _reactRedux.useSelector),
+        (0, _reactRedux.useSelector),
+        (0, _reactRedux.useDispatch)
+    ];
+});
 _c = MovieCard;
-//PropTypes for MovieCard
+//PropTypes for MovieCard holds prev path ("/" or "/profile")
 MovieCard.propTypes = {
-    user: (0, _propTypes.PropTypes).shape({
-        Username: (0, _propTypes.PropTypes).string.isRequired,
-        Email: (0, _propTypes.PropTypes).string.isRequired,
-        Birthdate: (0, _propTypes.PropTypes).string.isRequired,
-        FavoriteMovies: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).string).isRequired
-    }).isRequired,
-    setUser: (0, _propTypes.PropTypes).func.isRequired,
     movie: (0, _propTypes.PropTypes).shape({
-        _id: (0, _propTypes.PropTypes).string.isRequired,
         ImageURL: (0, _propTypes.PropTypes).string.isRequired,
-        Title: (0, _propTypes.PropTypes).string.isRequired
+        Title: (0, _propTypes.PropTypes).string.isRequired,
+        ReleaseYear: (0, _propTypes.PropTypes).number.isRequired,
+        Description: (0, _propTypes.PropTypes).string.isRequired,
+        Rating: (0, _propTypes.PropTypes).number,
+        Actors: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).string).isRequired,
+        Genre: (0, _propTypes.PropTypes).exact({
+            Name: (0, _propTypes.PropTypes).string.isRequired,
+            Description: (0, _propTypes.PropTypes).string.isRequired
+        }).isRequired,
+        Director: (0, _propTypes.PropTypes).shape({
+            Name: (0, _propTypes.PropTypes).string.isRequired,
+            Bio: (0, _propTypes.PropTypes).string,
+            BirthYear: (0, _propTypes.PropTypes).number.isRequired,
+            DeathYear: (0, _propTypes.PropTypes).number,
+            Movies: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).string).isRequired
+        }).isRequired
     }).isRequired,
-    token: (0, _propTypes.PropTypes).string.isRequired,
     prev: (0, _propTypes.PropTypes).string.isRequired
 };
 var _c;
@@ -19755,7 +19749,7 @@ $RefreshReg$(_c, "MovieCard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react":"21dqq","react-bootstrap":"3AD9A","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"7wKI2":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react":"21dqq","react-bootstrap":"3AD9A","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe","react-redux":"62sf7","../../redux/reducers/user":"e6tdF"}],"7wKI2":[function(require,module,exports,__globalThis) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -35113,610 +35107,1010 @@ function registerExportsForReactRefresh(module1) {
 },{"d0349a6232b762a7":"2XXld","370a05339886f768":"1sgPB"}],"1sgPB":[function(require,module,exports,__globalThis) {
 module.exports = JSON.parse("{\"name\":\"react-refresh\",\"description\":\"React is a JavaScript library for building user interfaces.\",\"keywords\":[\"react\"],\"version\":\"0.14.2\",\"homepage\":\"https://reactjs.org/\",\"bugs\":\"https://github.com/facebook/react/issues\",\"license\":\"MIT\",\"files\":[\"LICENSE\",\"README.md\",\"babel.js\",\"runtime.js\",\"cjs/\",\"umd/\"],\"main\":\"runtime.js\",\"exports\":{\".\":\"./runtime.js\",\"./runtime\":\"./runtime.js\",\"./babel\":\"./babel.js\",\"./package.json\":\"./package.json\"},\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/facebook/react.git\",\"directory\":\"packages/react\"},\"engines\":{\"node\":\">=0.10.0\"},\"devDependencies\":{\"react-16-8\":\"npm:react@16.8.0\",\"react-dom-16-8\":\"npm:react-dom@16.8.0\",\"scheduler-0-13\":\"npm:scheduler@0.13.0\"}}");
 
-},{}],"ggaUx":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$e9f6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$e9f6.prelude(module);
-
-try {
+},{}],"62sf7":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MovieView", ()=>MovieView);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _propTypes = require("prop-types");
+parcelHelpers.export(exports, "Provider", ()=>Provider_default);
+parcelHelpers.export(exports, "ReactReduxContext", ()=>ReactReduxContext);
+parcelHelpers.export(exports, "batch", ()=>batch);
+parcelHelpers.export(exports, "connect", ()=>connect_default);
+parcelHelpers.export(exports, "createDispatchHook", ()=>createDispatchHook);
+parcelHelpers.export(exports, "createSelectorHook", ()=>createSelectorHook);
+parcelHelpers.export(exports, "createStoreHook", ()=>createStoreHook);
+parcelHelpers.export(exports, "shallowEqual", ()=>shallowEqual);
+parcelHelpers.export(exports, "useDispatch", ()=>useDispatch);
+parcelHelpers.export(exports, "useSelector", ()=>useSelector);
+parcelHelpers.export(exports, "useStore", ()=>useStore);
+// src/utils/react.ts
 var _react = require("react");
-//import { useContext } from "react";
-//import AppContext from "../app-context/app-context";
-var _movieCard = require("../movie-card/movie-card");
-var _button = require("react-bootstrap/Button");
-var _buttonDefault = parcelHelpers.interopDefault(_button);
-var _row = require("react-bootstrap/Row");
-var _rowDefault = parcelHelpers.interopDefault(_row);
-var _col = require("react-bootstrap/Col");
-var _colDefault = parcelHelpers.interopDefault(_col);
-var _reactRouter = require("react-router");
-var _s = $RefreshSig$();
-const DB_FAVORITES_URI = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies/favorites/";
-//Increase to 1px to add debug borders
-const debugBorder = "0px solid blue";
-const MovieView = ({ user, setUser, movies, token, prev })=>{
-    _s();
-    const { movieId } = (0, _reactRouter.useParams)();
-    const [isFavorite, setIsFavorite] = (0, _react.useState)(user.FavoriteMovies.includes(movieId));
-    //Find movie to display
-    const movie = movies.find((foundMovie)=>foundMovie._id === movieId);
-    //Find similar movies array
-    const similarMovieArray = movies.filter((arrayMovie)=>movie.Genre.Name === arrayMovie.Genre.Name && movieId !== arrayMovie._id) || [];
-    /**
- * Handles API call to add favorite movie to user.FavoriteMovies
- */ const handleAddFav = async ()=>{
-        console.log("movie-view.jsx|handleAddFav()|Adding fav movie: " + movie.Title + " " + movie._id);
-        try {
-            const addFavResponse = await fetch(DB_FAVORITES_URI + movie._id, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-            const responseData = await addFavResponse.json();
-            console.log("movie-view.jsx|handleAddFav()|responseData:", responseData);
-            if (responseData) {
-                setUser(responseData);
-                setIsFavorite(true);
-            } else alert("Something went wrong trying to add favorite, please try again.");
-        } catch (e) {
-            console.error("movie-view.jsx|handleAddFav()|ERROR during add handler:", e);
-        }
-    };
-    /**
-   * Handles API call to remove favorite movie to user.FavoriteMovies
-   */ const handleRemoveFav = async ()=>{
-        console.log("movie-view.jsx|handleRemoveFav|Removing fav movie: " + movie.Title + " " + movie._id);
-        try {
-            const removeFavResponse = await fetch(DB_FAVORITES_URI + movie._id, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-            const responseData = await removeFavResponse.json();
-            console.log("movie-view.jsx|handleRemoveFav()|responseData:", responseData);
-            if (responseData) {
-                setUser(responseData);
-                setIsFavorite(false);
-            } else alert("Something went wrong trying to remove favorite, please try again.");
-        } catch (e) {
-            console.error("movie-view.jsx|handleRemoveFav()|ERROR during remove handler:", e);
-        }
-    };
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-        children: [
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: 'instant'
-            }),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
-                        xs: 12,
-                        md: 5,
-                        className: "d-flex justify-content-center",
-                        style: {
-                            border: debugBorder
-                        },
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                            className: "mt-3",
-                            src: movie.ImageURL,
-                            style: {
-                                borderRadius: '5px',
-                                maxWidth: "100%"
-                            }
-                        }, void 0, false, {
-                            fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 87,
-                            columnNumber: 11
-                        }, undefined)
-                    }, void 0, false, {
-                        fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 86,
-                        columnNumber: 9
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
-                        xs: 12,
-                        md: 7,
-                        className: "mt-3",
-                        style: {
-                            border: debugBorder
-                        },
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "movie-view-info-field",
-                                        children: "Title:"
-                                    }, void 0, false, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 91,
-                                        columnNumber: 13
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        children: [
-                                            " ",
-                                            movie.Title
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 92,
-                                        columnNumber: 13
-                                    }, undefined)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 90,
-                                columnNumber: 11
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "movie-view-info-field",
-                                        children: "Released:"
-                                    }, void 0, false, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 95,
-                                        columnNumber: 13
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        children: [
-                                            " ",
-                                            movie.ReleaseYear
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 96,
-                                        columnNumber: 13
-                                    }, undefined)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 94,
-                                columnNumber: 11
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "movie-view-info-field",
-                                        children: "Description:"
-                                    }, void 0, false, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 99,
-                                        columnNumber: 13
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        children: [
-                                            " ",
-                                            movie.Description
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 100,
-                                        columnNumber: 13
-                                    }, undefined)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 98,
-                                columnNumber: 11
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "movie-view-info-field",
-                                        children: "Genre:"
-                                    }, void 0, false, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 103,
-                                        columnNumber: 13
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        children: [
-                                            " ",
-                                            movie.Genre.Name
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 104,
-                                        columnNumber: 13
-                                    }, undefined)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 102,
-                                columnNumber: 11
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "movie-view-info-field",
-                                        children: "Director:"
-                                    }, void 0, false, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 107,
-                                        columnNumber: 13
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        children: [
-                                            " ",
-                                            movie.Director.Name
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 108,
-                                        columnNumber: 13
-                                    }, undefined)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 106,
-                                columnNumber: 11
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "movie-view-info-field",
-                                        children: "Rating:"
-                                    }, void 0, false, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 111,
-                                        columnNumber: 13
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        children: [
-                                            " ",
-                                            movie.Rating
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 112,
-                                        columnNumber: 13
-                                    }, undefined)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 110,
-                                columnNumber: 11
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        className: "movie-view-info-field",
-                                        children: "Actors:"
-                                    }, void 0, false, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 115,
-                                        columnNumber: 13
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        children: [
-                                            " ",
-                                            movie.Actors.join(', ')
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 116,
-                                        columnNumber: 13
-                                    }, undefined)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 114,
-                                columnNumber: 11
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "d-flex justify-content-around mt-3",
-                                style: {
-                                    border: debugBorder
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Link), {
-                                        to: prev,
-                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
-                                            className: "btn-md",
-                                            type: "button",
-                                            children: "Back"
-                                        }, void 0, false, {
-                                            fileName: "src/components/movie-view/movie-view.jsx",
-                                            lineNumber: 122,
-                                            columnNumber: 15
-                                        }, undefined)
-                                    }, void 0, false, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 121,
-                                        columnNumber: 13
-                                    }, undefined),
-                                    isFavorite ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
-                                        variant: "danger",
-                                        className: "btn-md",
-                                        onClick: handleRemoveFav,
-                                        children: "Remove Favorite"
-                                    }, void 0, false, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 125,
-                                        columnNumber: 15
-                                    }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
-                                        variant: "success",
-                                        className: "btn-md",
-                                        onClick: handleAddFav,
-                                        children: "Add Favorite"
-                                    }, void 0, false, {
-                                        fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 127,
-                                        columnNumber: 15
-                                    }, undefined)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 120,
-                                columnNumber: 11
-                            }, undefined)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 89,
-                        columnNumber: 9
-                    }, undefined)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/movie-view/movie-view.jsx",
-                lineNumber: 85,
-                columnNumber: 7
-            }, undefined),
-            similarMovieArray.length !== 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
-                        fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 137,
-                        columnNumber: 11
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
-                        children: "Similar Movies:"
-                    }, void 0, false, {
-                        fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 138,
-                        columnNumber: 11
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
-                        className: "justify-content-center mt-3",
-                        style: {
-                            border: debugBorder
-                        },
-                        children: similarMovieArray.map((similarMovie)=>{
-                            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
-                                md: 4,
-                                sm: 6,
-                                className: "mb-5",
-                                style: {
-                                    border: debugBorder
-                                },
-                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                                    user: user,
-                                    setUser: setUser,
-                                    movie: similarMovie,
-                                    token: token,
-                                    prev: prev
-                                }, void 0, false, {
-                                    fileName: "src/components/movie-view/movie-view.jsx",
-                                    lineNumber: 144,
-                                    columnNumber: 21
-                                }, undefined)
-                            }, similarMovie._id, false, {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 143,
-                                columnNumber: 19
-                            }, undefined);
-                        })
-                    }, void 0, false, {
-                        fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 139,
-                        columnNumber: 11
-                    }, undefined)
-                ]
-            }, void 0, true) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                fileName: "src/components/movie-view/movie-view.jsx",
-                lineNumber: 152,
-                columnNumber: 9
-            }, undefined)
-        ]
-    }, void 0, true);
+// src/hooks/useSelector.ts
+var _withSelectorJs = require("use-sync-external-store/with-selector.js");
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value)=>key in obj ? __defProp(obj, key, {
+        enumerable: true,
+        configurable: true,
+        writable: true,
+        value
+    }) : obj[key] = value;
+var __spreadValues = (a, b)=>{
+    for(var prop in b || (b = {}))if (__hasOwnProp.call(b, prop)) __defNormalProp(a, prop, b[prop]);
+    if (__getOwnPropSymbols) {
+        for (var prop of __getOwnPropSymbols(b))if (__propIsEnum.call(b, prop)) __defNormalProp(a, prop, b[prop]);
+    }
+    return a;
 };
-_s(MovieView, "fFg9pRC36isUzvKCuPx+XfARODE=", false, function() {
-    return [
-        (0, _reactRouter.useParams)
-    ];
-});
-_c = MovieView;
-//PropTypes for MovieView component (contains additional validation for genre and director data)
-MovieView.propTypes = {
-    user: (0, _propTypes.PropTypes).shape({
-        Username: (0, _propTypes.PropTypes).string.isRequired,
-        Email: (0, _propTypes.PropTypes).string.isRequired,
-        Birthdate: (0, _propTypes.PropTypes).string.isRequired
-    }).isRequired,
-    setUser: (0, _propTypes.PropTypes).func.isRequired,
-    movies: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).shape({
-        ImageURL: (0, _propTypes.PropTypes).string.isRequired,
-        Title: (0, _propTypes.PropTypes).string.isRequired,
-        ReleaseYear: (0, _propTypes.PropTypes).number.isRequired,
-        Description: (0, _propTypes.PropTypes).string.isRequired,
-        Rating: (0, _propTypes.PropTypes).number,
-        Actors: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).string).isRequired,
-        Genre: (0, _propTypes.PropTypes).exact({
-            Name: (0, _propTypes.PropTypes).string.isRequired,
-            Description: (0, _propTypes.PropTypes).string.isRequired
-        }).isRequired,
-        Director: (0, _propTypes.PropTypes).shape({
-            Name: (0, _propTypes.PropTypes).string.isRequired,
-            Bio: (0, _propTypes.PropTypes).string,
-            BirthYear: (0, _propTypes.PropTypes).number.isRequired,
-            DeathYear: (0, _propTypes.PropTypes).number,
-            Movies: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).string).isRequired
-        }).isRequired
-    }).isRequired),
-    token: (0, _propTypes.PropTypes).string.isRequired,
-    prev: (0, _propTypes.PropTypes).string.isRequired
+var __spreadProps = (a, b)=>__defProps(a, __getOwnPropDescs(b));
+var __objRest = (source, exclude)=>{
+    var target = {};
+    for(var prop in source)if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0) target[prop] = source[prop];
+    if (source != null && __getOwnPropSymbols) {
+        for (var prop of __getOwnPropSymbols(source))if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop)) target[prop] = source[prop];
+    }
+    return target;
 };
-var _c;
-$RefreshReg$(_c, "MovieView");
-
-  $parcel$ReactRefreshHelpers$e9f6.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
+// src/utils/react-is.ts
+var IS_REACT_19 = /* @__PURE__ */ _react.version.startsWith("19");
+var REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for(IS_REACT_19 ? "react.transitional.element" : "react.element");
+var REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal");
+var REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment");
+var REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode");
+var REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler");
+var REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer");
+var REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context");
+var REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref");
+var REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense");
+var REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list");
+var REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo");
+var REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+var REACT_OFFSCREEN_TYPE = /* @__PURE__ */ Symbol.for("react.offscreen");
+var REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference");
+var ForwardRef = REACT_FORWARD_REF_TYPE;
+var Memo = REACT_MEMO_TYPE;
+function isValidElementType(type) {
+    return typeof type === "string" || typeof type === "function" || type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_OFFSCREEN_TYPE || typeof type === "object" && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_CONSUMER_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_CLIENT_REFERENCE || type.getModuleId !== void 0) ? true : false;
 }
-},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react":"21dqq","../movie-card/movie-card":"bwuIu","react-bootstrap/Button":"aPzUt","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"9YtA0":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$9fee.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "LoginView", ()=>LoginView);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _propTypes = require("prop-types");
-var _react = require("react");
-var _button = require("react-bootstrap/Button");
-var _buttonDefault = parcelHelpers.interopDefault(_button);
-var _form = require("react-bootstrap/Form");
-var _formDefault = parcelHelpers.interopDefault(_form);
-var _user = require("../../redux/reducers/user");
-var _token = require("../../redux/reducers/token");
-var _reactRedux = require("react-redux");
-var _s = $RefreshSig$();
-const LOGIN_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/login";
-const LoginView = ({ onLoggedIn })=>{
-    _s();
-    const [username, setUsername] = (0, _react.useState)("");
-    const [password, setPassword] = (0, _react.useState)("");
-    //Handler for form submit
-    const handleLoginSubmit = (event)=>{
-        event.preventDefault();
-        console.log("login-view.jsx | Starting handleLoginSubmit()");
-        const loginData = {
-            Username: username,
-            Password: password
+function typeOf(object) {
+    if (typeof object === "object" && object !== null) {
+        const { $$typeof } = object;
+        switch($$typeof){
+            case REACT_ELEMENT_TYPE:
+                switch(object = object.type, object){
+                    case REACT_FRAGMENT_TYPE:
+                    case REACT_PROFILER_TYPE:
+                    case REACT_STRICT_MODE_TYPE:
+                    case REACT_SUSPENSE_TYPE:
+                    case REACT_SUSPENSE_LIST_TYPE:
+                        return object;
+                    default:
+                        switch(object = object && object.$$typeof, object){
+                            case REACT_CONTEXT_TYPE:
+                            case REACT_FORWARD_REF_TYPE:
+                            case REACT_LAZY_TYPE:
+                            case REACT_MEMO_TYPE:
+                                return object;
+                            case REACT_CONSUMER_TYPE:
+                                return object;
+                            default:
+                                return $$typeof;
+                        }
+                }
+            case REACT_PORTAL_TYPE:
+                return $$typeof;
+        }
+    }
+}
+function isContextConsumer(object) {
+    return IS_REACT_19 ? typeOf(object) === REACT_CONSUMER_TYPE : typeOf(object) === REACT_CONTEXT_TYPE;
+}
+function isMemo(object) {
+    return typeOf(object) === REACT_MEMO_TYPE;
+}
+// src/utils/warning.ts
+function warning(message) {
+    if (typeof console !== "undefined" && typeof console.error === "function") console.error(message);
+    try {
+        throw new Error(message);
+    } catch (e) {}
+}
+// src/connect/verifySubselectors.ts
+function verify(selector, methodName) {
+    if (!selector) throw new Error(`Unexpected value for ${methodName} in connect.`);
+    else if (methodName === "mapStateToProps" || methodName === "mapDispatchToProps") {
+        if (!Object.prototype.hasOwnProperty.call(selector, "dependsOnOwnProps")) warning(`The selector for ${methodName} of connect did not specify a value for dependsOnOwnProps.`);
+    }
+}
+function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps) {
+    verify(mapStateToProps, "mapStateToProps");
+    verify(mapDispatchToProps, "mapDispatchToProps");
+    verify(mergeProps, "mergeProps");
+}
+// src/connect/selectorFactory.ts
+function pureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, { areStatesEqual, areOwnPropsEqual, areStatePropsEqual }) {
+    let hasRunAtLeastOnce = false;
+    let state;
+    let ownProps;
+    let stateProps;
+    let dispatchProps;
+    let mergedProps;
+    function handleFirstCall(firstState, firstOwnProps) {
+        state = firstState;
+        ownProps = firstOwnProps;
+        stateProps = mapStateToProps(state, ownProps);
+        dispatchProps = mapDispatchToProps(dispatch, ownProps);
+        mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+        hasRunAtLeastOnce = true;
+        return mergedProps;
+    }
+    function handleNewPropsAndNewState() {
+        stateProps = mapStateToProps(state, ownProps);
+        if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
+        mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+        return mergedProps;
+    }
+    function handleNewProps() {
+        if (mapStateToProps.dependsOnOwnProps) stateProps = mapStateToProps(state, ownProps);
+        if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
+        mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+        return mergedProps;
+    }
+    function handleNewState() {
+        const nextStateProps = mapStateToProps(state, ownProps);
+        const statePropsChanged = !areStatePropsEqual(nextStateProps, stateProps);
+        stateProps = nextStateProps;
+        if (statePropsChanged) mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+        return mergedProps;
+    }
+    function handleSubsequentCalls(nextState, nextOwnProps) {
+        const propsChanged = !areOwnPropsEqual(nextOwnProps, ownProps);
+        const stateChanged = !areStatesEqual(nextState, state, nextOwnProps, ownProps);
+        state = nextState;
+        ownProps = nextOwnProps;
+        if (propsChanged && stateChanged) return handleNewPropsAndNewState();
+        if (propsChanged) return handleNewProps();
+        if (stateChanged) return handleNewState();
+        return mergedProps;
+    }
+    return function pureFinalPropsSelector(nextState, nextOwnProps) {
+        return hasRunAtLeastOnce ? handleSubsequentCalls(nextState, nextOwnProps) : handleFirstCall(nextState, nextOwnProps);
+    };
+}
+function finalPropsSelectorFactory(dispatch, _a) {
+    var _b = _a, { initMapStateToProps, initMapDispatchToProps, initMergeProps } = _b, options = __objRest(_b, [
+        "initMapStateToProps",
+        "initMapDispatchToProps",
+        "initMergeProps"
+    ]);
+    const mapStateToProps = initMapStateToProps(dispatch, options);
+    const mapDispatchToProps = initMapDispatchToProps(dispatch, options);
+    const mergeProps = initMergeProps(dispatch, options);
+    verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps);
+    return pureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, options);
+}
+// src/utils/bindActionCreators.ts
+function bindActionCreators(actionCreators, dispatch) {
+    const boundActionCreators = {};
+    for(const key in actionCreators){
+        const actionCreator = actionCreators[key];
+        if (typeof actionCreator === "function") boundActionCreators[key] = (...args)=>dispatch(actionCreator(...args));
+    }
+    return boundActionCreators;
+}
+// src/utils/isPlainObject.ts
+function isPlainObject(obj) {
+    if (typeof obj !== "object" || obj === null) return false;
+    const proto = Object.getPrototypeOf(obj);
+    if (proto === null) return true;
+    let baseProto = proto;
+    while(Object.getPrototypeOf(baseProto) !== null)baseProto = Object.getPrototypeOf(baseProto);
+    return proto === baseProto;
+}
+// src/utils/verifyPlainObject.ts
+function verifyPlainObject(value, displayName, methodName) {
+    if (!isPlainObject(value)) warning(`${methodName}() in ${displayName} must return a plain object. Instead received ${value}.`);
+}
+// src/connect/wrapMapToProps.ts
+function wrapMapToPropsConstant(getConstant) {
+    return function initConstantSelector(dispatch) {
+        const constant = getConstant(dispatch);
+        function constantSelector() {
+            return constant;
+        }
+        constantSelector.dependsOnOwnProps = false;
+        return constantSelector;
+    };
+}
+function getDependsOnOwnProps(mapToProps) {
+    return mapToProps.dependsOnOwnProps ? Boolean(mapToProps.dependsOnOwnProps) : mapToProps.length !== 1;
+}
+function wrapMapToPropsFunc(mapToProps, methodName) {
+    return function initProxySelector(dispatch, { displayName }) {
+        const proxy = function mapToPropsProxy(stateOrDispatch, ownProps) {
+            return proxy.dependsOnOwnProps ? proxy.mapToProps(stateOrDispatch, ownProps) : proxy.mapToProps(stateOrDispatch, void 0);
         };
-        fetch(LOGIN_URL, {
-            method: "POST",
-            body: JSON.stringify(loginData),
-            headers: {
-                "Content-Type": "application/json"
+        proxy.dependsOnOwnProps = true;
+        proxy.mapToProps = function detectFactoryAndVerify(stateOrDispatch, ownProps) {
+            proxy.mapToProps = mapToProps;
+            proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps);
+            let props = proxy(stateOrDispatch, ownProps);
+            if (typeof props === "function") {
+                proxy.mapToProps = props;
+                proxy.dependsOnOwnProps = getDependsOnOwnProps(props);
+                props = proxy(stateOrDispatch, ownProps);
             }
-        }).then((response)=>response.json()).then((data)=>{
-            console.log("login-view.jsx | Login response: ", data);
-            if (data.user) {
-                localStorage.setItem("user", JSON.stringify(data.user));
-                localStorage.setItem("token", data.token);
-                onLoggedIn(data.user, data.token);
-            } else alert("No such user");
-        }).catch((e)=>{
-            alert("Something went wrong");
-            console.log("login-view.jsx | Something went wrong :", e);
-        });
+            verifyPlainObject(props, displayName, methodName);
+            return props;
+        };
+        return proxy;
     };
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default), {
-        onSubmit: handleLoginSubmit,
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
-                controlId: "formUsername",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
-                        children: "Username: "
-                    }, void 0, false, {
-                        fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 54,
-                        columnNumber: 9
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
-                        type: "text",
-                        value: username,
-                        onChange: (e)=>setUsername(e.target.value),
-                        required: true,
-                        minLength: "5"
-                    }, void 0, false, {
-                        fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 55,
-                        columnNumber: 9
-                    }, undefined)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 53,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
-                controlId: "formPassword",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
-                        children: "Password: "
-                    }, void 0, false, {
-                        fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 65,
-                        columnNumber: 9
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
-                        type: "password",
-                        value: password,
-                        onChange: (e)=>setPassword(e.target.value),
-                        required: true,
-                        minLength: "6"
-                    }, void 0, false, {
-                        fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 66,
-                        columnNumber: 9
-                    }, undefined)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 64,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
-                variant: "primary",
-                type: "submit",
-                className: "mt-2",
-                children: "Log in"
-            }, void 0, false, {
-                fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 74,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/login-view/login-view.jsx",
-        lineNumber: 52,
-        columnNumber: 5
-    }, undefined);
-};
-_s(LoginView, "Lrw7JeD9zj6OUWhT/IH4OIvPKEk=");
-_c = LoginView;
-// If we use context, won't need propTypes?
-LoginView.propTypes = {
-    onLoggedIn: (0, _propTypes.PropTypes).func.isRequired
-};
-var _c;
-$RefreshReg$(_c, "LoginView");
-
-  $parcel$ReactRefreshHelpers$9fee.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react":"21dqq","react-bootstrap/Button":"aPzUt","react-bootstrap/Form":"iBZ80","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe","../../redux/reducers/user":"e6tdF","../../redux/reducers/token":"4eTad","react-redux":"62sf7"}],"e6tdF":[function(require,module,exports,__globalThis) {
+// src/connect/invalidArgFactory.ts
+function createInvalidArgFactory(arg, name) {
+    return (dispatch, options)=>{
+        throw new Error(`Invalid value of type ${typeof arg} for ${name} argument when connecting component ${options.wrappedComponentName}.`);
+    };
+}
+// src/connect/mapDispatchToProps.ts
+function mapDispatchToPropsFactory(mapDispatchToProps) {
+    return mapDispatchToProps && typeof mapDispatchToProps === "object" ? wrapMapToPropsConstant((dispatch)=>// @ts-ignore
+        bindActionCreators(mapDispatchToProps, dispatch)) : !mapDispatchToProps ? wrapMapToPropsConstant((dispatch)=>({
+            dispatch
+        })) : typeof mapDispatchToProps === "function" ? // @ts-ignore
+    wrapMapToPropsFunc(mapDispatchToProps, "mapDispatchToProps") : createInvalidArgFactory(mapDispatchToProps, "mapDispatchToProps");
+}
+// src/connect/mapStateToProps.ts
+function mapStateToPropsFactory(mapStateToProps) {
+    return !mapStateToProps ? wrapMapToPropsConstant(()=>({})) : typeof mapStateToProps === "function" ? // @ts-ignore
+    wrapMapToPropsFunc(mapStateToProps, "mapStateToProps") : createInvalidArgFactory(mapStateToProps, "mapStateToProps");
+}
+// src/connect/mergeProps.ts
+function defaultMergeProps(stateProps, dispatchProps, ownProps) {
+    return __spreadValues(__spreadValues(__spreadValues({}, ownProps), stateProps), dispatchProps);
+}
+function wrapMergePropsFunc(mergeProps) {
+    return function initMergePropsProxy(dispatch, { displayName, areMergedPropsEqual }) {
+        let hasRunOnce = false;
+        let mergedProps;
+        return function mergePropsProxy(stateProps, dispatchProps, ownProps) {
+            const nextMergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+            if (hasRunOnce) {
+                if (!areMergedPropsEqual(nextMergedProps, mergedProps)) mergedProps = nextMergedProps;
+            } else {
+                hasRunOnce = true;
+                mergedProps = nextMergedProps;
+                verifyPlainObject(mergedProps, displayName, "mergeProps");
+            }
+            return mergedProps;
+        };
+    };
+}
+function mergePropsFactory(mergeProps) {
+    return !mergeProps ? ()=>defaultMergeProps : typeof mergeProps === "function" ? wrapMergePropsFunc(mergeProps) : createInvalidArgFactory(mergeProps, "mergeProps");
+}
+// src/utils/batch.ts
+function defaultNoopBatch(callback) {
+    callback();
+}
+// src/utils/Subscription.ts
+function createListenerCollection() {
+    let first = null;
+    let last = null;
+    return {
+        clear () {
+            first = null;
+            last = null;
+        },
+        notify () {
+            defaultNoopBatch(()=>{
+                let listener = first;
+                while(listener){
+                    listener.callback();
+                    listener = listener.next;
+                }
+            });
+        },
+        get () {
+            const listeners = [];
+            let listener = first;
+            while(listener){
+                listeners.push(listener);
+                listener = listener.next;
+            }
+            return listeners;
+        },
+        subscribe (callback) {
+            let isSubscribed = true;
+            const listener = last = {
+                callback,
+                next: null,
+                prev: last
+            };
+            if (listener.prev) listener.prev.next = listener;
+            else first = listener;
+            return function unsubscribe() {
+                if (!isSubscribed || first === null) return;
+                isSubscribed = false;
+                if (listener.next) listener.next.prev = listener.prev;
+                else last = listener.prev;
+                if (listener.prev) listener.prev.next = listener.next;
+                else first = listener.next;
+            };
+        }
+    };
+}
+var nullListeners = {
+    notify () {},
+    get: ()=>[]
+};
+function createSubscription(store, parentSub) {
+    let unsubscribe;
+    let listeners = nullListeners;
+    let subscriptionsAmount = 0;
+    let selfSubscribed = false;
+    function addNestedSub(listener) {
+        trySubscribe();
+        const cleanupListener = listeners.subscribe(listener);
+        let removed = false;
+        return ()=>{
+            if (!removed) {
+                removed = true;
+                cleanupListener();
+                tryUnsubscribe();
+            }
+        };
+    }
+    function notifyNestedSubs() {
+        listeners.notify();
+    }
+    function handleChangeWrapper() {
+        if (subscription.onStateChange) subscription.onStateChange();
+    }
+    function isSubscribed() {
+        return selfSubscribed;
+    }
+    function trySubscribe() {
+        subscriptionsAmount++;
+        if (!unsubscribe) {
+            unsubscribe = parentSub ? parentSub.addNestedSub(handleChangeWrapper) : store.subscribe(handleChangeWrapper);
+            listeners = createListenerCollection();
+        }
+    }
+    function tryUnsubscribe() {
+        subscriptionsAmount--;
+        if (unsubscribe && subscriptionsAmount === 0) {
+            unsubscribe();
+            unsubscribe = void 0;
+            listeners.clear();
+            listeners = nullListeners;
+        }
+    }
+    function trySubscribeSelf() {
+        if (!selfSubscribed) {
+            selfSubscribed = true;
+            trySubscribe();
+        }
+    }
+    function tryUnsubscribeSelf() {
+        if (selfSubscribed) {
+            selfSubscribed = false;
+            tryUnsubscribe();
+        }
+    }
+    const subscription = {
+        addNestedSub,
+        notifyNestedSubs,
+        handleChangeWrapper,
+        isSubscribed,
+        trySubscribe: trySubscribeSelf,
+        tryUnsubscribe: tryUnsubscribeSelf,
+        getListeners: ()=>listeners
+    };
+    return subscription;
+}
+// src/utils/useIsomorphicLayoutEffect.ts
+var canUseDOM = ()=>!!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
+var isDOM = /* @__PURE__ */ canUseDOM();
+var isRunningInReactNative = ()=>typeof navigator !== "undefined" && navigator.product === "ReactNative";
+var isReactNative = /* @__PURE__ */ isRunningInReactNative();
+var getUseIsomorphicLayoutEffect = ()=>isDOM || isReactNative ? _react.useLayoutEffect : _react.useEffect;
+var useIsomorphicLayoutEffect = /* @__PURE__ */ getUseIsomorphicLayoutEffect();
+// src/utils/shallowEqual.ts
+function is(x, y) {
+    if (x === y) return x !== 0 || y !== 0 || 1 / x === 1 / y;
+    else return x !== x && y !== y;
+}
+function shallowEqual(objA, objB) {
+    if (is(objA, objB)) return true;
+    if (typeof objA !== "object" || objA === null || typeof objB !== "object" || objB === null) return false;
+    const keysA = Object.keys(objA);
+    const keysB = Object.keys(objB);
+    if (keysA.length !== keysB.length) return false;
+    for(let i = 0; i < keysA.length; i++){
+        if (!Object.prototype.hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) return false;
+    }
+    return true;
+}
+// src/utils/hoistStatics.ts
+var REACT_STATICS = {
+    childContextTypes: true,
+    contextType: true,
+    contextTypes: true,
+    defaultProps: true,
+    displayName: true,
+    getDefaultProps: true,
+    getDerivedStateFromError: true,
+    getDerivedStateFromProps: true,
+    mixins: true,
+    propTypes: true,
+    type: true
+};
+var KNOWN_STATICS = {
+    name: true,
+    length: true,
+    prototype: true,
+    caller: true,
+    callee: true,
+    arguments: true,
+    arity: true
+};
+var FORWARD_REF_STATICS = {
+    $$typeof: true,
+    render: true,
+    defaultProps: true,
+    displayName: true,
+    propTypes: true
+};
+var MEMO_STATICS = {
+    $$typeof: true,
+    compare: true,
+    defaultProps: true,
+    displayName: true,
+    propTypes: true,
+    type: true
+};
+var TYPE_STATICS = {
+    [ForwardRef]: FORWARD_REF_STATICS,
+    [Memo]: MEMO_STATICS
+};
+function getStatics(component) {
+    if (isMemo(component)) return MEMO_STATICS;
+    return TYPE_STATICS[component["$$typeof"]] || REACT_STATICS;
+}
+var defineProperty = Object.defineProperty;
+var getOwnPropertyNames = Object.getOwnPropertyNames;
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+var getPrototypeOf = Object.getPrototypeOf;
+var objectPrototype = Object.prototype;
+function hoistNonReactStatics(targetComponent, sourceComponent) {
+    if (typeof sourceComponent !== "string") {
+        if (objectPrototype) {
+            const inheritedComponent = getPrototypeOf(sourceComponent);
+            if (inheritedComponent && inheritedComponent !== objectPrototype) hoistNonReactStatics(targetComponent, inheritedComponent);
+        }
+        let keys = getOwnPropertyNames(sourceComponent);
+        if (getOwnPropertySymbols) keys = keys.concat(getOwnPropertySymbols(sourceComponent));
+        const targetStatics = getStatics(targetComponent);
+        const sourceStatics = getStatics(sourceComponent);
+        for(let i = 0; i < keys.length; ++i){
+            const key = keys[i];
+            if (!KNOWN_STATICS[key] && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
+                const descriptor = getOwnPropertyDescriptor(sourceComponent, key);
+                try {
+                    defineProperty(targetComponent, key, descriptor);
+                } catch (e) {}
+            }
+        }
+    }
+    return targetComponent;
+}
+// src/components/Context.ts
+var ContextKey = /* @__PURE__ */ Symbol.for(`react-redux-context`);
+var gT = typeof globalThis !== "undefined" ? globalThis : /* fall back to a per-module scope (pre-8.1 behaviour) if `globalThis` is not available */ {};
+function getContext() {
+    var _a;
+    if (!_react.createContext) return {};
+    const contextMap = (_a = gT[ContextKey]) != null ? _a : gT[ContextKey] = /* @__PURE__ */ new Map();
+    let realContext = contextMap.get(_react.createContext);
+    if (!realContext) {
+        realContext = _react.createContext(null);
+        realContext.displayName = "ReactRedux";
+        contextMap.set(_react.createContext, realContext);
+    }
+    return realContext;
+}
+var ReactReduxContext = /* @__PURE__ */ getContext();
+// src/components/connect.tsx
+var NO_SUBSCRIPTION_ARRAY = [
+    null,
+    null
+];
+var stringifyComponent = (Comp)=>{
+    try {
+        return JSON.stringify(Comp);
+    } catch (err) {
+        return String(Comp);
+    }
+};
+function useIsomorphicLayoutEffectWithArgs(effectFunc, effectArgs, dependencies) {
+    useIsomorphicLayoutEffect(()=>effectFunc(...effectArgs), dependencies);
+}
+function captureWrapperProps(lastWrapperProps, lastChildProps, renderIsScheduled, wrapperProps, childPropsFromStoreUpdate, notifyNestedSubs) {
+    lastWrapperProps.current = wrapperProps;
+    renderIsScheduled.current = false;
+    if (childPropsFromStoreUpdate.current) {
+        childPropsFromStoreUpdate.current = null;
+        notifyNestedSubs();
+    }
+}
+function subscribeUpdates(shouldHandleStateChanges, store, subscription, childPropsSelector, lastWrapperProps, lastChildProps, renderIsScheduled, isMounted, childPropsFromStoreUpdate, notifyNestedSubs, additionalSubscribeListener) {
+    if (!shouldHandleStateChanges) return ()=>{};
+    let didUnsubscribe = false;
+    let lastThrownError = null;
+    const checkForUpdates = ()=>{
+        if (didUnsubscribe || !isMounted.current) return;
+        const latestStoreState = store.getState();
+        let newChildProps, error;
+        try {
+            newChildProps = childPropsSelector(latestStoreState, lastWrapperProps.current);
+        } catch (e) {
+            error = e;
+            lastThrownError = e;
+        }
+        if (!error) lastThrownError = null;
+        if (newChildProps === lastChildProps.current) {
+            if (!renderIsScheduled.current) notifyNestedSubs();
+        } else {
+            lastChildProps.current = newChildProps;
+            childPropsFromStoreUpdate.current = newChildProps;
+            renderIsScheduled.current = true;
+            additionalSubscribeListener();
+        }
+    };
+    subscription.onStateChange = checkForUpdates;
+    subscription.trySubscribe();
+    checkForUpdates();
+    const unsubscribeWrapper = ()=>{
+        didUnsubscribe = true;
+        subscription.tryUnsubscribe();
+        subscription.onStateChange = null;
+        if (lastThrownError) throw lastThrownError;
+    };
+    return unsubscribeWrapper;
+}
+function strictEqual(a, b) {
+    return a === b;
+}
+var hasWarnedAboutDeprecatedPureOption = false;
+function connect(mapStateToProps, mapDispatchToProps, mergeProps, { // The `pure` option has been removed, so TS doesn't like us destructuring this to check its existence.
+// @ts-ignore
+pure, areStatesEqual = strictEqual, areOwnPropsEqual = shallowEqual, areStatePropsEqual = shallowEqual, areMergedPropsEqual = shallowEqual, // use React's forwardRef to expose a ref of the wrapped component
+forwardRef = false, // the context consumer to use
+context = ReactReduxContext } = {}) {
+    if (pure !== void 0 && !hasWarnedAboutDeprecatedPureOption) {
+        hasWarnedAboutDeprecatedPureOption = true;
+        warning('The `pure` option has been removed. `connect` is now always a "pure/memoized" component');
+    }
+    const Context = context;
+    const initMapStateToProps = mapStateToPropsFactory(mapStateToProps);
+    const initMapDispatchToProps = mapDispatchToPropsFactory(mapDispatchToProps);
+    const initMergeProps = mergePropsFactory(mergeProps);
+    const shouldHandleStateChanges = Boolean(mapStateToProps);
+    const wrapWithConnect = (WrappedComponent)=>{
+        {
+            const isValid = /* @__PURE__ */ isValidElementType(WrappedComponent);
+            if (!isValid) throw new Error(`You must pass a component to the function returned by connect. Instead received ${stringifyComponent(WrappedComponent)}`);
+        }
+        const wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || "Component";
+        const displayName = `Connect(${wrappedComponentName})`;
+        const selectorFactoryOptions = {
+            shouldHandleStateChanges,
+            displayName,
+            wrappedComponentName,
+            WrappedComponent,
+            // @ts-ignore
+            initMapStateToProps,
+            initMapDispatchToProps,
+            initMergeProps,
+            areStatesEqual,
+            areStatePropsEqual,
+            areOwnPropsEqual,
+            areMergedPropsEqual
+        };
+        function ConnectFunction(props) {
+            const [propsContext, reactReduxForwardedRef, wrapperProps] = _react.useMemo(()=>{
+                const _a = props, { reactReduxForwardedRef: reactReduxForwardedRef2 } = _a, wrapperProps2 = __objRest(_a, [
+                    "reactReduxForwardedRef"
+                ]);
+                return [
+                    props.context,
+                    reactReduxForwardedRef2,
+                    wrapperProps2
+                ];
+            }, [
+                props
+            ]);
+            const ContextToUse = _react.useMemo(()=>{
+                let ResultContext = Context;
+                if (propsContext == null ? void 0 : propsContext.Consumer) {
+                    const isValid = /* @__PURE__ */ isContextConsumer(// @ts-ignore
+                    /* @__PURE__ */ _react.createElement(propsContext.Consumer, null));
+                    if (!isValid) throw new Error("You must pass a valid React context consumer as `props.context`");
+                    ResultContext = propsContext;
+                }
+                return ResultContext;
+            }, [
+                propsContext,
+                Context
+            ]);
+            const contextValue = _react.useContext(ContextToUse);
+            const didStoreComeFromProps = Boolean(props.store) && Boolean(props.store.getState) && Boolean(props.store.dispatch);
+            const didStoreComeFromContext = Boolean(contextValue) && Boolean(contextValue.store);
+            if (!didStoreComeFromProps && !didStoreComeFromContext) throw new Error(`Could not find "store" in the context of "${displayName}". Either wrap the root component in a <Provider>, or pass a custom React context provider to <Provider> and the corresponding React context consumer to ${displayName} in connect options.`);
+            const store = didStoreComeFromProps ? props.store : contextValue.store;
+            const getServerState = didStoreComeFromContext ? contextValue.getServerState : store.getState;
+            const childPropsSelector = _react.useMemo(()=>{
+                return finalPropsSelectorFactory(store.dispatch, selectorFactoryOptions);
+            }, [
+                store
+            ]);
+            const [subscription, notifyNestedSubs] = _react.useMemo(()=>{
+                if (!shouldHandleStateChanges) return NO_SUBSCRIPTION_ARRAY;
+                const subscription2 = createSubscription(store, didStoreComeFromProps ? void 0 : contextValue.subscription);
+                const notifyNestedSubs2 = subscription2.notifyNestedSubs.bind(subscription2);
+                return [
+                    subscription2,
+                    notifyNestedSubs2
+                ];
+            }, [
+                store,
+                didStoreComeFromProps,
+                contextValue
+            ]);
+            const overriddenContextValue = _react.useMemo(()=>{
+                if (didStoreComeFromProps) return contextValue;
+                return __spreadProps(__spreadValues({}, contextValue), {
+                    subscription
+                });
+            }, [
+                didStoreComeFromProps,
+                contextValue,
+                subscription
+            ]);
+            const lastChildProps = _react.useRef(void 0);
+            const lastWrapperProps = _react.useRef(wrapperProps);
+            const childPropsFromStoreUpdate = _react.useRef(void 0);
+            const renderIsScheduled = _react.useRef(false);
+            const isMounted = _react.useRef(false);
+            const latestSubscriptionCallbackError = _react.useRef(void 0);
+            useIsomorphicLayoutEffect(()=>{
+                isMounted.current = true;
+                return ()=>{
+                    isMounted.current = false;
+                };
+            }, []);
+            const actualChildPropsSelector = _react.useMemo(()=>{
+                const selector = ()=>{
+                    if (childPropsFromStoreUpdate.current && wrapperProps === lastWrapperProps.current) return childPropsFromStoreUpdate.current;
+                    return childPropsSelector(store.getState(), wrapperProps);
+                };
+                return selector;
+            }, [
+                store,
+                wrapperProps
+            ]);
+            const subscribeForReact = _react.useMemo(()=>{
+                const subscribe = (reactListener)=>{
+                    if (!subscription) return ()=>{};
+                    return subscribeUpdates(shouldHandleStateChanges, store, subscription, // @ts-ignore
+                    childPropsSelector, lastWrapperProps, lastChildProps, renderIsScheduled, isMounted, childPropsFromStoreUpdate, notifyNestedSubs, reactListener);
+                };
+                return subscribe;
+            }, [
+                subscription
+            ]);
+            useIsomorphicLayoutEffectWithArgs(captureWrapperProps, [
+                lastWrapperProps,
+                lastChildProps,
+                renderIsScheduled,
+                wrapperProps,
+                childPropsFromStoreUpdate,
+                notifyNestedSubs
+            ]);
+            let actualChildProps;
+            try {
+                actualChildProps = _react.useSyncExternalStore(// TODO We're passing through a big wrapper that does a bunch of extra side effects besides subscribing
+                subscribeForReact, // TODO This is incredibly hacky. We've already processed the store update and calculated new child props,
+                // TODO and we're just passing that through so it triggers a re-render for us rather than relying on `uSES`.
+                actualChildPropsSelector, getServerState ? ()=>childPropsSelector(getServerState(), wrapperProps) : actualChildPropsSelector);
+            } catch (err) {
+                if (latestSubscriptionCallbackError.current) err.message += `
+The error may be correlated with this previous error:
+${latestSubscriptionCallbackError.current.stack}
+
+`;
+                throw err;
+            }
+            useIsomorphicLayoutEffect(()=>{
+                latestSubscriptionCallbackError.current = void 0;
+                childPropsFromStoreUpdate.current = void 0;
+                lastChildProps.current = actualChildProps;
+            });
+            const renderedWrappedComponent = _react.useMemo(()=>{
+                return(// @ts-ignore
+                /* @__PURE__ */ _react.createElement(WrappedComponent, __spreadProps(__spreadValues({}, actualChildProps), {
+                    ref: reactReduxForwardedRef
+                })));
+            }, [
+                reactReduxForwardedRef,
+                WrappedComponent,
+                actualChildProps
+            ]);
+            const renderedChild = _react.useMemo(()=>{
+                if (shouldHandleStateChanges) return /* @__PURE__ */ _react.createElement(ContextToUse.Provider, {
+                    value: overriddenContextValue
+                }, renderedWrappedComponent);
+                return renderedWrappedComponent;
+            }, [
+                ContextToUse,
+                renderedWrappedComponent,
+                overriddenContextValue
+            ]);
+            return renderedChild;
+        }
+        const _Connect = _react.memo(ConnectFunction);
+        const Connect = _Connect;
+        Connect.WrappedComponent = WrappedComponent;
+        Connect.displayName = ConnectFunction.displayName = displayName;
+        if (forwardRef) {
+            const _forwarded = _react.forwardRef(function forwardConnectRef(props, ref) {
+                return /* @__PURE__ */ _react.createElement(Connect, __spreadProps(__spreadValues({}, props), {
+                    reactReduxForwardedRef: ref
+                }));
+            });
+            const forwarded = _forwarded;
+            forwarded.displayName = displayName;
+            forwarded.WrappedComponent = WrappedComponent;
+            return /* @__PURE__ */ hoistNonReactStatics(forwarded, WrappedComponent);
+        }
+        return /* @__PURE__ */ hoistNonReactStatics(Connect, WrappedComponent);
+    };
+    return wrapWithConnect;
+}
+var connect_default = connect;
+// src/components/Provider.tsx
+function Provider(providerProps) {
+    const { children, context, serverState, store } = providerProps;
+    const contextValue = _react.useMemo(()=>{
+        const subscription = createSubscription(store);
+        const baseContextValue = {
+            store,
+            subscription,
+            getServerState: serverState ? ()=>serverState : void 0
+        };
+        {
+            const { identityFunctionCheck = "once", stabilityCheck = "once" } = providerProps;
+            return /* @__PURE__ */ Object.assign(baseContextValue, {
+                stabilityCheck,
+                identityFunctionCheck
+            });
+        }
+    }, [
+        store,
+        serverState
+    ]);
+    const previousState = _react.useMemo(()=>store.getState(), [
+        store
+    ]);
+    useIsomorphicLayoutEffect(()=>{
+        const { subscription } = contextValue;
+        subscription.onStateChange = subscription.notifyNestedSubs;
+        subscription.trySubscribe();
+        if (previousState !== store.getState()) subscription.notifyNestedSubs();
+        return ()=>{
+            subscription.tryUnsubscribe();
+            subscription.onStateChange = void 0;
+        };
+    }, [
+        contextValue,
+        previousState
+    ]);
+    const Context = context || ReactReduxContext;
+    return /* @__PURE__ */ _react.createElement(Context.Provider, {
+        value: contextValue
+    }, children);
+}
+var Provider_default = Provider;
+// src/hooks/useReduxContext.ts
+function createReduxContextHook(context = ReactReduxContext) {
+    return function useReduxContext2() {
+        const contextValue = _react.useContext(context);
+        if (!contextValue) throw new Error("could not find react-redux context value; please ensure the component is wrapped in a <Provider>");
+        return contextValue;
+    };
+}
+var useReduxContext = /* @__PURE__ */ createReduxContextHook();
+// src/hooks/useStore.ts
+function createStoreHook(context = ReactReduxContext) {
+    const useReduxContext2 = context === ReactReduxContext ? useReduxContext : // @ts-ignore
+    createReduxContextHook(context);
+    const useStore2 = ()=>{
+        const { store } = useReduxContext2();
+        return store;
+    };
+    Object.assign(useStore2, {
+        withTypes: ()=>useStore2
+    });
+    return useStore2;
+}
+var useStore = /* @__PURE__ */ createStoreHook();
+// src/hooks/useDispatch.ts
+function createDispatchHook(context = ReactReduxContext) {
+    const useStore2 = context === ReactReduxContext ? useStore : createStoreHook(context);
+    const useDispatch2 = ()=>{
+        const store = useStore2();
+        return store.dispatch;
+    };
+    Object.assign(useDispatch2, {
+        withTypes: ()=>useDispatch2
+    });
+    return useDispatch2;
+}
+var useDispatch = /* @__PURE__ */ createDispatchHook();
+var refEquality = (a, b)=>a === b;
+function createSelectorHook(context = ReactReduxContext) {
+    const useReduxContext2 = context === ReactReduxContext ? useReduxContext : createReduxContextHook(context);
+    const useSelector2 = (selector, equalityFnOrOptions = {})=>{
+        const { equalityFn = refEquality } = typeof equalityFnOrOptions === "function" ? {
+            equalityFn: equalityFnOrOptions
+        } : equalityFnOrOptions;
+        if (!selector) throw new Error(`You must pass a selector to useSelector`);
+        if (typeof selector !== "function") throw new Error(`You must pass a function as a selector to useSelector`);
+        if (typeof equalityFn !== "function") throw new Error(`You must pass a function as an equality function to useSelector`);
+        const reduxContext = useReduxContext2();
+        const { store, subscription, getServerState } = reduxContext;
+        const firstRun = _react.useRef(true);
+        const wrappedSelector = _react.useCallback({
+            [selector.name] (state) {
+                const selected = selector(state);
+                {
+                    const { devModeChecks = {} } = typeof equalityFnOrOptions === "function" ? {} : equalityFnOrOptions;
+                    const { identityFunctionCheck, stabilityCheck } = reduxContext;
+                    const { identityFunctionCheck: finalIdentityFunctionCheck, stabilityCheck: finalStabilityCheck } = __spreadValues({
+                        stabilityCheck,
+                        identityFunctionCheck
+                    }, devModeChecks);
+                    if (finalStabilityCheck === "always" || finalStabilityCheck === "once" && firstRun.current) {
+                        const toCompare = selector(state);
+                        if (!equalityFn(selected, toCompare)) {
+                            let stack = void 0;
+                            try {
+                                throw new Error();
+                            } catch (e) {
+                                ({ stack } = e);
+                            }
+                            console.warn("Selector " + (selector.name || "unknown") + " returned a different result when called with the same parameters. This can lead to unnecessary rerenders.\nSelectors that return a new reference (such as an object or an array) should be memoized: https://redux.js.org/usage/deriving-data-selectors#optimizing-selectors-with-memoization", {
+                                state,
+                                selected,
+                                selected2: toCompare,
+                                stack
+                            });
+                        }
+                    }
+                    if (finalIdentityFunctionCheck === "always" || finalIdentityFunctionCheck === "once" && firstRun.current) {
+                        if (selected === state) {
+                            let stack = void 0;
+                            try {
+                                throw new Error();
+                            } catch (e) {
+                                ({ stack } = e);
+                            }
+                            console.warn("Selector " + (selector.name || "unknown") + " returned the root state when called. This can lead to unnecessary rerenders.\nSelectors that return the entire state are almost certainly a mistake, as they will cause a rerender whenever *anything* in state changes.", {
+                                stack
+                            });
+                        }
+                    }
+                    if (firstRun.current) firstRun.current = false;
+                }
+                return selected;
+            }
+        }[selector.name], [
+            selector
+        ]);
+        const selectedState = (0, _withSelectorJs.useSyncExternalStoreWithSelector)(subscription.addNestedSub, store.getState, getServerState || store.getState, wrappedSelector, equalityFn);
+        _react.useDebugValue(selectedState);
+        return selectedState;
+    };
+    Object.assign(useSelector2, {
+        withTypes: ()=>useSelector2
+    });
+    return useSelector2;
+}
+var useSelector = /* @__PURE__ */ createSelectorHook();
+// src/exports.ts
+var batch = defaultNoopBatch;
+
+},{"react":"21dqq","use-sync-external-store/with-selector.js":"3eYnG","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS"}],"3eYnG":[function(require,module,exports,__globalThis) {
+'use strict';
+module.exports = require("374a059340689e89");
+
+},{"374a059340689e89":"1Ag9Q"}],"1Ag9Q":[function(require,module,exports,__globalThis) {
+/**
+ * @license React
+ * use-sync-external-store-with-selector.development.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */ "use strict";
+(function() {
+    function is(x, y) {
+        return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
+    }
+    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
+    var React = require("8b38fc6c74f16e20"), objectIs = "function" === typeof Object.is ? Object.is : is, useSyncExternalStore = React.useSyncExternalStore, useRef = React.useRef, useEffect = React.useEffect, useMemo = React.useMemo, useDebugValue = React.useDebugValue;
+    exports.useSyncExternalStoreWithSelector = function(subscribe, getSnapshot, getServerSnapshot, selector, isEqual) {
+        var instRef = useRef(null);
+        if (null === instRef.current) {
+            var inst = {
+                hasValue: !1,
+                value: null
+            };
+            instRef.current = inst;
+        } else inst = instRef.current;
+        instRef = useMemo(function() {
+            function memoizedSelector(nextSnapshot) {
+                if (!hasMemo) {
+                    hasMemo = !0;
+                    memoizedSnapshot = nextSnapshot;
+                    nextSnapshot = selector(nextSnapshot);
+                    if (void 0 !== isEqual && inst.hasValue) {
+                        var currentSelection = inst.value;
+                        if (isEqual(currentSelection, nextSnapshot)) return memoizedSelection = currentSelection;
+                    }
+                    return memoizedSelection = nextSnapshot;
+                }
+                currentSelection = memoizedSelection;
+                if (objectIs(memoizedSnapshot, nextSnapshot)) return currentSelection;
+                var nextSelection = selector(nextSnapshot);
+                if (void 0 !== isEqual && isEqual(currentSelection, nextSelection)) return memoizedSnapshot = nextSnapshot, currentSelection;
+                memoizedSnapshot = nextSnapshot;
+                return memoizedSelection = nextSelection;
+            }
+            var hasMemo = !1, memoizedSnapshot, memoizedSelection, maybeGetServerSnapshot = void 0 === getServerSnapshot ? null : getServerSnapshot;
+            return [
+                function() {
+                    return memoizedSelector(getSnapshot());
+                },
+                null === maybeGetServerSnapshot ? void 0 : function() {
+                    return memoizedSelector(maybeGetServerSnapshot());
+                }
+            ];
+        }, [
+            getSnapshot,
+            getServerSnapshot,
+            selector,
+            isEqual
+        ]);
+        var value = useSyncExternalStore(subscribe, instRef[0], instRef[1]);
+        useEffect(function() {
+            inst.hasValue = !0;
+            inst.value = value;
+        }, [
+            value
+        ]);
+        useDebugValue(value);
+        return value;
+    };
+    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
+})();
+
+},{"8b38fc6c74f16e20":"21dqq"}],"e6tdF":[function(require,module,exports,__globalThis) {
 //-----------------------------------------------------------------
 // Defines an actions that store the authenticated user after login
 //    & updated user object with profile update logic
@@ -35729,7 +36123,10 @@ const userSlice = (0, _toolkit.createSlice)({
     name: "user",
     initialState: null,
     reducers: {
-        setUser: (state, action)=>action.payload
+        setUser: (state, action)=>{
+            console.log("REDUCER|user.js|setUser() to action.payload:", action.payload);
+            return action.payload;
+        }
     }
 });
 const { setUser } = userSlice.actions;
@@ -39686,7 +40083,626 @@ function createThunkMiddleware(extraArgument) {
 var thunk = createThunkMiddleware();
 var withExtraArgument = createThunkMiddleware;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS"}],"4eTad":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS"}],"ggaUx":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$e9f6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$e9f6.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MovieView", ()=>MovieView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _reactRedux = require("react-redux");
+var _user = require("../../redux/reducers/user");
+var _movieCard = require("../movie-card/movie-card");
+var _button = require("react-bootstrap/Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
+var _row = require("react-bootstrap/Row");
+var _rowDefault = parcelHelpers.interopDefault(_row);
+var _col = require("react-bootstrap/Col");
+var _colDefault = parcelHelpers.interopDefault(_col);
+var _reactRouter = require("react-router");
+var _s = $RefreshSig$();
+const DB_FAVORITES_URI = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies/favorites/";
+//Increase to 1px to add debug borders
+const debugBorder = "0px solid blue";
+const MovieView = ({ prev })=>{
+    _s();
+    const movies = (0, _reactRedux.useSelector)((state)=>state.movies.list);
+    const user = (0, _reactRedux.useSelector)((state)=>state.user);
+    const token = (0, _reactRedux.useSelector)((state)=>state.token);
+    const dispatch = (0, _reactRedux.useDispatch)();
+    console.log("movie-view.jsx|||user object from redux:", user);
+    const { movieId } = (0, _reactRouter.useParams)();
+    const [isFavorite, setIsFavorite] = (0, _react.useState)(user.FavoriteMovies.includes(movieId));
+    //Find movie to display
+    const movie = movies.find((foundMovie)=>foundMovie._id === movieId);
+    //Find similar movies array
+    const similarMovieArray = movies.filter((arrayMovie)=>movie.Genre.Name === arrayMovie.Genre.Name && movieId !== arrayMovie._id) || [];
+    /**
+ * Handles API call to add favorite movie to user.FavoriteMovies
+ */ const handleAddFav = async ()=>{
+        console.log("movie-view.jsx|handleAddFav()|Adding fav movie: " + movie.Title + " " + movie._id);
+        try {
+            const addFavResponse = await fetch(DB_FAVORITES_URI + movie._id, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            const responseData = await addFavResponse.json();
+            console.log("movie-view.jsx|handleAddFav()|responseData:", responseData);
+            if (responseData) {
+                dispatch((0, _user.setUser)(responseData));
+                setIsFavorite(true);
+            } else alert("Something went wrong trying to add favorite, please try again.");
+        } catch (e) {
+            console.error("movie-view.jsx|handleAddFav()|ERROR during add handler:", e);
+        }
+    };
+    /**
+   * Handles API call to remove favorite movie to user.FavoriteMovies
+   */ const handleRemoveFav = async ()=>{
+        console.log("movie-view.jsx|handleRemoveFav|Removing fav movie: " + movie.Title + " " + movie._id);
+        try {
+            const removeFavResponse = await fetch(DB_FAVORITES_URI + movie._id, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            const responseData = await removeFavResponse.json();
+            console.log("movie-view.jsx|handleRemoveFav()|responseData:", responseData);
+            if (responseData) {
+                dispatch((0, _user.setUser)(responseData));
+                setIsFavorite(false);
+            } else alert("Something went wrong trying to remove favorite, please try again.");
+        } catch (e) {
+            console.error("movie-view.jsx|handleRemoveFav()|ERROR during remove handler:", e);
+        }
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+        children: [
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'instant'
+            }),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                        xs: 12,
+                        md: 5,
+                        className: "d-flex justify-content-center",
+                        style: {
+                            border: debugBorder
+                        },
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                            className: "mt-3",
+                            src: movie.ImageURL,
+                            style: {
+                                borderRadius: '5px',
+                                maxWidth: "100%"
+                            }
+                        }, void 0, false, {
+                            fileName: "src/components/movie-view/movie-view.jsx",
+                            lineNumber: 95,
+                            columnNumber: 11
+                        }, undefined)
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 94,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                        xs: 12,
+                        md: 7,
+                        className: "mt-3",
+                        style: {
+                            border: debugBorder
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        className: "movie-view-info-field",
+                                        children: "Title:"
+                                    }, void 0, false, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 99,
+                                        columnNumber: 13
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        children: [
+                                            " ",
+                                            movie.Title
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 100,
+                                        columnNumber: 13
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 98,
+                                columnNumber: 11
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        className: "movie-view-info-field",
+                                        children: "Released:"
+                                    }, void 0, false, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 103,
+                                        columnNumber: 13
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        children: [
+                                            " ",
+                                            movie.ReleaseYear
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 104,
+                                        columnNumber: 13
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 102,
+                                columnNumber: 11
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        className: "movie-view-info-field",
+                                        children: "Description:"
+                                    }, void 0, false, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 107,
+                                        columnNumber: 13
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        children: [
+                                            " ",
+                                            movie.Description
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 108,
+                                        columnNumber: 13
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 106,
+                                columnNumber: 11
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        className: "movie-view-info-field",
+                                        children: "Genre:"
+                                    }, void 0, false, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 111,
+                                        columnNumber: 13
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        children: [
+                                            " ",
+                                            movie.Genre.Name
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 112,
+                                        columnNumber: 13
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 110,
+                                columnNumber: 11
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        className: "movie-view-info-field",
+                                        children: "Director:"
+                                    }, void 0, false, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 115,
+                                        columnNumber: 13
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        children: [
+                                            " ",
+                                            movie.Director.Name
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 116,
+                                        columnNumber: 13
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 114,
+                                columnNumber: 11
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        className: "movie-view-info-field",
+                                        children: "Rating:"
+                                    }, void 0, false, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 119,
+                                        columnNumber: 13
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        children: [
+                                            " ",
+                                            movie.Rating
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 120,
+                                        columnNumber: 13
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 118,
+                                columnNumber: 11
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        className: "movie-view-info-field",
+                                        children: "Actors:"
+                                    }, void 0, false, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 123,
+                                        columnNumber: 13
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        children: [
+                                            " ",
+                                            movie.Actors.join(', ')
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 124,
+                                        columnNumber: 13
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 122,
+                                columnNumber: 11
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "d-flex justify-content-around mt-3",
+                                style: {
+                                    border: debugBorder
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouter.Link), {
+                                        to: prev,
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                                            className: "btn-md",
+                                            type: "button",
+                                            children: "Back"
+                                        }, void 0, false, {
+                                            fileName: "src/components/movie-view/movie-view.jsx",
+                                            lineNumber: 130,
+                                            columnNumber: 15
+                                        }, undefined)
+                                    }, void 0, false, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 129,
+                                        columnNumber: 13
+                                    }, undefined),
+                                    isFavorite ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                                        variant: "danger",
+                                        className: "btn-md",
+                                        onClick: handleRemoveFav,
+                                        children: "Remove Favorite"
+                                    }, void 0, false, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 133,
+                                        columnNumber: 15
+                                    }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                                        variant: "success",
+                                        className: "btn-md",
+                                        onClick: handleAddFav,
+                                        children: "Add Favorite"
+                                    }, void 0, false, {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 135,
+                                        columnNumber: 15
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 128,
+                                columnNumber: 11
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 97,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/movie-view/movie-view.jsx",
+                lineNumber: 93,
+                columnNumber: 7
+            }, undefined),
+            similarMovieArray.length !== 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 145,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                        children: "Similar Movies:"
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 146,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
+                        className: "justify-content-center mt-3",
+                        style: {
+                            border: debugBorder
+                        },
+                        children: similarMovieArray.map((similarMovie)=>{
+                            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                                md: 4,
+                                sm: 6,
+                                className: "mb-5",
+                                style: {
+                                    border: debugBorder
+                                },
+                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                                    user: user,
+                                    setUser: (0, _user.setUser),
+                                    movie: similarMovie,
+                                    token: token,
+                                    prev: prev
+                                }, void 0, false, {
+                                    fileName: "src/components/movie-view/movie-view.jsx",
+                                    lineNumber: 152,
+                                    columnNumber: 21
+                                }, undefined)
+                            }, similarMovie._id, false, {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 151,
+                                columnNumber: 19
+                            }, undefined);
+                        })
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 147,
+                        columnNumber: 11
+                    }, undefined)
+                ]
+            }, void 0, true) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                fileName: "src/components/movie-view/movie-view.jsx",
+                lineNumber: 160,
+                columnNumber: 9
+            }, undefined)
+        ]
+    }, void 0, true);
+};
+_s(MovieView, "OKxMKlxPXhol7ZszTfTy2rOoA9o=", false, function() {
+    return [
+        (0, _reactRedux.useSelector),
+        (0, _reactRedux.useSelector),
+        (0, _reactRedux.useSelector),
+        (0, _reactRedux.useDispatch),
+        (0, _reactRouter.useParams)
+    ];
+});
+_c = MovieView;
+//PropTypes for MovieView component holds previous path ("/" or "/profile")
+MovieView.propTypes = {
+    prev: (0, _propTypes.PropTypes).string.isRequired
+};
+var _c;
+$RefreshReg$(_c, "MovieView");
+
+  $parcel$ReactRefreshHelpers$e9f6.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react":"21dqq","../movie-card/movie-card":"bwuIu","react-bootstrap/Button":"aPzUt","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe","react-redux":"62sf7","../../redux/reducers/user":"e6tdF"}],"9YtA0":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$9fee.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LoginView", ()=>LoginView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _button = require("react-bootstrap/Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
+var _form = require("react-bootstrap/Form");
+var _formDefault = parcelHelpers.interopDefault(_form);
+var _user = require("../../redux/reducers/user");
+var _token = require("../../redux/reducers/token");
+var _movies = require("../../redux/reducers/movies");
+var _reactRedux = require("react-redux");
+var _s = $RefreshSig$();
+const ENABLE_DATA_CLEAR = false; //Set true to enable button to clear stored states/localStorage
+const LOGIN_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/login";
+const LoginView = ()=>{
+    _s();
+    const [username, setUsername] = (0, _react.useState)("");
+    const [password, setPassword] = (0, _react.useState)("");
+    const dispatch = (0, _reactRedux.useDispatch)();
+    const onLoggedIn = (user, token)=>{
+        dispatch((0, _user.setUser)(user));
+        dispatch((0, _token.setToken)(token));
+    };
+    const onLoggedOut = ()=>{
+        localStorage.clear();
+        dispatch((0, _user.setUser)(null));
+        dispatch((0, _token.setToken)(null));
+        dispatch((0, _movies.setMovies)([]));
+        console.log("login-view.jsx|...cleared localStorage and user/token/movies");
+    };
+    //Handler for form submit
+    const handleLoginSubmit = (event)=>{
+        event.preventDefault();
+        console.log("login-view.jsx | Starting handleLoginSubmit()");
+        const loginData = {
+            Username: username,
+            Password: password
+        };
+        fetch(LOGIN_URL, {
+            method: "POST",
+            body: JSON.stringify(loginData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then((response)=>response.json()).then((data)=>{
+            console.log("login-view.jsx | Login response: ", data);
+            if (data.user) {
+                localStorage.setItem("user", JSON.stringify(data.user));
+                localStorage.setItem("token", data.token);
+                onLoggedIn(data.user, data.token);
+                console.log("login-view.jsx|Login successful.");
+            } else alert("No such user");
+        }).catch((e)=>{
+            alert("Something went wrong");
+            console.log("login-view.jsx | Something went wrong :", e);
+            console.error("login-view.jsx | Error during authentication :", e);
+            localStorage.clear();
+            console.error("login-view.jsx | dispatch(setUser(null))...");
+            dispatch((0, _user.setUser)(null));
+            console.error("login-view.jsx | dispatch(setToken(null))...");
+            dispatch((0, _token.setToken)(null));
+        });
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default), {
+        onSubmit: handleLoginSubmit,
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
+                controlId: "formUsername",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
+                        children: "Username: "
+                    }, void 0, false, {
+                        fileName: "src/components/login-view/login-view.jsx",
+                        lineNumber: 77,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
+                        type: "text",
+                        value: username,
+                        onChange: (e)=>setUsername(e.target.value),
+                        required: true,
+                        minLength: "5"
+                    }, void 0, false, {
+                        fileName: "src/components/login-view/login-view.jsx",
+                        lineNumber: 78,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/login-view/login-view.jsx",
+                lineNumber: 76,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
+                controlId: "formPassword",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
+                        children: "Password: "
+                    }, void 0, false, {
+                        fileName: "src/components/login-view/login-view.jsx",
+                        lineNumber: 88,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
+                        type: "password",
+                        value: password,
+                        onChange: (e)=>setPassword(e.target.value),
+                        required: true,
+                        minLength: "6"
+                    }, void 0, false, {
+                        fileName: "src/components/login-view/login-view.jsx",
+                        lineNumber: 89,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/login-view/login-view.jsx",
+                lineNumber: 87,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                variant: "primary",
+                type: "submit",
+                className: "mt-2",
+                children: "Log in"
+            }, void 0, false, {
+                fileName: "src/components/login-view/login-view.jsx",
+                lineNumber: 97,
+                columnNumber: 7
+            }, undefined),
+            ENABLE_DATA_CLEAR && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                variant: "danger",
+                type: "button",
+                className: "mt-2 ml-2",
+                onClick: onLoggedOut,
+                children: "Clear Data"
+            }, void 0, false, {
+                fileName: "src/components/login-view/login-view.jsx",
+                lineNumber: 101,
+                columnNumber: 9
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/login-view/login-view.jsx",
+        lineNumber: 75,
+        columnNumber: 5
+    }, undefined);
+};
+_s(LoginView, "hfLFCx16V4K1m8kS4JbFPmLkqZE=", false, function() {
+    return [
+        (0, _reactRedux.useDispatch)
+    ];
+});
+_c = LoginView;
+var _c;
+$RefreshReg$(_c, "LoginView");
+
+  $parcel$ReactRefreshHelpers$9fee.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Button":"aPzUt","react-bootstrap/Form":"iBZ80","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe","../../redux/reducers/user":"e6tdF","../../redux/reducers/token":"4eTad","react-redux":"62sf7","../../redux/reducers/movies":"l0qwl"}],"4eTad":[function(require,module,exports,__globalThis) {
 //-----------------------------------------------------------------
 // Defines an action that stores the authentication token
 //-----------------------------------------------------------------
@@ -39696,1020 +40712,48 @@ parcelHelpers.export(exports, "setToken", ()=>setToken);
 var _toolkit = require("@reduxjs/toolkit");
 const tokenSlice = (0, _toolkit.createSlice)({
     name: "token",
-    initialState: "",
+    initialState: null,
     reducers: {
         setToken: (state, action)=>{
-            state.token = action.payload;
+            console.log("REDUCER|token.js|setToken() to action.payload:", action.payload);
+            return action.payload;
         }
     }
 });
 const { setToken } = tokenSlice.actions;
 exports.default = tokenSlice.reducer;
 
-},{"@reduxjs/toolkit":"fuua8","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS"}],"62sf7":[function(require,module,exports,__globalThis) {
+},{"@reduxjs/toolkit":"fuua8","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS"}],"l0qwl":[function(require,module,exports,__globalThis) {
+//-----------------------------------------------------------------
+// Defines actions that store the movies list from the API
+//     & the filtered list of movie IDs
+//-----------------------------------------------------------------
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Provider", ()=>Provider_default);
-parcelHelpers.export(exports, "ReactReduxContext", ()=>ReactReduxContext);
-parcelHelpers.export(exports, "batch", ()=>batch);
-parcelHelpers.export(exports, "connect", ()=>connect_default);
-parcelHelpers.export(exports, "createDispatchHook", ()=>createDispatchHook);
-parcelHelpers.export(exports, "createSelectorHook", ()=>createSelectorHook);
-parcelHelpers.export(exports, "createStoreHook", ()=>createStoreHook);
-parcelHelpers.export(exports, "shallowEqual", ()=>shallowEqual);
-parcelHelpers.export(exports, "useDispatch", ()=>useDispatch);
-parcelHelpers.export(exports, "useSelector", ()=>useSelector);
-parcelHelpers.export(exports, "useStore", ()=>useStore);
-// src/utils/react.ts
-var _react = require("react");
-// src/hooks/useSelector.ts
-var _withSelectorJs = require("use-sync-external-store/with-selector.js");
-var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value)=>key in obj ? __defProp(obj, key, {
-        enumerable: true,
-        configurable: true,
-        writable: true,
-        value
-    }) : obj[key] = value;
-var __spreadValues = (a, b)=>{
-    for(var prop in b || (b = {}))if (__hasOwnProp.call(b, prop)) __defNormalProp(a, prop, b[prop]);
-    if (__getOwnPropSymbols) {
-        for (var prop of __getOwnPropSymbols(b))if (__propIsEnum.call(b, prop)) __defNormalProp(a, prop, b[prop]);
-    }
-    return a;
-};
-var __spreadProps = (a, b)=>__defProps(a, __getOwnPropDescs(b));
-var __objRest = (source, exclude)=>{
-    var target = {};
-    for(var prop in source)if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0) target[prop] = source[prop];
-    if (source != null && __getOwnPropSymbols) {
-        for (var prop of __getOwnPropSymbols(source))if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop)) target[prop] = source[prop];
-    }
-    return target;
-};
-// src/utils/react-is.ts
-var IS_REACT_19 = /* @__PURE__ */ _react.version.startsWith("19");
-var REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for(IS_REACT_19 ? "react.transitional.element" : "react.element");
-var REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal");
-var REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment");
-var REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode");
-var REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler");
-var REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer");
-var REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context");
-var REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref");
-var REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense");
-var REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list");
-var REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo");
-var REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
-var REACT_OFFSCREEN_TYPE = /* @__PURE__ */ Symbol.for("react.offscreen");
-var REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference");
-var ForwardRef = REACT_FORWARD_REF_TYPE;
-var Memo = REACT_MEMO_TYPE;
-function isValidElementType(type) {
-    return typeof type === "string" || typeof type === "function" || type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_OFFSCREEN_TYPE || typeof type === "object" && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_CONSUMER_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_CLIENT_REFERENCE || type.getModuleId !== void 0) ? true : false;
-}
-function typeOf(object) {
-    if (typeof object === "object" && object !== null) {
-        const { $$typeof } = object;
-        switch($$typeof){
-            case REACT_ELEMENT_TYPE:
-                switch(object = object.type, object){
-                    case REACT_FRAGMENT_TYPE:
-                    case REACT_PROFILER_TYPE:
-                    case REACT_STRICT_MODE_TYPE:
-                    case REACT_SUSPENSE_TYPE:
-                    case REACT_SUSPENSE_LIST_TYPE:
-                        return object;
-                    default:
-                        switch(object = object && object.$$typeof, object){
-                            case REACT_CONTEXT_TYPE:
-                            case REACT_FORWARD_REF_TYPE:
-                            case REACT_LAZY_TYPE:
-                            case REACT_MEMO_TYPE:
-                                return object;
-                            case REACT_CONSUMER_TYPE:
-                                return object;
-                            default:
-                                return $$typeof;
-                        }
-                }
-            case REACT_PORTAL_TYPE:
-                return $$typeof;
-        }
-    }
-}
-function isContextConsumer(object) {
-    return IS_REACT_19 ? typeOf(object) === REACT_CONSUMER_TYPE : typeOf(object) === REACT_CONTEXT_TYPE;
-}
-function isMemo(object) {
-    return typeOf(object) === REACT_MEMO_TYPE;
-}
-// src/utils/warning.ts
-function warning(message) {
-    if (typeof console !== "undefined" && typeof console.error === "function") console.error(message);
-    try {
-        throw new Error(message);
-    } catch (e) {}
-}
-// src/connect/verifySubselectors.ts
-function verify(selector, methodName) {
-    if (!selector) throw new Error(`Unexpected value for ${methodName} in connect.`);
-    else if (methodName === "mapStateToProps" || methodName === "mapDispatchToProps") {
-        if (!Object.prototype.hasOwnProperty.call(selector, "dependsOnOwnProps")) warning(`The selector for ${methodName} of connect did not specify a value for dependsOnOwnProps.`);
-    }
-}
-function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps) {
-    verify(mapStateToProps, "mapStateToProps");
-    verify(mapDispatchToProps, "mapDispatchToProps");
-    verify(mergeProps, "mergeProps");
-}
-// src/connect/selectorFactory.ts
-function pureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, { areStatesEqual, areOwnPropsEqual, areStatePropsEqual }) {
-    let hasRunAtLeastOnce = false;
-    let state;
-    let ownProps;
-    let stateProps;
-    let dispatchProps;
-    let mergedProps;
-    function handleFirstCall(firstState, firstOwnProps) {
-        state = firstState;
-        ownProps = firstOwnProps;
-        stateProps = mapStateToProps(state, ownProps);
-        dispatchProps = mapDispatchToProps(dispatch, ownProps);
-        mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-        hasRunAtLeastOnce = true;
-        return mergedProps;
-    }
-    function handleNewPropsAndNewState() {
-        stateProps = mapStateToProps(state, ownProps);
-        if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
-        mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-        return mergedProps;
-    }
-    function handleNewProps() {
-        if (mapStateToProps.dependsOnOwnProps) stateProps = mapStateToProps(state, ownProps);
-        if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
-        mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-        return mergedProps;
-    }
-    function handleNewState() {
-        const nextStateProps = mapStateToProps(state, ownProps);
-        const statePropsChanged = !areStatePropsEqual(nextStateProps, stateProps);
-        stateProps = nextStateProps;
-        if (statePropsChanged) mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-        return mergedProps;
-    }
-    function handleSubsequentCalls(nextState, nextOwnProps) {
-        const propsChanged = !areOwnPropsEqual(nextOwnProps, ownProps);
-        const stateChanged = !areStatesEqual(nextState, state, nextOwnProps, ownProps);
-        state = nextState;
-        ownProps = nextOwnProps;
-        if (propsChanged && stateChanged) return handleNewPropsAndNewState();
-        if (propsChanged) return handleNewProps();
-        if (stateChanged) return handleNewState();
-        return mergedProps;
-    }
-    return function pureFinalPropsSelector(nextState, nextOwnProps) {
-        return hasRunAtLeastOnce ? handleSubsequentCalls(nextState, nextOwnProps) : handleFirstCall(nextState, nextOwnProps);
-    };
-}
-function finalPropsSelectorFactory(dispatch, _a) {
-    var _b = _a, { initMapStateToProps, initMapDispatchToProps, initMergeProps } = _b, options = __objRest(_b, [
-        "initMapStateToProps",
-        "initMapDispatchToProps",
-        "initMergeProps"
-    ]);
-    const mapStateToProps = initMapStateToProps(dispatch, options);
-    const mapDispatchToProps = initMapDispatchToProps(dispatch, options);
-    const mergeProps = initMergeProps(dispatch, options);
-    verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps);
-    return pureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, options);
-}
-// src/utils/bindActionCreators.ts
-function bindActionCreators(actionCreators, dispatch) {
-    const boundActionCreators = {};
-    for(const key in actionCreators){
-        const actionCreator = actionCreators[key];
-        if (typeof actionCreator === "function") boundActionCreators[key] = (...args)=>dispatch(actionCreator(...args));
-    }
-    return boundActionCreators;
-}
-// src/utils/isPlainObject.ts
-function isPlainObject(obj) {
-    if (typeof obj !== "object" || obj === null) return false;
-    const proto = Object.getPrototypeOf(obj);
-    if (proto === null) return true;
-    let baseProto = proto;
-    while(Object.getPrototypeOf(baseProto) !== null)baseProto = Object.getPrototypeOf(baseProto);
-    return proto === baseProto;
-}
-// src/utils/verifyPlainObject.ts
-function verifyPlainObject(value, displayName, methodName) {
-    if (!isPlainObject(value)) warning(`${methodName}() in ${displayName} must return a plain object. Instead received ${value}.`);
-}
-// src/connect/wrapMapToProps.ts
-function wrapMapToPropsConstant(getConstant) {
-    return function initConstantSelector(dispatch) {
-        const constant = getConstant(dispatch);
-        function constantSelector() {
-            return constant;
-        }
-        constantSelector.dependsOnOwnProps = false;
-        return constantSelector;
-    };
-}
-function getDependsOnOwnProps(mapToProps) {
-    return mapToProps.dependsOnOwnProps ? Boolean(mapToProps.dependsOnOwnProps) : mapToProps.length !== 1;
-}
-function wrapMapToPropsFunc(mapToProps, methodName) {
-    return function initProxySelector(dispatch, { displayName }) {
-        const proxy = function mapToPropsProxy(stateOrDispatch, ownProps) {
-            return proxy.dependsOnOwnProps ? proxy.mapToProps(stateOrDispatch, ownProps) : proxy.mapToProps(stateOrDispatch, void 0);
-        };
-        proxy.dependsOnOwnProps = true;
-        proxy.mapToProps = function detectFactoryAndVerify(stateOrDispatch, ownProps) {
-            proxy.mapToProps = mapToProps;
-            proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps);
-            let props = proxy(stateOrDispatch, ownProps);
-            if (typeof props === "function") {
-                proxy.mapToProps = props;
-                proxy.dependsOnOwnProps = getDependsOnOwnProps(props);
-                props = proxy(stateOrDispatch, ownProps);
-            }
-            verifyPlainObject(props, displayName, methodName);
-            return props;
-        };
-        return proxy;
-    };
-}
-// src/connect/invalidArgFactory.ts
-function createInvalidArgFactory(arg, name) {
-    return (dispatch, options)=>{
-        throw new Error(`Invalid value of type ${typeof arg} for ${name} argument when connecting component ${options.wrappedComponentName}.`);
-    };
-}
-// src/connect/mapDispatchToProps.ts
-function mapDispatchToPropsFactory(mapDispatchToProps) {
-    return mapDispatchToProps && typeof mapDispatchToProps === "object" ? wrapMapToPropsConstant((dispatch)=>// @ts-ignore
-        bindActionCreators(mapDispatchToProps, dispatch)) : !mapDispatchToProps ? wrapMapToPropsConstant((dispatch)=>({
-            dispatch
-        })) : typeof mapDispatchToProps === "function" ? // @ts-ignore
-    wrapMapToPropsFunc(mapDispatchToProps, "mapDispatchToProps") : createInvalidArgFactory(mapDispatchToProps, "mapDispatchToProps");
-}
-// src/connect/mapStateToProps.ts
-function mapStateToPropsFactory(mapStateToProps) {
-    return !mapStateToProps ? wrapMapToPropsConstant(()=>({})) : typeof mapStateToProps === "function" ? // @ts-ignore
-    wrapMapToPropsFunc(mapStateToProps, "mapStateToProps") : createInvalidArgFactory(mapStateToProps, "mapStateToProps");
-}
-// src/connect/mergeProps.ts
-function defaultMergeProps(stateProps, dispatchProps, ownProps) {
-    return __spreadValues(__spreadValues(__spreadValues({}, ownProps), stateProps), dispatchProps);
-}
-function wrapMergePropsFunc(mergeProps) {
-    return function initMergePropsProxy(dispatch, { displayName, areMergedPropsEqual }) {
-        let hasRunOnce = false;
-        let mergedProps;
-        return function mergePropsProxy(stateProps, dispatchProps, ownProps) {
-            const nextMergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-            if (hasRunOnce) {
-                if (!areMergedPropsEqual(nextMergedProps, mergedProps)) mergedProps = nextMergedProps;
-            } else {
-                hasRunOnce = true;
-                mergedProps = nextMergedProps;
-                verifyPlainObject(mergedProps, displayName, "mergeProps");
-            }
-            return mergedProps;
-        };
-    };
-}
-function mergePropsFactory(mergeProps) {
-    return !mergeProps ? ()=>defaultMergeProps : typeof mergeProps === "function" ? wrapMergePropsFunc(mergeProps) : createInvalidArgFactory(mergeProps, "mergeProps");
-}
-// src/utils/batch.ts
-function defaultNoopBatch(callback) {
-    callback();
-}
-// src/utils/Subscription.ts
-function createListenerCollection() {
-    let first = null;
-    let last = null;
-    return {
-        clear () {
-            first = null;
-            last = null;
+parcelHelpers.export(exports, "setMovies", ()=>setMovies);
+parcelHelpers.export(exports, "setFilter", ()=>setFilter);
+var _toolkit = require("@reduxjs/toolkit");
+const moviesSlice = (0, _toolkit.createSlice)({
+    name: "movies",
+    initialState: {
+        list: [],
+        filter: ""
+    },
+    reducers: {
+        setMovies: (state, action)=>{
+            state.list = action.payload;
+            console.log("REDUCER|movies.js|setMovies() to:", action.payload);
         },
-        notify () {
-            defaultNoopBatch(()=>{
-                let listener = first;
-                while(listener){
-                    listener.callback();
-                    listener = listener.next;
-                }
-            });
-        },
-        get () {
-            const listeners = [];
-            let listener = first;
-            while(listener){
-                listeners.push(listener);
-                listener = listener.next;
-            }
-            return listeners;
-        },
-        subscribe (callback) {
-            let isSubscribed = true;
-            const listener = last = {
-                callback,
-                next: null,
-                prev: last
-            };
-            if (listener.prev) listener.prev.next = listener;
-            else first = listener;
-            return function unsubscribe() {
-                if (!isSubscribed || first === null) return;
-                isSubscribed = false;
-                if (listener.next) listener.next.prev = listener.prev;
-                else last = listener.prev;
-                if (listener.prev) listener.prev.next = listener.next;
-                else first = listener.next;
-            };
-        }
-    };
-}
-var nullListeners = {
-    notify () {},
-    get: ()=>[]
-};
-function createSubscription(store, parentSub) {
-    let unsubscribe;
-    let listeners = nullListeners;
-    let subscriptionsAmount = 0;
-    let selfSubscribed = false;
-    function addNestedSub(listener) {
-        trySubscribe();
-        const cleanupListener = listeners.subscribe(listener);
-        let removed = false;
-        return ()=>{
-            if (!removed) {
-                removed = true;
-                cleanupListener();
-                tryUnsubscribe();
-            }
-        };
-    }
-    function notifyNestedSubs() {
-        listeners.notify();
-    }
-    function handleChangeWrapper() {
-        if (subscription.onStateChange) subscription.onStateChange();
-    }
-    function isSubscribed() {
-        return selfSubscribed;
-    }
-    function trySubscribe() {
-        subscriptionsAmount++;
-        if (!unsubscribe) {
-            unsubscribe = parentSub ? parentSub.addNestedSub(handleChangeWrapper) : store.subscribe(handleChangeWrapper);
-            listeners = createListenerCollection();
+        setFilter: (state, action)=>{
+            state.filter = action.payload;
+            console.log("REDUCER|movies.js|setFilter() to:", action.payload);
         }
     }
-    function tryUnsubscribe() {
-        subscriptionsAmount--;
-        if (unsubscribe && subscriptionsAmount === 0) {
-            unsubscribe();
-            unsubscribe = void 0;
-            listeners.clear();
-            listeners = nullListeners;
-        }
-    }
-    function trySubscribeSelf() {
-        if (!selfSubscribed) {
-            selfSubscribed = true;
-            trySubscribe();
-        }
-    }
-    function tryUnsubscribeSelf() {
-        if (selfSubscribed) {
-            selfSubscribed = false;
-            tryUnsubscribe();
-        }
-    }
-    const subscription = {
-        addNestedSub,
-        notifyNestedSubs,
-        handleChangeWrapper,
-        isSubscribed,
-        trySubscribe: trySubscribeSelf,
-        tryUnsubscribe: tryUnsubscribeSelf,
-        getListeners: ()=>listeners
-    };
-    return subscription;
-}
-// src/utils/useIsomorphicLayoutEffect.ts
-var canUseDOM = ()=>!!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
-var isDOM = /* @__PURE__ */ canUseDOM();
-var isRunningInReactNative = ()=>typeof navigator !== "undefined" && navigator.product === "ReactNative";
-var isReactNative = /* @__PURE__ */ isRunningInReactNative();
-var getUseIsomorphicLayoutEffect = ()=>isDOM || isReactNative ? _react.useLayoutEffect : _react.useEffect;
-var useIsomorphicLayoutEffect = /* @__PURE__ */ getUseIsomorphicLayoutEffect();
-// src/utils/shallowEqual.ts
-function is(x, y) {
-    if (x === y) return x !== 0 || y !== 0 || 1 / x === 1 / y;
-    else return x !== x && y !== y;
-}
-function shallowEqual(objA, objB) {
-    if (is(objA, objB)) return true;
-    if (typeof objA !== "object" || objA === null || typeof objB !== "object" || objB === null) return false;
-    const keysA = Object.keys(objA);
-    const keysB = Object.keys(objB);
-    if (keysA.length !== keysB.length) return false;
-    for(let i = 0; i < keysA.length; i++){
-        if (!Object.prototype.hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) return false;
-    }
-    return true;
-}
-// src/utils/hoistStatics.ts
-var REACT_STATICS = {
-    childContextTypes: true,
-    contextType: true,
-    contextTypes: true,
-    defaultProps: true,
-    displayName: true,
-    getDefaultProps: true,
-    getDerivedStateFromError: true,
-    getDerivedStateFromProps: true,
-    mixins: true,
-    propTypes: true,
-    type: true
-};
-var KNOWN_STATICS = {
-    name: true,
-    length: true,
-    prototype: true,
-    caller: true,
-    callee: true,
-    arguments: true,
-    arity: true
-};
-var FORWARD_REF_STATICS = {
-    $$typeof: true,
-    render: true,
-    defaultProps: true,
-    displayName: true,
-    propTypes: true
-};
-var MEMO_STATICS = {
-    $$typeof: true,
-    compare: true,
-    defaultProps: true,
-    displayName: true,
-    propTypes: true,
-    type: true
-};
-var TYPE_STATICS = {
-    [ForwardRef]: FORWARD_REF_STATICS,
-    [Memo]: MEMO_STATICS
-};
-function getStatics(component) {
-    if (isMemo(component)) return MEMO_STATICS;
-    return TYPE_STATICS[component["$$typeof"]] || REACT_STATICS;
-}
-var defineProperty = Object.defineProperty;
-var getOwnPropertyNames = Object.getOwnPropertyNames;
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-var getPrototypeOf = Object.getPrototypeOf;
-var objectPrototype = Object.prototype;
-function hoistNonReactStatics(targetComponent, sourceComponent) {
-    if (typeof sourceComponent !== "string") {
-        if (objectPrototype) {
-            const inheritedComponent = getPrototypeOf(sourceComponent);
-            if (inheritedComponent && inheritedComponent !== objectPrototype) hoistNonReactStatics(targetComponent, inheritedComponent);
-        }
-        let keys = getOwnPropertyNames(sourceComponent);
-        if (getOwnPropertySymbols) keys = keys.concat(getOwnPropertySymbols(sourceComponent));
-        const targetStatics = getStatics(targetComponent);
-        const sourceStatics = getStatics(sourceComponent);
-        for(let i = 0; i < keys.length; ++i){
-            const key = keys[i];
-            if (!KNOWN_STATICS[key] && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
-                const descriptor = getOwnPropertyDescriptor(sourceComponent, key);
-                try {
-                    defineProperty(targetComponent, key, descriptor);
-                } catch (e) {}
-            }
-        }
-    }
-    return targetComponent;
-}
-// src/components/Context.ts
-var ContextKey = /* @__PURE__ */ Symbol.for(`react-redux-context`);
-var gT = typeof globalThis !== "undefined" ? globalThis : /* fall back to a per-module scope (pre-8.1 behaviour) if `globalThis` is not available */ {};
-function getContext() {
-    var _a;
-    if (!_react.createContext) return {};
-    const contextMap = (_a = gT[ContextKey]) != null ? _a : gT[ContextKey] = /* @__PURE__ */ new Map();
-    let realContext = contextMap.get(_react.createContext);
-    if (!realContext) {
-        realContext = _react.createContext(null);
-        realContext.displayName = "ReactRedux";
-        contextMap.set(_react.createContext, realContext);
-    }
-    return realContext;
-}
-var ReactReduxContext = /* @__PURE__ */ getContext();
-// src/components/connect.tsx
-var NO_SUBSCRIPTION_ARRAY = [
-    null,
-    null
-];
-var stringifyComponent = (Comp)=>{
-    try {
-        return JSON.stringify(Comp);
-    } catch (err) {
-        return String(Comp);
-    }
-};
-function useIsomorphicLayoutEffectWithArgs(effectFunc, effectArgs, dependencies) {
-    useIsomorphicLayoutEffect(()=>effectFunc(...effectArgs), dependencies);
-}
-function captureWrapperProps(lastWrapperProps, lastChildProps, renderIsScheduled, wrapperProps, childPropsFromStoreUpdate, notifyNestedSubs) {
-    lastWrapperProps.current = wrapperProps;
-    renderIsScheduled.current = false;
-    if (childPropsFromStoreUpdate.current) {
-        childPropsFromStoreUpdate.current = null;
-        notifyNestedSubs();
-    }
-}
-function subscribeUpdates(shouldHandleStateChanges, store, subscription, childPropsSelector, lastWrapperProps, lastChildProps, renderIsScheduled, isMounted, childPropsFromStoreUpdate, notifyNestedSubs, additionalSubscribeListener) {
-    if (!shouldHandleStateChanges) return ()=>{};
-    let didUnsubscribe = false;
-    let lastThrownError = null;
-    const checkForUpdates = ()=>{
-        if (didUnsubscribe || !isMounted.current) return;
-        const latestStoreState = store.getState();
-        let newChildProps, error;
-        try {
-            newChildProps = childPropsSelector(latestStoreState, lastWrapperProps.current);
-        } catch (e) {
-            error = e;
-            lastThrownError = e;
-        }
-        if (!error) lastThrownError = null;
-        if (newChildProps === lastChildProps.current) {
-            if (!renderIsScheduled.current) notifyNestedSubs();
-        } else {
-            lastChildProps.current = newChildProps;
-            childPropsFromStoreUpdate.current = newChildProps;
-            renderIsScheduled.current = true;
-            additionalSubscribeListener();
-        }
-    };
-    subscription.onStateChange = checkForUpdates;
-    subscription.trySubscribe();
-    checkForUpdates();
-    const unsubscribeWrapper = ()=>{
-        didUnsubscribe = true;
-        subscription.tryUnsubscribe();
-        subscription.onStateChange = null;
-        if (lastThrownError) throw lastThrownError;
-    };
-    return unsubscribeWrapper;
-}
-function strictEqual(a, b) {
-    return a === b;
-}
-var hasWarnedAboutDeprecatedPureOption = false;
-function connect(mapStateToProps, mapDispatchToProps, mergeProps, { // The `pure` option has been removed, so TS doesn't like us destructuring this to check its existence.
-// @ts-ignore
-pure, areStatesEqual = strictEqual, areOwnPropsEqual = shallowEqual, areStatePropsEqual = shallowEqual, areMergedPropsEqual = shallowEqual, // use React's forwardRef to expose a ref of the wrapped component
-forwardRef = false, // the context consumer to use
-context = ReactReduxContext } = {}) {
-    if (pure !== void 0 && !hasWarnedAboutDeprecatedPureOption) {
-        hasWarnedAboutDeprecatedPureOption = true;
-        warning('The `pure` option has been removed. `connect` is now always a "pure/memoized" component');
-    }
-    const Context = context;
-    const initMapStateToProps = mapStateToPropsFactory(mapStateToProps);
-    const initMapDispatchToProps = mapDispatchToPropsFactory(mapDispatchToProps);
-    const initMergeProps = mergePropsFactory(mergeProps);
-    const shouldHandleStateChanges = Boolean(mapStateToProps);
-    const wrapWithConnect = (WrappedComponent)=>{
-        {
-            const isValid = /* @__PURE__ */ isValidElementType(WrappedComponent);
-            if (!isValid) throw new Error(`You must pass a component to the function returned by connect. Instead received ${stringifyComponent(WrappedComponent)}`);
-        }
-        const wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || "Component";
-        const displayName = `Connect(${wrappedComponentName})`;
-        const selectorFactoryOptions = {
-            shouldHandleStateChanges,
-            displayName,
-            wrappedComponentName,
-            WrappedComponent,
-            // @ts-ignore
-            initMapStateToProps,
-            initMapDispatchToProps,
-            initMergeProps,
-            areStatesEqual,
-            areStatePropsEqual,
-            areOwnPropsEqual,
-            areMergedPropsEqual
-        };
-        function ConnectFunction(props) {
-            const [propsContext, reactReduxForwardedRef, wrapperProps] = _react.useMemo(()=>{
-                const _a = props, { reactReduxForwardedRef: reactReduxForwardedRef2 } = _a, wrapperProps2 = __objRest(_a, [
-                    "reactReduxForwardedRef"
-                ]);
-                return [
-                    props.context,
-                    reactReduxForwardedRef2,
-                    wrapperProps2
-                ];
-            }, [
-                props
-            ]);
-            const ContextToUse = _react.useMemo(()=>{
-                let ResultContext = Context;
-                if (propsContext == null ? void 0 : propsContext.Consumer) {
-                    const isValid = /* @__PURE__ */ isContextConsumer(// @ts-ignore
-                    /* @__PURE__ */ _react.createElement(propsContext.Consumer, null));
-                    if (!isValid) throw new Error("You must pass a valid React context consumer as `props.context`");
-                    ResultContext = propsContext;
-                }
-                return ResultContext;
-            }, [
-                propsContext,
-                Context
-            ]);
-            const contextValue = _react.useContext(ContextToUse);
-            const didStoreComeFromProps = Boolean(props.store) && Boolean(props.store.getState) && Boolean(props.store.dispatch);
-            const didStoreComeFromContext = Boolean(contextValue) && Boolean(contextValue.store);
-            if (!didStoreComeFromProps && !didStoreComeFromContext) throw new Error(`Could not find "store" in the context of "${displayName}". Either wrap the root component in a <Provider>, or pass a custom React context provider to <Provider> and the corresponding React context consumer to ${displayName} in connect options.`);
-            const store = didStoreComeFromProps ? props.store : contextValue.store;
-            const getServerState = didStoreComeFromContext ? contextValue.getServerState : store.getState;
-            const childPropsSelector = _react.useMemo(()=>{
-                return finalPropsSelectorFactory(store.dispatch, selectorFactoryOptions);
-            }, [
-                store
-            ]);
-            const [subscription, notifyNestedSubs] = _react.useMemo(()=>{
-                if (!shouldHandleStateChanges) return NO_SUBSCRIPTION_ARRAY;
-                const subscription2 = createSubscription(store, didStoreComeFromProps ? void 0 : contextValue.subscription);
-                const notifyNestedSubs2 = subscription2.notifyNestedSubs.bind(subscription2);
-                return [
-                    subscription2,
-                    notifyNestedSubs2
-                ];
-            }, [
-                store,
-                didStoreComeFromProps,
-                contextValue
-            ]);
-            const overriddenContextValue = _react.useMemo(()=>{
-                if (didStoreComeFromProps) return contextValue;
-                return __spreadProps(__spreadValues({}, contextValue), {
-                    subscription
-                });
-            }, [
-                didStoreComeFromProps,
-                contextValue,
-                subscription
-            ]);
-            const lastChildProps = _react.useRef(void 0);
-            const lastWrapperProps = _react.useRef(wrapperProps);
-            const childPropsFromStoreUpdate = _react.useRef(void 0);
-            const renderIsScheduled = _react.useRef(false);
-            const isMounted = _react.useRef(false);
-            const latestSubscriptionCallbackError = _react.useRef(void 0);
-            useIsomorphicLayoutEffect(()=>{
-                isMounted.current = true;
-                return ()=>{
-                    isMounted.current = false;
-                };
-            }, []);
-            const actualChildPropsSelector = _react.useMemo(()=>{
-                const selector = ()=>{
-                    if (childPropsFromStoreUpdate.current && wrapperProps === lastWrapperProps.current) return childPropsFromStoreUpdate.current;
-                    return childPropsSelector(store.getState(), wrapperProps);
-                };
-                return selector;
-            }, [
-                store,
-                wrapperProps
-            ]);
-            const subscribeForReact = _react.useMemo(()=>{
-                const subscribe = (reactListener)=>{
-                    if (!subscription) return ()=>{};
-                    return subscribeUpdates(shouldHandleStateChanges, store, subscription, // @ts-ignore
-                    childPropsSelector, lastWrapperProps, lastChildProps, renderIsScheduled, isMounted, childPropsFromStoreUpdate, notifyNestedSubs, reactListener);
-                };
-                return subscribe;
-            }, [
-                subscription
-            ]);
-            useIsomorphicLayoutEffectWithArgs(captureWrapperProps, [
-                lastWrapperProps,
-                lastChildProps,
-                renderIsScheduled,
-                wrapperProps,
-                childPropsFromStoreUpdate,
-                notifyNestedSubs
-            ]);
-            let actualChildProps;
-            try {
-                actualChildProps = _react.useSyncExternalStore(// TODO We're passing through a big wrapper that does a bunch of extra side effects besides subscribing
-                subscribeForReact, // TODO This is incredibly hacky. We've already processed the store update and calculated new child props,
-                // TODO and we're just passing that through so it triggers a re-render for us rather than relying on `uSES`.
-                actualChildPropsSelector, getServerState ? ()=>childPropsSelector(getServerState(), wrapperProps) : actualChildPropsSelector);
-            } catch (err) {
-                if (latestSubscriptionCallbackError.current) err.message += `
-The error may be correlated with this previous error:
-${latestSubscriptionCallbackError.current.stack}
+});
+const { setMovies, setFilter } = moviesSlice.actions;
+exports.default = moviesSlice.reducer;
 
-`;
-                throw err;
-            }
-            useIsomorphicLayoutEffect(()=>{
-                latestSubscriptionCallbackError.current = void 0;
-                childPropsFromStoreUpdate.current = void 0;
-                lastChildProps.current = actualChildProps;
-            });
-            const renderedWrappedComponent = _react.useMemo(()=>{
-                return(// @ts-ignore
-                /* @__PURE__ */ _react.createElement(WrappedComponent, __spreadProps(__spreadValues({}, actualChildProps), {
-                    ref: reactReduxForwardedRef
-                })));
-            }, [
-                reactReduxForwardedRef,
-                WrappedComponent,
-                actualChildProps
-            ]);
-            const renderedChild = _react.useMemo(()=>{
-                if (shouldHandleStateChanges) return /* @__PURE__ */ _react.createElement(ContextToUse.Provider, {
-                    value: overriddenContextValue
-                }, renderedWrappedComponent);
-                return renderedWrappedComponent;
-            }, [
-                ContextToUse,
-                renderedWrappedComponent,
-                overriddenContextValue
-            ]);
-            return renderedChild;
-        }
-        const _Connect = _react.memo(ConnectFunction);
-        const Connect = _Connect;
-        Connect.WrappedComponent = WrappedComponent;
-        Connect.displayName = ConnectFunction.displayName = displayName;
-        if (forwardRef) {
-            const _forwarded = _react.forwardRef(function forwardConnectRef(props, ref) {
-                return /* @__PURE__ */ _react.createElement(Connect, __spreadProps(__spreadValues({}, props), {
-                    reactReduxForwardedRef: ref
-                }));
-            });
-            const forwarded = _forwarded;
-            forwarded.displayName = displayName;
-            forwarded.WrappedComponent = WrappedComponent;
-            return /* @__PURE__ */ hoistNonReactStatics(forwarded, WrappedComponent);
-        }
-        return /* @__PURE__ */ hoistNonReactStatics(Connect, WrappedComponent);
-    };
-    return wrapWithConnect;
-}
-var connect_default = connect;
-// src/components/Provider.tsx
-function Provider(providerProps) {
-    const { children, context, serverState, store } = providerProps;
-    const contextValue = _react.useMemo(()=>{
-        const subscription = createSubscription(store);
-        const baseContextValue = {
-            store,
-            subscription,
-            getServerState: serverState ? ()=>serverState : void 0
-        };
-        {
-            const { identityFunctionCheck = "once", stabilityCheck = "once" } = providerProps;
-            return /* @__PURE__ */ Object.assign(baseContextValue, {
-                stabilityCheck,
-                identityFunctionCheck
-            });
-        }
-    }, [
-        store,
-        serverState
-    ]);
-    const previousState = _react.useMemo(()=>store.getState(), [
-        store
-    ]);
-    useIsomorphicLayoutEffect(()=>{
-        const { subscription } = contextValue;
-        subscription.onStateChange = subscription.notifyNestedSubs;
-        subscription.trySubscribe();
-        if (previousState !== store.getState()) subscription.notifyNestedSubs();
-        return ()=>{
-            subscription.tryUnsubscribe();
-            subscription.onStateChange = void 0;
-        };
-    }, [
-        contextValue,
-        previousState
-    ]);
-    const Context = context || ReactReduxContext;
-    return /* @__PURE__ */ _react.createElement(Context.Provider, {
-        value: contextValue
-    }, children);
-}
-var Provider_default = Provider;
-// src/hooks/useReduxContext.ts
-function createReduxContextHook(context = ReactReduxContext) {
-    return function useReduxContext2() {
-        const contextValue = _react.useContext(context);
-        if (!contextValue) throw new Error("could not find react-redux context value; please ensure the component is wrapped in a <Provider>");
-        return contextValue;
-    };
-}
-var useReduxContext = /* @__PURE__ */ createReduxContextHook();
-// src/hooks/useStore.ts
-function createStoreHook(context = ReactReduxContext) {
-    const useReduxContext2 = context === ReactReduxContext ? useReduxContext : // @ts-ignore
-    createReduxContextHook(context);
-    const useStore2 = ()=>{
-        const { store } = useReduxContext2();
-        return store;
-    };
-    Object.assign(useStore2, {
-        withTypes: ()=>useStore2
-    });
-    return useStore2;
-}
-var useStore = /* @__PURE__ */ createStoreHook();
-// src/hooks/useDispatch.ts
-function createDispatchHook(context = ReactReduxContext) {
-    const useStore2 = context === ReactReduxContext ? useStore : createStoreHook(context);
-    const useDispatch2 = ()=>{
-        const store = useStore2();
-        return store.dispatch;
-    };
-    Object.assign(useDispatch2, {
-        withTypes: ()=>useDispatch2
-    });
-    return useDispatch2;
-}
-var useDispatch = /* @__PURE__ */ createDispatchHook();
-var refEquality = (a, b)=>a === b;
-function createSelectorHook(context = ReactReduxContext) {
-    const useReduxContext2 = context === ReactReduxContext ? useReduxContext : createReduxContextHook(context);
-    const useSelector2 = (selector, equalityFnOrOptions = {})=>{
-        const { equalityFn = refEquality } = typeof equalityFnOrOptions === "function" ? {
-            equalityFn: equalityFnOrOptions
-        } : equalityFnOrOptions;
-        if (!selector) throw new Error(`You must pass a selector to useSelector`);
-        if (typeof selector !== "function") throw new Error(`You must pass a function as a selector to useSelector`);
-        if (typeof equalityFn !== "function") throw new Error(`You must pass a function as an equality function to useSelector`);
-        const reduxContext = useReduxContext2();
-        const { store, subscription, getServerState } = reduxContext;
-        const firstRun = _react.useRef(true);
-        const wrappedSelector = _react.useCallback({
-            [selector.name] (state) {
-                const selected = selector(state);
-                {
-                    const { devModeChecks = {} } = typeof equalityFnOrOptions === "function" ? {} : equalityFnOrOptions;
-                    const { identityFunctionCheck, stabilityCheck } = reduxContext;
-                    const { identityFunctionCheck: finalIdentityFunctionCheck, stabilityCheck: finalStabilityCheck } = __spreadValues({
-                        stabilityCheck,
-                        identityFunctionCheck
-                    }, devModeChecks);
-                    if (finalStabilityCheck === "always" || finalStabilityCheck === "once" && firstRun.current) {
-                        const toCompare = selector(state);
-                        if (!equalityFn(selected, toCompare)) {
-                            let stack = void 0;
-                            try {
-                                throw new Error();
-                            } catch (e) {
-                                ({ stack } = e);
-                            }
-                            console.warn("Selector " + (selector.name || "unknown") + " returned a different result when called with the same parameters. This can lead to unnecessary rerenders.\nSelectors that return a new reference (such as an object or an array) should be memoized: https://redux.js.org/usage/deriving-data-selectors#optimizing-selectors-with-memoization", {
-                                state,
-                                selected,
-                                selected2: toCompare,
-                                stack
-                            });
-                        }
-                    }
-                    if (finalIdentityFunctionCheck === "always" || finalIdentityFunctionCheck === "once" && firstRun.current) {
-                        if (selected === state) {
-                            let stack = void 0;
-                            try {
-                                throw new Error();
-                            } catch (e) {
-                                ({ stack } = e);
-                            }
-                            console.warn("Selector " + (selector.name || "unknown") + " returned the root state when called. This can lead to unnecessary rerenders.\nSelectors that return the entire state are almost certainly a mistake, as they will cause a rerender whenever *anything* in state changes.", {
-                                stack
-                            });
-                        }
-                    }
-                    if (firstRun.current) firstRun.current = false;
-                }
-                return selected;
-            }
-        }[selector.name], [
-            selector
-        ]);
-        const selectedState = (0, _withSelectorJs.useSyncExternalStoreWithSelector)(subscription.addNestedSub, store.getState, getServerState || store.getState, wrappedSelector, equalityFn);
-        _react.useDebugValue(selectedState);
-        return selectedState;
-    };
-    Object.assign(useSelector2, {
-        withTypes: ()=>useSelector2
-    });
-    return useSelector2;
-}
-var useSelector = /* @__PURE__ */ createSelectorHook();
-// src/exports.ts
-var batch = defaultNoopBatch;
-
-},{"react":"21dqq","use-sync-external-store/with-selector.js":"3eYnG","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS"}],"3eYnG":[function(require,module,exports,__globalThis) {
-'use strict';
-module.exports = require("374a059340689e89");
-
-},{"374a059340689e89":"1Ag9Q"}],"1Ag9Q":[function(require,module,exports,__globalThis) {
-/**
- * @license React
- * use-sync-external-store-with-selector.development.js
- *
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */ "use strict";
-(function() {
-    function is(x, y) {
-        return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
-    }
-    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-    var React = require("8b38fc6c74f16e20"), objectIs = "function" === typeof Object.is ? Object.is : is, useSyncExternalStore = React.useSyncExternalStore, useRef = React.useRef, useEffect = React.useEffect, useMemo = React.useMemo, useDebugValue = React.useDebugValue;
-    exports.useSyncExternalStoreWithSelector = function(subscribe, getSnapshot, getServerSnapshot, selector, isEqual) {
-        var instRef = useRef(null);
-        if (null === instRef.current) {
-            var inst = {
-                hasValue: !1,
-                value: null
-            };
-            instRef.current = inst;
-        } else inst = instRef.current;
-        instRef = useMemo(function() {
-            function memoizedSelector(nextSnapshot) {
-                if (!hasMemo) {
-                    hasMemo = !0;
-                    memoizedSnapshot = nextSnapshot;
-                    nextSnapshot = selector(nextSnapshot);
-                    if (void 0 !== isEqual && inst.hasValue) {
-                        var currentSelection = inst.value;
-                        if (isEqual(currentSelection, nextSnapshot)) return memoizedSelection = currentSelection;
-                    }
-                    return memoizedSelection = nextSnapshot;
-                }
-                currentSelection = memoizedSelection;
-                if (objectIs(memoizedSnapshot, nextSnapshot)) return currentSelection;
-                var nextSelection = selector(nextSnapshot);
-                if (void 0 !== isEqual && isEqual(currentSelection, nextSelection)) return memoizedSnapshot = nextSnapshot, currentSelection;
-                memoizedSnapshot = nextSnapshot;
-                return memoizedSelection = nextSelection;
-            }
-            var hasMemo = !1, memoizedSnapshot, memoizedSelection, maybeGetServerSnapshot = void 0 === getServerSnapshot ? null : getServerSnapshot;
-            return [
-                function() {
-                    return memoizedSelector(getSnapshot());
-                },
-                null === maybeGetServerSnapshot ? void 0 : function() {
-                    return memoizedSelector(maybeGetServerSnapshot());
-                }
-            ];
-        }, [
-            getSnapshot,
-            getServerSnapshot,
-            selector,
-            isEqual
-        ]);
-        var value = useSyncExternalStore(subscribe, instRef[0], instRef[1]);
-        useEffect(function() {
-            inst.hasValue = !0;
-            inst.value = value;
-        }, [
-            value
-        ]);
-        useDebugValue(value);
-        return value;
-    };
-    "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
-})();
-
-},{"8b38fc6c74f16e20":"21dqq"}],"4OGiN":[function(require,module,exports,__globalThis) {
+},{"@reduxjs/toolkit":"fuua8","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS"}],"4OGiN":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$73d1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -40910,7 +40954,12 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "ProfileView", ()=>ProfileView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _propTypes = require("prop-types");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRedux = require("react-redux");
+var _user = require("../../redux/reducers/user");
+var _token = require("../../redux/reducers/token");
+var _movies = require("../../redux/reducers/movies");
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
@@ -40922,6 +40971,7 @@ var _favoriteMoviesView = require("./favorite-movies-view");
 //Image imports - Matinee images created using www.recraft.ai and are owned by Recraft.
 var _matinee4TransparentPng = require("../../img/matinee4-transparent.png");
 var _matinee4TransparentPngDefault = parcelHelpers.interopDefault(_matinee4TransparentPng);
+var _s = $RefreshSig$();
 const DELETE_USER_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/users";
 //Increase to 1px to add debug borders
 const debugBorder = "0px solid blue";
@@ -40935,8 +40985,21 @@ const debugBorder = "0px solid blue";
     if (dateParts.length !== 3) return "Invalid date";
     else return dateParts[1] + "/" + dateParts[2] + "/" + dateParts[0];
 }
-const ProfileView = ({ user, setUser, movies, token, onLoggedOut })=>{
+const ProfileView = ()=>{
+    _s();
     console.log("profile-view.jsx | Starting");
+    const user = (0, _reactRedux.useSelector)((state)=>state.user);
+    const token = (0, _reactRedux.useSelector)((state)=>state.token);
+    const movies = (0, _reactRedux.useSelector)((state)=>state.movies.list);
+    const dispatch = (0, _reactRedux.useDispatch)();
+    const onLoggedOut = ()=>{
+        localStorage.clear();
+        console.log("profile-view.jsx|dispatch(setUser(null))...");
+        dispatch((0, _user.setUser)(null));
+        console.log("profile-view.jsx|dispatch(setToken(null))...");
+        dispatch((0, _token.setToken)(null));
+        console.log("profile-view.jsx|Logout complete.");
+    };
     //Handles account removal with user confirmation required before DELETE call
     const handleDeleteAcct = ()=>{
         const confirmDelete = window.confirm("Are you sure you want to delete your account? This cannot be undone. Click OK to delete your account.");
@@ -40959,6 +41022,11 @@ const ProfileView = ({ user, setUser, movies, token, onLoggedOut })=>{
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'instant'
+            }),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
                 className: "d-flex justify-content-center mt-2",
                 style: {
@@ -40984,7 +41052,7 @@ const ProfileView = ({ user, setUser, movies, token, onLoggedOut })=>{
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 68,
+                                    lineNumber: 87,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -40994,7 +41062,7 @@ const ProfileView = ({ user, setUser, movies, token, onLoggedOut })=>{
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 69,
+                                    lineNumber: 88,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -41004,18 +41072,18 @@ const ProfileView = ({ user, setUser, movies, token, onLoggedOut })=>{
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 70,
+                                    lineNumber: 89,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 67,
+                            lineNumber: 86,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 66,
+                        lineNumber: 85,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -41028,18 +41096,18 @@ const ProfileView = ({ user, setUser, movies, token, onLoggedOut })=>{
                             children: "Delete Account"
                         }, void 0, false, {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 75,
+                            lineNumber: 94,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 74,
+                        lineNumber: 93,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 65,
+                lineNumber: 84,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -41054,25 +41122,19 @@ const ProfileView = ({ user, setUser, movies, token, onLoggedOut })=>{
                     style: {
                         border: debugBorder
                     },
-                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _updateUser.UpdateUser), {
-                        user: user,
-                        token: token,
-                        onUpdatedUser: (updatedUser)=>{
-                            setUser(updatedUser);
-                        }
-                    }, void 0, false, {
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _updateUser.UpdateUser), {}, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 83,
+                        lineNumber: 102,
                         columnNumber: 11
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 82,
+                    lineNumber: 101,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 81,
+                lineNumber: 100,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -41087,17 +41149,17 @@ const ProfileView = ({ user, setUser, movies, token, onLoggedOut })=>{
                         alt: "Image created using www.recraft.ai and is owned by Recraft."
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 91,
+                        lineNumber: 108,
                         columnNumber: 11
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 90,
+                    lineNumber: 107,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 89,
+                lineNumber: 106,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h5", {
@@ -41107,73 +41169,51 @@ const ProfileView = ({ user, setUser, movies, token, onLoggedOut })=>{
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 95,
+                lineNumber: 112,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 96,
+                lineNumber: 113,
                 columnNumber: 7
             }, undefined),
             user.FavoriteMovies.length !== 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favoriteMoviesView.FavoriteMoviesView), {
                         user: user,
-                        setUser: setUser,
+                        setUser: (0, _user.setUser),
                         movies: movies,
                         token: token,
                         favoritesIdArray: user.FavoriteMovies
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 100,
+                        lineNumber: 117,
                         columnNumber: 13
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 99,
+                    lineNumber: 116,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: "No movies added to favorites"
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 104,
+                lineNumber: 121,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true);
 };
+_s(ProfileView, "jah7uczrMPDfomHfgf8QxLEQ9cg=", false, function() {
+    return [
+        (0, _reactRedux.useSelector),
+        (0, _reactRedux.useSelector),
+        (0, _reactRedux.useSelector),
+        (0, _reactRedux.useDispatch)
+    ];
+});
 _c = ProfileView;
-ProfileView.propTypes = {
-    user: (0, _propTypes.PropTypes).shape({
-        Username: (0, _propTypes.PropTypes).string.isRequired,
-        Email: (0, _propTypes.PropTypes).string.isRequired,
-        Birthdate: (0, _propTypes.PropTypes).string.isRequired,
-        FavoriteMovies: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).string).isRequired
-    }).isRequired,
-    setUser: (0, _propTypes.PropTypes).func.isRequired,
-    movies: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).shape({
-        ImageURL: (0, _propTypes.PropTypes).string.isRequired,
-        Title: (0, _propTypes.PropTypes).string.isRequired,
-        ReleaseYear: (0, _propTypes.PropTypes).number.isRequired,
-        Description: (0, _propTypes.PropTypes).string.isRequired,
-        Rating: (0, _propTypes.PropTypes).number,
-        Actors: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).string).isRequired,
-        Genre: (0, _propTypes.PropTypes).exact({
-            Name: (0, _propTypes.PropTypes).string.isRequired,
-            Description: (0, _propTypes.PropTypes).string.isRequired
-        }).isRequired,
-        Director: (0, _propTypes.PropTypes).shape({
-            Name: (0, _propTypes.PropTypes).string.isRequired,
-            Bio: (0, _propTypes.PropTypes).string,
-            BirthYear: (0, _propTypes.PropTypes).number.isRequired,
-            DeathYear: (0, _propTypes.PropTypes).number,
-            Movies: (0, _propTypes.PropTypes).arrayOf((0, _propTypes.PropTypes).string).isRequired
-        }).isRequired
-    }).isRequired),
-    token: (0, _propTypes.PropTypes).string.isRequired,
-    onLoggedOut: (0, _propTypes.PropTypes).func.isRequired
-};
 var _c;
 $RefreshReg$(_c, "ProfileView");
 
@@ -41182,7 +41222,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","./update-user":"2SBwg","./favorite-movies-view":"cxlUu","../../img/matinee4-transparent.png":"eMurD","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe","react-bootstrap/Button":"aPzUt"}],"2SBwg":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","./update-user":"2SBwg","./favorite-movies-view":"cxlUu","../../img/matinee4-transparent.png":"eMurD","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe","react-bootstrap/Button":"aPzUt","react":"21dqq","react-redux":"62sf7","../../redux/reducers/user":"e6tdF","../../redux/reducers/token":"4eTad","../../redux/reducers/movies":"l0qwl"}],"2SBwg":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$95d1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -41193,8 +41233,10 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "UpdateUser", ()=>UpdateUser);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _propTypes = require("prop-types");
 var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRedux = require("react-redux");
+var _user = require("../../redux/reducers/user");
 var _form = require("react-bootstrap/Form");
 var _formDefault = parcelHelpers.interopDefault(_form);
 var _button = require("react-bootstrap/Button");
@@ -41204,12 +41246,15 @@ var _s = $RefreshSig$();
 const UPDATE_USER_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/users";
 //Use 1px to add debug borders with style="border: {debugBorder}" element attrib
 const debugBorder = "0px solid purple";
-const UpdateUser = ({ user, token, onUpdatedUser })=>{
+const UpdateUser = ()=>{
     _s();
+    const dispatch = (0, _reactRedux.useDispatch)();
+    const user = (0, _reactRedux.useSelector)((state)=>state.user);
+    const token = (0, _reactRedux.useSelector)((state)=>state.token);
+    const navigate = (0, _reactRouter.useNavigate)();
     const [newPassword, setNewPassword] = (0, _react.useState)("");
     const [newEmail, setNewEmail] = (0, _react.useState)("");
     const [newBirthday, setNewBirthday] = (0, _react.useState)("");
-    const navigate = (0, _reactRouter.useNavigate)();
     const handleUpdateSubmit = async (event)=>{
         event.preventDefault();
         console.log("update-user.jsx | Starting handleUpdateSubmit()");
@@ -41233,7 +41278,7 @@ const UpdateUser = ({ user, token, onUpdatedUser })=>{
             if (apiResponseJSON) {
                 alert("Update successful.");
                 console.log("update-user.jsx | Successful update, the response user object is: ", apiResponseJSON);
-                onUpdatedUser(apiResponseJSON); //Pass this function the new user object
+                dispatch((0, _user.setUser)(apiResponseJSON));
                 navigate("/profile"); //Hook to navigate back to /profile
             } else alert("Update failed, please try again.");
         } catch (e) {
@@ -41246,12 +41291,12 @@ const UpdateUser = ({ user, token, onUpdatedUser })=>{
                 children: "Update Account Information"
             }, void 0, false, {
                 fileName: "src/components/profile-view/update-user.jsx",
-                lineNumber: 60,
+                lineNumber: 66,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
                 fileName: "src/components/profile-view/update-user.jsx",
-                lineNumber: 61,
+                lineNumber: 67,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -41261,14 +41306,14 @@ const UpdateUser = ({ user, token, onUpdatedUser })=>{
                         children: "ALL"
                     }, void 0, false, {
                         fileName: "src/components/profile-view/update-user.jsx",
-                        lineNumber: 62,
+                        lineNumber: 68,
                         columnNumber: 26
                     }, undefined),
                     " fields:"
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/update-user.jsx",
-                lineNumber: 62,
+                lineNumber: 68,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default), {
@@ -41284,7 +41329,7 @@ const UpdateUser = ({ user, token, onUpdatedUser })=>{
                                 children: "Password:"
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/update-user.jsx",
-                                lineNumber: 65,
+                                lineNumber: 71,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
@@ -41295,13 +41340,13 @@ const UpdateUser = ({ user, token, onUpdatedUser })=>{
                                 minLength: "6"
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/update-user.jsx",
-                                lineNumber: 66,
+                                lineNumber: 72,
                                 columnNumber: 11
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/profile-view/update-user.jsx",
-                        lineNumber: 64,
+                        lineNumber: 70,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
@@ -41311,7 +41356,7 @@ const UpdateUser = ({ user, token, onUpdatedUser })=>{
                                 children: "Email:"
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/update-user.jsx",
-                                lineNumber: 76,
+                                lineNumber: 82,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
@@ -41322,13 +41367,13 @@ const UpdateUser = ({ user, token, onUpdatedUser })=>{
                                 required: true
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/update-user.jsx",
-                                lineNumber: 77,
+                                lineNumber: 83,
                                 columnNumber: 11
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/profile-view/update-user.jsx",
-                        lineNumber: 75,
+                        lineNumber: 81,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
@@ -41338,7 +41383,7 @@ const UpdateUser = ({ user, token, onUpdatedUser })=>{
                                 children: "Birthday:"
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/update-user.jsx",
-                                lineNumber: 87,
+                                lineNumber: 93,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
@@ -41348,13 +41393,13 @@ const UpdateUser = ({ user, token, onUpdatedUser })=>{
                                 required: true
                             }, void 0, false, {
                                 fileName: "src/components/profile-view/update-user.jsx",
-                                lineNumber: 88,
+                                lineNumber: 94,
                                 columnNumber: 11
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/profile-view/update-user.jsx",
-                        lineNumber: 86,
+                        lineNumber: 92,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -41366,39 +41411,33 @@ const UpdateUser = ({ user, token, onUpdatedUser })=>{
                             children: "Update Info"
                         }, void 0, false, {
                             fileName: "src/components/profile-view/update-user.jsx",
-                            lineNumber: 97,
+                            lineNumber: 103,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/profile-view/update-user.jsx",
-                        lineNumber: 96,
+                        lineNumber: 102,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profile-view/update-user.jsx",
-                lineNumber: 63,
+                lineNumber: 69,
                 columnNumber: 7
             }, undefined),
             "  "
         ]
     }, void 0, true);
 };
-_s(UpdateUser, "Qvj1VDhjMjWDB4bgk8sHEZwqnug=", false, function() {
+_s(UpdateUser, "/2NnOr64s6C1CXwRNbyKxz6u60c=", false, function() {
     return [
+        (0, _reactRedux.useDispatch),
+        (0, _reactRedux.useSelector),
+        (0, _reactRedux.useSelector),
         (0, _reactRouter.useNavigate)
     ];
 });
 _c = UpdateUser;
-UpdateUser.propTypes = {
-    user: (0, _propTypes.PropTypes).shape({
-        Username: (0, _propTypes.PropTypes).string.isRequired,
-        Email: (0, _propTypes.PropTypes).string.isRequired,
-        Birthdate: (0, _propTypes.PropTypes).string.isRequired
-    }).isRequired,
-    token: (0, _propTypes.PropTypes).string.isRequired,
-    onUpdatedUser: (0, _propTypes.PropTypes).func.isRequired
-};
 var _c;
 $RefreshReg$(_c, "UpdateUser");
 
@@ -41407,7 +41446,7 @@ $RefreshReg$(_c, "UpdateUser");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react":"21dqq","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"cxlUu":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-router":"dXVwI","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe","react-redux":"62sf7","../../redux/reducers/user":"e6tdF"}],"cxlUu":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$ea69 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -41418,6 +41457,10 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "FavoriteMoviesView", ()=>FavoriteMoviesView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRedux = require("react-redux");
+var _user = require("../../redux/reducers/user");
 var _propTypes = require("prop-types");
 var _movieCard = require("../movie-card/movie-card");
 var _col = require("react-bootstrap/Col");
@@ -41440,19 +41483,16 @@ const FavoriteMoviesView = ({ user, setUser, movies, token, favoritesIdArray })=
                 sm: 6,
                 className: "mb-3",
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                    user: user,
-                    setUser: setUser,
                     movie: movie,
-                    token: token,
                     prev: "/profile"
                 }, void 0, false, {
                     fileName: "src/components/profile-view/favorite-movies-view.jsx",
-                    lineNumber: 28,
+                    lineNumber: 32,
                     columnNumber: 13
                 }, undefined)
             }, movie._id, false, {
                 fileName: "src/components/profile-view/favorite-movies-view.jsx",
-                lineNumber: 27,
+                lineNumber: 31,
                 columnNumber: 11
             }, undefined);
         })
@@ -41497,7 +41537,7 @@ $RefreshReg$(_c, "FavoriteMoviesView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","../movie-card/movie-card":"bwuIu","react-bootstrap/Col":"2L2I6","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"eMurD":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","../movie-card/movie-card":"bwuIu","react-bootstrap/Col":"2L2I6","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe","react":"21dqq","react-redux":"62sf7","../../redux/reducers/user":"e6tdF"}],"eMurD":[function(require,module,exports,__globalThis) {
 module.exports = require("8de70d037922c7fb").getBundleURL('byUka') + "matinee4-transparent.c33bebb0.png" + "?" + Date.now();
 
 },{"8de70d037922c7fb":"gw4EE"}],"gw4EE":[function(require,module,exports,__globalThis) {
@@ -41548,6 +41588,10 @@ parcelHelpers.export(exports, "NavigationBar", ()=>NavigationBar);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRedux = require("react-redux");
+var _user = require("../../redux/reducers/user");
+var _token = require("../../redux/reducers/token");
+var _movies = require("../../redux/reducers/movies");
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouter = require("react-router"); // Make sure you use "react-router-dom" if you're using it for routing
 // Image imports - Matinee images created using www.recraft.ai and are owned by Recraft.
@@ -41556,17 +41600,25 @@ var _matineeLogo2NavbarSmPngDefault = parcelHelpers.interopDefault(_matineeLogo2
 var _s = $RefreshSig$();
 //Set to 1px for debug border
 const debugBorder = "0px solid red";
-const NavigationBar = ({ user, onLoggedOut })=>{
+const NavigationBar = ()=>{
     _s();
+    const user = (0, _reactRedux.useSelector)((state)=>state.user);
+    const dispatch = (0, _reactRedux.useDispatch)();
     // State to track whether the navbar is expanded
     const [expanded, setExpanded] = (0, _react.useState)(false);
     // Function to handle closing the navbar after a NavLink is clicked
-    const handleNavLinkClick = ()=>{
-        setExpanded(false); // Collapse the navbar after the link is clicked
-    };
+    const handleNavLinkClick = ()=>setExpanded(false);
     const handleNavLinkLogout = ()=>{
         setExpanded(false);
         onLoggedOut();
+    };
+    const onLoggedOut = ()=>{
+        console.log("navigation-bar.jsx|Clearing localStorage and setting user/token/movies to null/[]...");
+        localStorage.clear();
+        dispatch((0, _user.setUser)(null));
+        dispatch((0, _token.setToken)(null));
+        dispatch((0, _movies.setMovies)(null));
+        console.log("navigation-bar.jsx|Logout complete.");
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar), {
         expand: "md",
@@ -41583,12 +41635,12 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                             src: (0, _matineeLogo2NavbarSmPngDefault.default)
                         }, void 0, false, {
                             fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                            lineNumber: 29,
+                            lineNumber: 45,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                        lineNumber: 28,
+                        lineNumber: 44,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Toggle, {
@@ -41596,7 +41648,7 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                         onClick: ()=>setExpanded(!expanded)
                     }, void 0, false, {
                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                        lineNumber: 31,
+                        lineNumber: 47,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Collapse, {
@@ -41612,7 +41664,7 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                                         children: "Log in"
                                     }, void 0, false, {
                                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                        lineNumber: 39,
+                                        lineNumber: 55,
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -41622,7 +41674,7 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                                         children: "Sign up"
                                     }, void 0, false, {
                                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                        lineNumber: 42,
+                                        lineNumber: 58,
                                         columnNumber: 17
                                     }, undefined)
                                 ]
@@ -41635,7 +41687,7 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                                         children: "Home"
                                     }, void 0, false, {
                                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                        lineNumber: 48,
+                                        lineNumber: 64,
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -41645,7 +41697,7 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                                         children: "Profile"
                                     }, void 0, false, {
                                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                        lineNumber: 51,
+                                        lineNumber: 67,
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -41653,25 +41705,25 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                                         children: "Logout"
                                     }, void 0, false, {
                                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                        lineNumber: 54,
+                                        lineNumber: 70,
                                         columnNumber: 17
                                     }, undefined)
                                 ]
                             }, void 0, true)
                         }, void 0, false, {
                             fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                            lineNumber: 36,
+                            lineNumber: 52,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                        lineNumber: 35,
+                        lineNumber: 51,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                lineNumber: 27,
+                lineNumber: 43,
                 columnNumber: 7
             }, undefined),
             user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -41687,17 +41739,22 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                 ]
             }, void 0, true, {
                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                lineNumber: 63,
+                lineNumber: 79,
                 columnNumber: 9
             }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {}, void 0, false)
         ]
     }, void 0, true, {
         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-        lineNumber: 26,
+        lineNumber: 42,
         columnNumber: 5
     }, undefined);
 };
-_s(NavigationBar, "DuL5jiiQQFgbn7gBKAyxwS/H4Ek=");
+_s(NavigationBar, "rbAbUQaSbApBRVhOnO2juy78QA0=", false, function() {
+    return [
+        (0, _reactRedux.useSelector),
+        (0, _reactRedux.useDispatch)
+    ];
+});
 _c = NavigationBar;
 var _c;
 $RefreshReg$(_c, "NavigationBar");
@@ -41707,40 +41764,10 @@ $RefreshReg$(_c, "NavigationBar");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","react-router":"dXVwI","../../img/matinee-logo2-navbar-sm.png":"kvi26","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe"}],"kvi26":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","react-router":"dXVwI","../../img/matinee-logo2-navbar-sm.png":"kvi26","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eidxe","react-redux":"62sf7","../../redux/reducers/user":"e6tdF","../../redux/reducers/token":"4eTad","../../redux/reducers/movies":"l0qwl"}],"kvi26":[function(require,module,exports,__globalThis) {
 module.exports = require("b0c60f9034a93d25").getBundleURL('byUka') + "matinee-logo2-navbar-sm.c71418a1.png" + "?" + Date.now();
 
-},{"b0c60f9034a93d25":"gw4EE"}],"l0qwl":[function(require,module,exports,__globalThis) {
-//-----------------------------------------------------------------
-// Defines actions that store the movies list from the API
-//     & the filtered list of movie IDs
-//-----------------------------------------------------------------
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "setMovies", ()=>setMovies);
-parcelHelpers.export(exports, "setFilter", ()=>setFilter);
-var _toolkit = require("@reduxjs/toolkit");
-const moviesSlice = (0, _toolkit.createSlice)({
-    name: "movies",
-    initialState: {
-        list: [],
-        filter: ""
-    },
-    reducers: {
-        setMovies: (state, action)=>{
-            state.list = action.payload;
-            console.log("REDUCER|movies.js|setMovies() to:", action.payload);
-        },
-        setFilter: (state, action)=>{
-            state.filter = action.payload;
-            console.log("REDUCER|movies.js|setFilter() to:", action.payload);
-        }
-    }
-});
-const { setMovies, setFilter } = moviesSlice.actions;
-exports.default = moviesSlice.reducer;
-
-},{"@reduxjs/toolkit":"fuua8","@parcel/transformer-js/src/esmodule-helpers.js":"6fVZS"}],"lJZlQ":[function() {},{}],"bDp2K":[function(require,module,exports,__globalThis) {
+},{"b0c60f9034a93d25":"gw4EE"}],"lJZlQ":[function() {},{}],"bDp2K":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "store", ()=>store);

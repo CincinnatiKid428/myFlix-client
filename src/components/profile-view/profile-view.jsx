@@ -1,4 +1,8 @@
-import { PropTypes } from "prop-types";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../../redux/reducers/user";
+import { setToken } from "../../redux/reducers/token";
+import { setMovies } from "../../redux/reducers/movies";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -28,8 +32,22 @@ function formatUserBday(bday) {
     return dateParts[1] + "/" + dateParts[2] + "/" + dateParts[0];
 }
 
-export const ProfileView = ({ user, setUser, movies, token, onLoggedOut }) => {
+export const ProfileView = () => {
   console.log("profile-view.jsx | Starting");
+
+  const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const movies = useSelector((state) => state.movies.list);
+  const dispatch = useDispatch();
+
+  const onLoggedOut = () => {
+    localStorage.clear();
+    console.log("profile-view.jsx|dispatch(setUser(null))...");
+    dispatch(setUser(null));
+    console.log("profile-view.jsx|dispatch(setToken(null))...");
+    dispatch(setToken(null));
+    console.log("profile-view.jsx|Logout complete.");
+  };
 
   //Handles account removal with user confirmation required before DELETE call
   const handleDeleteAcct = () => {
@@ -62,6 +80,7 @@ export const ProfileView = ({ user, setUser, movies, token, onLoggedOut }) => {
 
   return (
     <>
+      {window.scrollTo({ top: 0, left: 0, behavior: 'instant' })}
       <Row className="d-flex justify-content-center mt-2" style={{ border: debugBorder }}>
         <Col sm={10} md={6} style={{ border: debugBorder }}>
           <div className="align-self-center ps-2" style={{ backgroundColor: "#ffffff" }}>
@@ -80,9 +99,7 @@ export const ProfileView = ({ user, setUser, movies, token, onLoggedOut }) => {
 
       <Row className="d-flex justify-content-center" style={{ border: debugBorder }}>
         <Col sm={10} md={6} className="align-self-center" style={{ border: debugBorder }}>
-          <UpdateUser user={user} token={token} onUpdatedUser={(updatedUser) => {
-            setUser(updatedUser);
-          }} />
+          <UpdateUser />
         </Col>
       </Row >
 
@@ -106,40 +123,3 @@ export const ProfileView = ({ user, setUser, movies, token, onLoggedOut }) => {
     </>
   );
 };
-
-ProfileView.propTypes = {
-
-  user: PropTypes.shape({
-    Username: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
-    Birthdate: PropTypes.string.isRequired,
-    FavoriteMovies: PropTypes.arrayOf(PropTypes.string).isRequired
-  }).isRequired,
-
-  setUser: PropTypes.func.isRequired,
-
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    ImageURL: PropTypes.string.isRequired,
-    Title: PropTypes.string.isRequired,
-    ReleaseYear: PropTypes.number.isRequired,
-    Description: PropTypes.string.isRequired,
-    Rating: PropTypes.number,
-    Actors: PropTypes.arrayOf(PropTypes.string).isRequired,
-
-    Genre: PropTypes.exact({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired
-    }).isRequired,
-
-    Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string,
-      BirthYear: PropTypes.number.isRequired,
-      DeathYear: PropTypes.number,
-      Movies: PropTypes.arrayOf(PropTypes.string).isRequired
-    }).isRequired
-  }).isRequired),
-
-  token: PropTypes.string.isRequired,
-  onLoggedOut: PropTypes.func.isRequired
-}

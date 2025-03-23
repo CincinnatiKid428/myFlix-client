@@ -1,7 +1,9 @@
+import React from "react";
 import { PropTypes } from "prop-types";
 import { useState } from "react";
-//import { useContext } from "react";
-//import AppContext from "../app-context/app-context";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../../redux/reducers/user";
+
 import { MovieCard } from "../movie-card/movie-card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -14,7 +16,13 @@ const DB_FAVORITES_URI = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/mo
 //Increase to 1px to add debug borders
 const debugBorder = "0px solid blue";
 
-export const MovieView = ({ user, setUser, movies, token, prev }) => { //Use context vs props?
+export const MovieView = ({ prev }) => {
+  const movies = useSelector((state) => state.movies.list);
+  const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const dispatch = useDispatch();
+
+  console.log("movie-view.jsx|||user object from redux:", user);
 
   const { movieId } = useParams();
   const [isFavorite, setIsFavorite] = useState((user.FavoriteMovies).includes(movieId));
@@ -42,7 +50,7 @@ export const MovieView = ({ user, setUser, movies, token, prev }) => { //Use con
       const responseData = await addFavResponse.json();
       console.log("movie-view.jsx|handleAddFav()|responseData:", responseData);
       if (responseData) {
-        setUser(responseData);
+        dispatch(setUser(responseData));
         setIsFavorite(true);
       } else {
         alert("Something went wrong trying to add favorite, please try again.");
@@ -69,7 +77,7 @@ export const MovieView = ({ user, setUser, movies, token, prev }) => { //Use con
       const responseData = await removeFavResponse.json();
       console.log("movie-view.jsx|handleRemoveFav()|responseData:", responseData);
       if (responseData) {
-        setUser(responseData);
+        dispatch(setUser(responseData));
         setIsFavorite(false);
       } else {
         alert("Something went wrong trying to remove favorite, please try again.");
@@ -157,41 +165,7 @@ export const MovieView = ({ user, setUser, movies, token, prev }) => { //Use con
   );
 };
 
-//PropTypes for MovieView component (contains additional validation for genre and director data)
+//PropTypes for MovieView component holds previous path ("/" or "/profile")
 MovieView.propTypes = {
-
-  user: PropTypes.shape({
-    Username: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
-    Birthdate: PropTypes.string.isRequired
-  }).isRequired,
-
-  setUser: PropTypes.func.isRequired,
-
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    ImageURL: PropTypes.string.isRequired,
-    Title: PropTypes.string.isRequired,
-    ReleaseYear: PropTypes.number.isRequired,
-    Description: PropTypes.string.isRequired,
-    Rating: PropTypes.number,
-    Actors: PropTypes.arrayOf(PropTypes.string).isRequired,
-
-    Genre: PropTypes.exact({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired
-    }).isRequired,
-
-    Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string,
-      BirthYear: PropTypes.number.isRequired,
-      DeathYear: PropTypes.number,
-      Movies: PropTypes.arrayOf(PropTypes.string).isRequired
-    }).isRequired
-  }).isRequired),
-
-  token: PropTypes.string.isRequired,
-
   prev: PropTypes.string.isRequired
-
 };

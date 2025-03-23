@@ -1,5 +1,7 @@
-import { PropTypes } from "prop-types";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../../redux/reducers/user";
+
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router";
@@ -8,13 +10,17 @@ const UPDATE_USER_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/use
 //Use 1px to add debug borders with style="border: {debugBorder}" element attrib
 const debugBorder = "0px solid purple";
 
-export const UpdateUser = ({ user, token, onUpdatedUser }) => {
+export const UpdateUser = () => {
+
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const navigate = useNavigate();
 
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newBirthday, setNewBirthday] = useState("");
 
-  const navigate = useNavigate();
 
   const handleUpdateSubmit = async (event) => {
     event.preventDefault();
@@ -44,7 +50,7 @@ export const UpdateUser = ({ user, token, onUpdatedUser }) => {
       if (apiResponseJSON) {
         alert("Update successful.");
         console.log("update-user.jsx | Successful update, the response user object is: ", apiResponseJSON);
-        onUpdatedUser(apiResponseJSON); //Pass this function the new user object
+        dispatch(setUser(apiResponseJSON));
         navigate("/profile"); //Hook to navigate back to /profile
       } else {
         alert("Update failed, please try again.");
@@ -104,13 +110,3 @@ export const UpdateUser = ({ user, token, onUpdatedUser }) => {
   */}  </>
   );
 };
-
-UpdateUser.propTypes = {
-  user: PropTypes.shape({
-    Username: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
-    Birthdate: PropTypes.string.isRequired
-  }).isRequired,
-  token: PropTypes.string.isRequired,
-  onUpdatedUser: PropTypes.func.isRequired
-}
