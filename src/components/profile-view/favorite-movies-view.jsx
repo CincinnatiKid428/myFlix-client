@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../redux/reducers/user";
 
-import { PropTypes } from "prop-types";
 import { MovieCard } from "../movie-card/movie-card";
 import Col from "react-bootstrap/Col";
 
-export const FavoriteMoviesView = ({ user, setUser, movies, token, favoritesIdArray }) => {
+export const FavoriteMoviesView = () => {
+
+  const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const movies = useSelector((state) => state.movies.list);
+  const dispatch = useDispatch();
+
+  const favoritesIdArray = user.FavoriteMovies;
+
   console.log("favorite-movies-view.jsx | favoritesIdArray prop is: ", favoritesIdArray);
 
   /**
@@ -26,52 +33,23 @@ export const FavoriteMoviesView = ({ user, setUser, movies, token, favoritesIdAr
 
   return (
     <>
-      {loadFavorites().map((movie => {
-        return (
-          <Col key={movie._id} md={4} sm={6} className="mb-3">
-            <MovieCard movie={movie} prev="/profile" />
-          </Col>
-        );
-      }))}
+
+      <h4>{user.Username}'s Favorite Movies:</h4>
+      <hr />
+      {user.FavoriteMovies.length !== 0 ? (
+        <>
+          {loadFavorites().map((movie) => (
+
+            <Col key={movie._id} md={3} sm={6} className="mb-3">
+              <MovieCard movie={movie} prev="/profile" />
+            </Col>
+          ))}
+        </>
+      ) : (
+        <p>No movies added to favorites...</p>
+      )
+      }
     </>
   );
 
 };
-
-FavoriteMoviesView.propTypes = {
-
-  user: PropTypes.shape({
-    Username: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
-    Birthdate: PropTypes.string.isRequired,
-    FavoriteMovies: PropTypes.arrayOf(PropTypes.string).isRequired
-  }).isRequired,
-
-  setUser: PropTypes.func.isRequired,
-
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    ImageURL: PropTypes.string.isRequired,
-    Title: PropTypes.string.isRequired,
-    ReleaseYear: PropTypes.number.isRequired,
-    Description: PropTypes.string.isRequired,
-    Rating: PropTypes.number,
-    Actors: PropTypes.arrayOf(PropTypes.string).isRequired,
-
-    Genre: PropTypes.exact({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired
-    }).isRequired,
-
-    Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string,
-      BirthYear: PropTypes.number.isRequired,
-      DeathYear: PropTypes.number,
-      Movies: PropTypes.arrayOf(PropTypes.string).isRequired
-    }).isRequired
-  }).isRequired),
-
-  token: PropTypes.string.isRequired,
-
-  favoritesIdArray: PropTypes.arrayOf(PropTypes.string).isRequired
-}

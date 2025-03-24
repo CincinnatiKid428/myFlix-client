@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../redux/reducers/user";
 import { setToken } from "../../redux/reducers/token";
-import { setMovies } from "../../redux/reducers/movies";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -109,17 +108,9 @@ export const ProfileView = () => {
         </Col>
       </Row>
 
-      <h5>{user.Username}'s Favorite Movies:</h5>
-      <hr />
-      {user.FavoriteMovies.length !== 0 ? (
-        <>
-          <Row>
-            <FavoriteMoviesView user={user} setUser={setUser} movies={movies} token={token} favoritesIdArray={user.FavoriteMovies} />
-          </Row>
-        </>
-      ) : (
-        <p>No movies added to favorites</p>
-      )}
+      <Row>
+        <FavoriteMoviesView user={user} setUser={setUser} movies={movies} token={token} favoritesIdArray={user.FavoriteMovies} />
+      </Row>
     </>
   );
 };

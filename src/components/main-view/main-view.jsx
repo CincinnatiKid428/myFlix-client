@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 
-import { MovieCard } from "../movie-card/movie-card";
+import { MoviesList } from "../movies-list/movies-list";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
@@ -32,28 +32,34 @@ const MainView = () => {
   useEffect(() => {
     console.log("main-view.jsx | Starting useEffect() hook...");
 
-    if (!token) {
-      console.log("Skipping fetch until authenticated user logged in...");
-      return;
-    }
+    async function fetchMovieData() {
 
-    //WRAP TRY-CATCH BLOCK HERE
-    fetch(API_GET_ALL_MOVIES, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+      if (!token) {
+        console.log("Skipping fetch until authenticated user logged in...");
+        return;
       }
-    })
-      .then((response) => response.json())
-      .then((movieData) => {
-        console.log("main-view.jsx | Return from movie_api:", movieData);
-        movieData ? dispatch(setMovies(movieData)) : dispatch(setMovies([]));
-      })
-      .catch((err) => {
-        console.error("main-view.jsx | Error in API call:", err.message);
-      });
 
+      try {
+        const response = await fetch(API_GET_ALL_MOVIES, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          }
+        });
+        const responseJSON = await response.json();
+        console.log("main-view.jsx | Return from movie_api:", responseJSON);
+
+        if (responseJSON) {
+          dispatch(setMovies(responseJSON));
+        } else {
+          dispatch(setMovies([]));
+        }
+      } catch (e) {
+        console.error("main-view.jsx|Error in API call:", e);
+      }
+    }
+    fetchMovieData();
   }, [token]);
 
 
@@ -102,7 +108,7 @@ const MainView = () => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
+                ) : !movies || movies.length === 0 ? (
                   <Col>There are no movies in the list!</Col>
                 ) : (
                   <Col md={10}>
@@ -120,7 +126,7 @@ const MainView = () => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
+                ) : !movies || movies.length === 0 ? (
                   <Col>There are no movies in the list!</Col>
                 ) : (
                   <Col md={10}>
@@ -138,16 +144,8 @@ const MainView = () => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
-                  <Col>There are no movies in the list!</Col>
                 ) : (
-                  <>
-                    {movies.map((movie) => (
-                      <Col key={movie._id} md={3} sm={6} className="mb-3">
-                        <MovieCard movie={movie} prev="/" />
-                      </Col>
-                    ))}
-                  </>
+                  <MoviesList />
                 )}
               </>
             }

@@ -51,7 +51,13 @@ export const UpdateUser = () => {
         alert("Update successful.");
         console.log("update-user.jsx | Successful update, the response user object is: ", apiResponseJSON);
         dispatch(setUser(apiResponseJSON));
-        navigate("/profile"); //Hook to navigate back to /profile
+
+        //Clear form fields after successful update & navigate back to /profile
+        setNewPassword("");
+        setNewEmail("");
+        setNewBirthday("");
+
+        navigate("/profile");
       } else {
         alert("Update failed, please try again.");
       }
@@ -63,7 +69,7 @@ export const UpdateUser = () => {
 
   return (
     <>
-      <h5>Update Account Information</h5>
+      <h4>Update Account Information</h4>
       <hr />
       <p>Please fill out <strong>ALL</strong> fields:</p>
       <Form onSubmit={handleUpdateSubmit} style={{ border: debugBorder }}>
@@ -82,7 +88,6 @@ export const UpdateUser = () => {
           <Form.Label>Email:</Form.Label>
           <Form.Control
             type="email"
-            placeholder={user.Email}
             value={newEmail}
             onChange={(e) => setNewEmail(e.target.value)}
             required
@@ -105,8 +110,6 @@ export const UpdateUser = () => {
           </Button>
         </div>
       </Form>
-      {/*     </Col>
-      </Row>
-  */}  </>
+    </>
   );
 };

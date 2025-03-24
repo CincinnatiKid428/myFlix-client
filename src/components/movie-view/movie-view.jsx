@@ -13,6 +13,9 @@ import { Link } from "react-router";
 
 const DB_FAVORITES_URI = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies/favorites/";
 
+// Image imports - Matinee images created using www.recraft.ai and are owned by Recraft.
+import matineeFilmReel from "../../img/matinee-film-reel-t.png";
+
 //Increase to 1px to add debug borders
 const debugBorder = "0px solid blue";
 
@@ -136,15 +139,23 @@ export const MovieView = ({ prev }) => {
             )}
           </div>
 
+        </Col>
+      </Row>
 
+      <Row>
+        <Col>
+          <div className="d-flex justify-content-center mt-3" style={{ border: debugBorder }}>
+            <img src={matineeFilmReel} width="auto" height="auto" />
+          </div>
         </Col>
       </Row>
 
       {similarMovieArray.length !== 0 ? ( //Similar movies found
         <>
-          <hr />
-          <h3>Similar Movies:</h3>
           <Row className="justify-content-center mt-3" style={{ border: debugBorder }}>
+
+            <h4>Similar Movies:</h4>
+            <hr />
             {
               similarMovieArray.map((similarMovie) => {
                 return (

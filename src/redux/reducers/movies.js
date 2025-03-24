@@ -18,7 +18,6 @@ const moviesSlice = createSlice({
     setFilter: (state, action) => {
       state.filter = action.payload;
       console.log("REDUCER|movies.js|setFilter() to:", action.payload);
-
     }
   }
 });
