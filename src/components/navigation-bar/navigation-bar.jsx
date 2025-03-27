@@ -68,20 +68,14 @@ export const NavigationBar = () => {
                   Profile
                 </Nav.Link>
                 <Nav.Link onClick={handleNavLinkLogout}>
-                  Logout
+                  Logout ( {user.Username} )
                 </Nav.Link>
               </>
             )}
           </Nav>
         </Navbar.Collapse>
       </Container>
-      {user ? (
-        <span style={{ float: "right", marginLeft: "10px", border: debugBorder }}>
-          Welcome, {user.Username}!
-        </span>
-      ) : (
-        <></>
-      )}
+
     </Navbar>
   );
 };

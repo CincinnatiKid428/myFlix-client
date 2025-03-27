@@ -71,6 +71,13 @@ const MainView = () => {
         <Routes>
 
           <Route
+            path="/myFlix-client"
+            element={
+              <Navigate to="/"></Navigate>
+            }
+          />
+
+          <Route
             path="/signup"
             element={
               <>
