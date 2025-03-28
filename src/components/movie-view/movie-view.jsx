@@ -37,9 +37,8 @@ export const MovieView = ({ prev }) => {
   const similarMovieArray = movies.filter((arrayMovie) => (movie.Genre.Name === arrayMovie.Genre.Name && movieId !== arrayMovie._id)) || [];
 
 
-  /**
- * Handles API call to add favorite movie to user.FavoriteMovies
- */
+
+  //Handles API call to add favorite movie to user.FavoriteMovies
   const handleAddFav = async () => {
     console.log("movie-view.jsx|handleAddFav()|Adding fav movie: " + movie.Title + " " + movie._id);
     try {
@@ -63,9 +62,7 @@ export const MovieView = ({ prev }) => {
     }
   };
 
-  /**
-   * Handles API call to remove favorite movie to user.FavoriteMovies
-   */
+  //Handles API call to remove favorite movie to user.FavoriteMovies
   const handleRemoveFav = async () => {
     console.log("movie-view.jsx|handleRemoveFav|Removing fav movie: " + movie.Title + " " + movie._id);
 
