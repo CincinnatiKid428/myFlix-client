@@ -33,7 +33,7 @@ export const NavigationBar = () => {
     localStorage.clear();
     dispatch(setUser(null));
     dispatch(setToken(null));
-    dispatch(setMovies(null));
+    dispatch(setMovies([]));
     console.log("navigation-bar.jsx|Logout complete.");
 
   };

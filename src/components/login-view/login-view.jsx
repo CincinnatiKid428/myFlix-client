@@ -25,7 +25,7 @@ export const LoginView = () => {
     dispatch(setUser(null));
     dispatch(setToken(null));
     dispatch(setMovies([]));
-    console.log("login-view.jsx|...cleared localStorage and user/token/movies");
+    console.log("DEBUG BUTTON|login-view.jsx|...cleared localStorage and user/token/movies");
   };
 
   //Handler for form submit

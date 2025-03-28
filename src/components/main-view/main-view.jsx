@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setMovies } from "../../redux/reducers/movies";
 
@@ -19,13 +19,16 @@ const MainView = () => {
 
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
+  console.log("main-view.jsx|localStorage user:", storedUser);
+  console.log("main-view.jsx|localStorage token:", storedToken);
   const dispatch = useDispatch();
 
-  //const [user, setUser] = useState(storedUser ? storedUser : null);  //State: user object when logged in
-  //const [token, setToken] = useState(storedToken ? storedToken : null);  //State: auth JWT token when logged in
+  const [loadingMovies, setLoadingMovies] = useState(true); //State: Movies loading - conditional for rendering views
 
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
+  //const user = storedUser ? storedUser : useSelector((state) => state.user);
+  //const token = storedToken ? storedToken : useSelector((state) => state.token);
   const movies = useSelector((state) => state.movies.list); //Redux State: movies list from API
 
   //API call to get list of all movies from remote Heroku server running movie_api app
@@ -39,31 +42,48 @@ const MainView = () => {
         return;
       }
 
-      try {
-        const response = await fetch(API_GET_ALL_MOVIES, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          }
-        });
-        const responseJSON = await response.json();
-        console.log("main-view.jsx | Return from movie_api:", responseJSON);
+      if (movies.length === 0) {
+        try {
+          setLoadingMovies(true);
+          const response = await fetch(API_GET_ALL_MOVIES, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            }
+          });
+          const responseJSON = await response.json();
+          console.log("main-view.jsx | Return from movie_api:", responseJSON);
 
-        if (responseJSON) {
-          dispatch(setMovies(responseJSON));
-        } else {
-          dispatch(setMovies([]));
+          if (responseJSON) {
+            dispatch(setMovies(responseJSON));
+          } else {
+            dispatch(setMovies([]));
+          }
+        } catch (e) {
+          console.error("main-view.jsx|Error in API call:", e);
+        } finally {
+          setLoadingMovies(false);
         }
-      } catch (e) {
-        console.error("main-view.jsx|Error in API call:", e);
       }
+
     }
     fetchMovieData();
   }, [token]);
 
+  //If movies are loading don't render the regular view, render loading spinner...
+  if (!movies && loadingMovies) {
+    return (
+      <>
+        <NavigationBar />
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </>
+    );
+  }
 
-
+  //...Othewise render appropriate route/view
   return (
     <BrowserRouter>
       <NavigationBar />
