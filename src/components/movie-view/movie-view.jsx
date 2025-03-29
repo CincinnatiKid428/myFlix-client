@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { PropTypes } from "prop-types";
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../redux/reducers/user";
 
