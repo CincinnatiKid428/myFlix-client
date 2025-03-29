@@ -7,6 +7,7 @@ See https://fast-taiga-09096-54ce00eca848.herokuapp.com/documentation for the ba
 ## Features
 - Allows users to register (username, password, email & birthdate)
 - Allows users to login with username & password, and logout
+- Allows for persistent login should the user close the browser and navigate back to the app without logout
 - Displays list of movies with an image & title that can be clicked for more information about the movie
 - Allows users to get additional information about genre and director when viewing details about a specific movie
 - Allows users to update account information (passowrd, email & birthdate)
