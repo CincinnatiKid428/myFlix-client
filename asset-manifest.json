@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/myFlix-client/static/css/main.304679f2.css",
+    "main.css": "/myFlix-client/static/css/main.19d99d91.css",
     "main.js": "/myFlix-client/static/js/main.e126e526.js",
     "static/media/matinee4-transparent.png": "/myFlix-client/static/media/matinee4-transparent.2df302e35585d12c69f9.png",
     "static/media/matinee-film-reel-t.png": "/myFlix-client/static/media/matinee-film-reel-t.f6dda5c307760b831780.png",
     "static/media/matinee-logo2-navbar-sm.png": "/myFlix-client/static/media/matinee-logo2-navbar-sm.a74f2e1af096dc8dfa7e.png",
     "index.html": "/myFlix-client/index.html",
-    "main.304679f2.css.map": "/myFlix-client/static/css/main.304679f2.css.map",
+    "main.19d99d91.css.map": "/myFlix-client/static/css/main.19d99d91.css.map",
     "main.e126e526.js.map": "/myFlix-client/static/js/main.e126e526.js.map"
   },
   "entrypoints": [
-    "static/css/main.304679f2.css",
+    "static/css/main.19d99d91.css",
     "static/js/main.e126e526.js"
   ]
 }
