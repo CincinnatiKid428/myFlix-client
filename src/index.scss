@@ -17,4 +17,10 @@ $input-bg: #FFF;
   font-weight: 600;
 }
 
+.custom-tooltip .tooltip-inner {
+  max-width: 75%;
+  padding: 10px;
+  word-wrap: break-word;
+}
+
 @import '~bootstrap/scss/bootstrap.scss';

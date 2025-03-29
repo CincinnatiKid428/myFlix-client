@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { PropTypes } from "prop-types";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,6 +8,8 @@ import { MovieCard } from "../movie-card/movie-card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { Tooltip, OverlayTrigger, Offcanvas } from "react-bootstrap";
+
 import { useParams } from "react-router";
 import { Link } from "react-router";
 
@@ -29,6 +31,7 @@ export const MovieView = ({ prev }) => {
 
   const { movieId } = useParams();
   const [isFavorite, setIsFavorite] = useState((user.FavoriteMovies).includes(movieId));
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
 
   //Find movie to display
   const movie = movies.find((foundMovie) => foundMovie._id === movieId);
@@ -36,7 +39,38 @@ export const MovieView = ({ prev }) => {
   //Find similar movies array
   const similarMovieArray = movies.filter((arrayMovie) => (movie.Genre.Name === arrayMovie.Genre.Name && movieId !== arrayMovie._id)) || [];
 
+  //Function to render genre Tooltips
+  const renderTooltip = (tooltipData) => (
+    <Tooltip className="custom-tooltip" >
+      {tooltipData}
+    </Tooltip >
+  );
 
+  const handleHideOffcanvas = () => setShowOffcanvas(false);
+  const handleShowOffcanvas = () => setShowOffcanvas(true);
+
+  function formatDirectorInfo(director) {
+    return (
+      <>
+        <h4>{director.Name} ({director.BirthYear} - {director.DeathYear ? director.DeathYear : ""})</h4>
+        <hr />
+        <h4>Biography:</h4>
+        {director.Bio.split('|').map((paragraph) => (
+          <p>
+            {paragraph}
+          </p>
+        ))}
+        <hr />
+        <h4>Other Movies:</h4>
+        {director.Movies.map((mov) => (
+          <>
+            <span>{mov}</span><br />
+          </>
+        ))}
+      </>
+    );
+
+  }
 
   //Handles API call to add favorite movie to user.FavoriteMovies
   const handleAddFav = async () => {
@@ -99,26 +133,45 @@ export const MovieView = ({ prev }) => {
             <span className="movie-view-info-field">Title:</span>
             <span> {movie.Title}</span>
           </div>
+
           <div>
             <span className="movie-view-info-field">Released:</span>
             <span> {movie.ReleaseYear}</span>
           </div>
+
           <div>
             <span className="movie-view-info-field">Description:</span>
             <span> {movie.Description}</span>
           </div>
+
           <div>
             <span className="movie-view-info-field">Genre:</span>
-            <span> {movie.Genre.Name}</span>
+            <OverlayTrigger
+              placement="top"
+              overlay={renderTooltip(movie.Genre.Description)}
+            >
+              <span> {movie.Genre.Name} (<u>More info</u>)</span>
+            </OverlayTrigger>
           </div>
+
           <div>
             <span className="movie-view-info-field">Director:</span>
-            <span> {movie.Director.Name}</span>
+            <span onClick={handleShowOffcanvas} style={{ cursor: "pointer" }}> {movie.Director.Name} (<u>Click for more info</u>)</span>
+            <Offcanvas show={showOffcanvas} onHide={handleHideOffcanvas}>
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title>More About the Director...</Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                {formatDirectorInfo(movie.Director)}
+              </Offcanvas.Body>
+            </Offcanvas>
           </div>
+
           <div>
             <span className="movie-view-info-field">Rating:</span>
             <span> {movie.Rating}</span>
           </div>
+
           <div>
             <span className="movie-view-info-field">Actors:</span>
             <span> {movie.Actors.join(', ')}</span>
