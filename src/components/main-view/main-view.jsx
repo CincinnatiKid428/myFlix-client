@@ -17,18 +17,15 @@ const API_GET_ALL_MOVIES = 'https://fast-taiga-09096-54ce00eca848.herokuapp.com/
 
 const MainView = () => {
 
-  const storedUser = JSON.parse(localStorage.getItem("user"));
-  const storedToken = localStorage.getItem("token");
-  console.log("main-view.jsx|localStorage user:", storedUser);
-  console.log("main-view.jsx|localStorage token:", storedToken);
+  //const storedUser = JSON.parse(localStorage.getItem("user"));
+  //const storedToken = localStorage.getItem("token");
+
   const dispatch = useDispatch();
 
   const [loadingMovies, setLoadingMovies] = useState(true); //State: Movies loading - conditional for rendering views
 
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
-  //const user = storedUser ? storedUser : useSelector((state) => state.user);
-  //const token = storedToken ? storedToken : useSelector((state) => state.token);
   const movies = useSelector((state) => state.movies.list); //Redux State: movies list from API
 
   //API call to get list of all movies from remote Heroku server running movie_api app

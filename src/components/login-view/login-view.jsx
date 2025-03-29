@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
@@ -70,6 +70,19 @@ export const LoginView = () => {
         dispatch(setToken(null));
       });
   };
+
+  //Check for persistent login with local storage
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedToken = localStorage.getItem("token");
+
+    //Update state if we have valid stored user/token
+    if (storedUser && storedToken) {
+      console.log("login-view.jsx|localStorage user:", storedUser);
+      console.log("login-view.jsx|localStorage token:", storedToken);
+      onLoggedIn(storedUser, storedToken);
+    }
+  }, []); //Empty dependency array ensures this runs only once after the initial render
 
   return (
     <Form onSubmit={handleLoginSubmit}>
