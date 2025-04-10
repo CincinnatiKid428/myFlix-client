@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PropTypes } from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../redux/reducers/user";
@@ -11,6 +11,7 @@ import { Tooltip, OverlayTrigger, Offcanvas } from "react-bootstrap";
 
 import { useParams } from "react-router";
 import { Link } from "react-router";
+import logIt, { LOG_LEVEL_ERROR, LOG_LEVEL_INFO, LOG_LEVEL_DEBUG } from "../../util/log-it";
 
 const DB_FAVORITES_URI = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies/favorites/";
 
@@ -25,17 +26,16 @@ export const MovieView = ({ prev }) => {
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
-
-  console.log("movie-view.jsx|||user object from redux:", user);
+  const log = logIt;
 
   const { movieId } = useParams();
   const [isFavorite, setIsFavorite] = useState((user.FavoriteMovies).includes(movieId));
   const [showOffcanvas, setShowOffcanvas] = useState(false);
 
-  //Find movie to display
-  const movie = movies.find((foundMovie) => foundMovie._id === movieId);
+  log(LOG_LEVEL_DEBUG, `movie-view.jsx|* *movieId [${movieId}] isFavorite [${isFavorite}]`);
 
-  //Find similar movies array
+  //Find movie & similar movies array to display
+  const movie = movies.find((foundMovie) => foundMovie._id === movieId);
   const similarMovieArray = movies.filter((arrayMovie) => (movie.Genre.Name === arrayMovie.Genre.Name && movieId !== arrayMovie._id)) || [];
 
   //Function to render genre Tooltips
@@ -54,17 +54,17 @@ export const MovieView = ({ prev }) => {
         <h4>{director.Name} ({director.BirthYear} - {director.DeathYear ? director.DeathYear : ""})</h4>
         <hr />
         <h4>Biography:</h4>
-        {director.Bio.split('|').map((paragraph) => (
-          <p>
+        {director.Bio.split('|').map((paragraph, index) => (
+          <p key={`bio-${index}`}>
             {paragraph}
           </p>
         ))}
         <hr />
         <h4>Other Movies:</h4>
-        {director.Movies.map((mov) => (
-          <>
+        {director.Movies.map((mov, index) => (
+          <React.Fragment key={`movie-${index}`}>
             <span>{mov}</span><br />
-          </>
+          </React.Fragment>
         ))}
       </>
     );
@@ -73,7 +73,7 @@ export const MovieView = ({ prev }) => {
 
   //Handles API call to add favorite movie to user.FavoriteMovies
   const handleAddFav = async () => {
-    console.log("movie-view.jsx|handleAddFav()|Adding fav movie: " + movie.Title + " " + movie._id);
+    log(LOG_LEVEL_DEBUG, `movie-view.jsx|handleAddFav()|Adding fav movie: ${movie.Title} ${movie._id}`);
     try {
       const addFavResponse = await fetch((DB_FAVORITES_URI + movie._id), {
         method: "POST",
@@ -83,7 +83,7 @@ export const MovieView = ({ prev }) => {
         }
       });
       const responseData = await addFavResponse.json();
-      console.log("movie-view.jsx|handleAddFav()|responseData:", responseData);
+      log(LOG_LEVEL_DEBUG, "movie-view.jsx|handleAddFav()|responseData:", responseData);
       if (responseData) {
         dispatch(setUser(responseData));
         setIsFavorite(true);
@@ -91,13 +91,13 @@ export const MovieView = ({ prev }) => {
         alert("Something went wrong trying to add favorite, please try again.");
       }
     } catch (e) {
-      console.error("movie-view.jsx|handleAddFav()|ERROR during add handler:", e);
+      log(LOG_LEVEL_ERROR, "movie-view.jsx|handleAddFav()|Error during add handler:", e);
     }
   };
 
   //Handles API call to remove favorite movie to user.FavoriteMovies
   const handleRemoveFav = async () => {
-    console.log("movie-view.jsx|handleRemoveFav|Removing fav movie: " + movie.Title + " " + movie._id);
+    log(LOG_LEVEL_DEBUG, `movie-view.jsx|handleRemoveFav|Removing fav movie: ${movie.Title} ${movie._id}`);
 
     try {
       const removeFavResponse = await fetch((DB_FAVORITES_URI + movie._id), {
@@ -108,7 +108,7 @@ export const MovieView = ({ prev }) => {
         }
       });
       const responseData = await removeFavResponse.json();
-      console.log("movie-view.jsx|handleRemoveFav()|responseData:", responseData);
+      log(LOG_LEVEL_DEBUG, "movie-view.jsx|handleRemoveFav()|responseData:", responseData);
       if (responseData) {
         dispatch(setUser(responseData));
         setIsFavorite(false);
@@ -116,13 +116,17 @@ export const MovieView = ({ prev }) => {
         alert("Something went wrong trying to remove favorite, please try again.");
       }
     } catch (e) {
-      console.error("movie-view.jsx|handleRemoveFav()|ERROR during remove handler:", e);
+      log(LOG_LEVEL_ERROR, "movie-view.jsx|handleRemoveFav()|Error during remove handler:", e);
     }
   };
 
+  useEffect(() => {
+    setIsFavorite((user.FavoriteMovies).includes(movieId));
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [movieId]);
+
   return (
     <>
-      {window.scrollTo({ top: 0, left: 0, behavior: 'instant' }) /*Return screen to top each time user is in a new MovieView*/}
       <Row>
         <Col xs={12} md={5} className="d-flex justify-content-center" style={{ border: debugBorder }}>
           <img className="mt-3" src={movie.ImageURL} style={{ borderRadius: '5px', maxWidth: "100%" }} />

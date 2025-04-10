@@ -5,6 +5,7 @@ import { setUser } from "../../redux/reducers/user";
 import { PropTypes } from "prop-types";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router";
+import logIt, { LOG_LEVEL_ERROR, LOG_LEVEL_INFO, LOG_LEVEL_DEBUG } from "../../util/log-it";
 
 const DB_FAVORITES_URI = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies/favorites/";
 
@@ -14,6 +15,7 @@ export const MovieCard = ({ movie, prev }) => {
   const token = useSelector((state) => state.token);
   const movies = useSelector((state) => state.movies.list);
   const dispatch = useDispatch();
+  const log = logIt;
 
   const [isFavorite, setIsFavorite] = useState((user.FavoriteMovies).includes(movie._id));
 
@@ -21,7 +23,7 @@ export const MovieCard = ({ movie, prev }) => {
    * Handles API call to add favorite movie to user.FavoriteMovies
    */
   const handleAddFav = async () => {
-    console.log("movie-card.jsx|handleAddFav()|Adding fav movie: " + movie.Title + " " + movie._id);
+    log(LOG_LEVEL_DEBUG, `movie-card.jsx|handleAddFav()|Adding fav movie: ${movie.Title} ${movie._id}`);
     try {
       const addFavResponse = await fetch((DB_FAVORITES_URI + movie._id), {
         method: "POST",
@@ -31,7 +33,7 @@ export const MovieCard = ({ movie, prev }) => {
         }
       });
       const responseData = await addFavResponse.json();
-      //console.log("movie-card.jsx|handleAddFav()|responseData:", responseData);
+      log(LOG_LEVEL_DEBUG, "movie-card.jsx|handleAddFav()|responseData:", responseData);
       if (responseData) {
         dispatch(setUser(responseData));
         setIsFavorite(true);
@@ -40,7 +42,7 @@ export const MovieCard = ({ movie, prev }) => {
       }
 
     } catch (e) {
-      console.error("movie-card.jsx|handleAddFav()|ERROR during add handler:", e);
+      log(LOG_LEVEL_ERROR, "movie-card.jsx|handleAddFav()|Error during add handler:", e);
     }
   };
 
@@ -48,7 +50,7 @@ export const MovieCard = ({ movie, prev }) => {
    * Handles API call to remove favorite movie to user.FavoriteMovies
    */
   const handleRemoveFav = async () => {
-    console.log("movie-card.jsx|handleRemoveFav|Removing fav movie: " + movie.Title + " " + movie._id);
+    log(LOG_LEVEL_DEBUG, `movie-card.jsx|handleRemoveFav|Removing fav movie: ${movie.Title} ${movie._id}`);
 
     try {
       const removeFavResponse = await fetch((DB_FAVORITES_URI + movie._id), {
@@ -59,7 +61,7 @@ export const MovieCard = ({ movie, prev }) => {
         }
       });
       const responseData = await removeFavResponse.json();
-      console.log("movie-card.jsx|handleRemoveFav()|responseData:", responseData);
+      log(LOG_LEVEL_DEBUG, "movie-card.jsx|handleRemoveFav()|responseData:", responseData);
       if (responseData) {
         dispatch(setUser(responseData));
         setIsFavorite(false);
@@ -67,7 +69,7 @@ export const MovieCard = ({ movie, prev }) => {
         alert("Something went wrong trying to remove favorite, please try again.");
       }
     } catch (e) {
-      console.error("movie-card.jsx|handleRemoveFav()|ERROR during remove handler:", e);
+      log(LOG_LEVEL_ERROR, "movie-card.jsx|handleRemoveFav()|Error during remove handler:", e);
     }
 
 

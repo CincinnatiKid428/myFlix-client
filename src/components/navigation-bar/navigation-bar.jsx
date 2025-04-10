@@ -5,6 +5,7 @@ import { setToken } from "../../redux/reducers/token";
 import { setMovies } from "../../redux/reducers/movies";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router"; // Make sure you use "react-router-dom" if you're using it for routing
+import logIt, { LOG_LEVEL_ERROR, LOG_LEVEL_INFO, LOG_LEVEL_DEBUG } from "../../util/log-it";
 
 //Set to 1px for debug border
 const debugBorder = "0px solid red";
@@ -16,6 +17,7 @@ export const NavigationBar = () => {
 
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const log = logIt;
 
   // State to track whether the navbar is expanded
   const [expanded, setExpanded] = useState(false);
@@ -29,12 +31,12 @@ export const NavigationBar = () => {
   }
 
   const onLoggedOut = () => {
-    console.log("navigation-bar.jsx|Clearing localStorage and setting user/token/movies to null/[]...");
+    log(LOG_LEVEL_DEBUG, "navigation-bar.jsx|Clearing localStorage and setting user/token/movies to null/[]...");
     localStorage.clear();
     dispatch(setUser(null));
     dispatch(setToken(null));
     dispatch(setMovies([]));
-    console.log("navigation-bar.jsx|Logout complete.");
+    log(LOG_LEVEL_DEBUG, "navigation-bar.jsx|Logout complete.");
 
   };
 

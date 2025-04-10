@@ -15,7 +15,7 @@ export const MoviesList = () => {
 
   //Check entered text from state.movies.filter to be sure it is part of the title of the movie
   const filteredMovies = movies.filter((movie) =>
-    movie.Title.toLowerCase().includes(moviesFilter)
+    movie.Title.toLowerCase().startsWith(moviesFilter)
   );
 
   return (

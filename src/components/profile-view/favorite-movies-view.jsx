@@ -4,6 +4,9 @@ import { setUser } from "../../redux/reducers/user";
 
 import { MovieCard } from "../movie-card/movie-card";
 import Col from "react-bootstrap/Col";
+import logIt, { LOG_LEVEL_ERROR, LOG_LEVEL_INFO, LOG_LEVEL_DEBUG } from "../../util/log-it";
+
+
 
 export const FavoriteMoviesView = () => {
 
@@ -11,10 +14,11 @@ export const FavoriteMoviesView = () => {
   const token = useSelector((state) => state.token);
   const movies = useSelector((state) => state.movies.list);
   const dispatch = useDispatch();
+  const log = logIt;
 
   const favoritesIdArray = user.FavoriteMovies;
 
-  console.log("favorite-movies-view.jsx | favoritesIdArray prop is: ", favoritesIdArray);
+  log(LOG_LEVEL_DEBUG, "favorite-movies-view.jsx | favoritesIdArray prop is: ", favoritesIdArray);
 
   /**
    * 
@@ -27,7 +31,7 @@ export const FavoriteMoviesView = () => {
       favoritesIdArray.includes(movie._id)
     );
 
-    console.log("favorite-movies-view.jsx|loadFavorites() | returning favoriteMovies: ", favoriteMovies);
+    log(LOG_LEVEL_DEBUG, "favorite-movies-view.jsx|loadFavorites() | returning favoriteMovies: ", favoriteMovies);
     return favoriteMovies;
   }
 

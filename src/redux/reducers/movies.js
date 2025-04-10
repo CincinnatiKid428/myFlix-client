@@ -3,6 +3,9 @@
 //     & the filtered list of movie IDs
 //-----------------------------------------------------------------
 import { createSlice } from "@reduxjs/toolkit";
+import logIt, { LOG_LEVEL_ERROR, LOG_LEVEL_INFO, LOG_LEVEL_DEBUG } from "../../util/log-it";
+
+const log = logIt;
 
 const moviesSlice = createSlice({
   name: "movies",
@@ -13,11 +16,11 @@ const moviesSlice = createSlice({
   reducers: {
     setMovies: (state, action) => {
       state.list = action.payload;
-      console.log("REDUCER|movies.js|setMovies() to:", action.payload);
+      log(LOG_LEVEL_DEBUG, "REDUCER|movies.js|setMovies() to:", action.payload);
     },
     setFilter: (state, action) => {
       state.filter = action.payload;
-      console.log("REDUCER|movies.js|setFilter() to:", action.payload);
+      log(LOG_LEVEL_DEBUG, "REDUCER|movies.js|setFilter() to:", action.payload);
     }
   }
 });

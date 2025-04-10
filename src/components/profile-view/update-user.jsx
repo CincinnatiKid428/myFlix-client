@@ -5,6 +5,8 @@ import { setUser } from "../../redux/reducers/user";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router";
+import logIt, { LOG_LEVEL_ERROR, LOG_LEVEL_INFO, LOG_LEVEL_DEBUG } from "../../util/log-it";
+
 const UPDATE_USER_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/users";
 
 //Use 1px to add debug borders with style="border: {debugBorder}" element attrib
@@ -13,6 +15,7 @@ const debugBorder = "0px solid purple";
 export const UpdateUser = () => {
 
   const dispatch = useDispatch();
+  const log = logIt;
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const navigate = useNavigate();
@@ -25,16 +28,16 @@ export const UpdateUser = () => {
   const handleUpdateSubmit = async (event) => {
     event.preventDefault();
 
-    console.log("update-user.jsx | Starting handleUpdateSubmit()");
+    log(LOG_LEVEL_DEBUG, "update-user.jsx | Starting handleUpdateSubmit()");
 
-    updateData = {
+    const updateData = {
       Password: newPassword,
       Email: newEmail,
       Birthdate: newBirthday,
     };
 
-    console.log("update-user.jsx | Attempting update with data:", updateData);
-    console.log("update-user.jsx | API call to:", (UPDATE_USER_URL + `/${user.Username}`));
+    log(LOG_LEVEL_DEBUG, "update-user.jsx | Attempting update with data:", updateData);
+    log(LOG_LEVEL_DEBUG, "update-user.jsx | API call to:", (UPDATE_USER_URL + `/${user.Username}`));
 
     try {
       const apiResponse = await fetch((UPDATE_USER_URL + `/${user.Username}`), {
@@ -49,7 +52,7 @@ export const UpdateUser = () => {
       const apiResponseJSON = await apiResponse.json();
       if (apiResponseJSON) {
         alert("Update successful.");
-        console.log("update-user.jsx | Successful update, the response user object is: ", apiResponseJSON);
+        log(LOG_LEVEL_INFO, "update-user.jsx | Successful update, the response user object is: ", apiResponseJSON);
         dispatch(setUser(apiResponseJSON));
 
         //Clear form fields after successful update & navigate back to /profile
@@ -62,7 +65,7 @@ export const UpdateUser = () => {
         alert("Update failed, please try again.");
       }
     } catch (e) {
-      console.error("update-user.jsx|Error during update submit : ", e);
+      log(LOG_LEVEL_ERROR, "update-user.jsx|Error during update submit : ", e);
     }
 
   };

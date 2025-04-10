@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import logIt, { LOG_LEVEL_ERROR, LOG_LEVEL_INFO, LOG_LEVEL_DEBUG } from "../../util/log-it";
+
 const SIGNUP_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/users";
-
-
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -13,6 +13,7 @@ export const SignupView = () => {
   const [birthday, setBirthday] = useState("");
 
   const navigate = useNavigate();
+  const log = logIt;
 
   const handleSignupSubmit = (event) => {
     event.preventDefault();
@@ -24,7 +25,7 @@ export const SignupView = () => {
       Birthdate: birthday,
     };
 
-    console.log("signup-view.jsx | Attempting signup with data:", signupData);
+    log(LOG_LEVEL_DEBUG, "signup-view.jsx|Attempting signup with data:", signupData);
 
     fetch(SIGNUP_URL, {
       method: "POST",
@@ -36,13 +37,14 @@ export const SignupView = () => {
       .then((response) => {
         if (response.ok) {
           alert("Sign up successful, you can now log in.");
+          log(LOG_LEVEL_INFO, "signup-view.jsx|Successful account signup user:", signupData.Username);
           navigate("/login"); //Hook to navigate back to /login
         } else {
           alert("Sign up failed, please try again.");
         }
       })
       .catch((e) => {
-        console.error("signup-view.jsx | Error during sign up submit : ", e);
+        log(LOG_LEVEL_ERROR, "signup-view.jsx|Error during sign up submit : ", e);
       });
   };
 

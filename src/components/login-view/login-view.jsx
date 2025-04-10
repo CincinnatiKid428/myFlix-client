@@ -6,6 +6,7 @@ import { setUser } from "../../redux/reducers/user";
 import { setToken } from "../../redux/reducers/token";
 import { setMovies } from "../../redux/reducers/movies";
 import { useDispatch } from "react-redux";
+import logIt, { LOG_LEVEL_ERROR, LOG_LEVEL_INFO, LOG_LEVEL_DEBUG } from "../../util/log-it";
 
 const ENABLE_DATA_CLEAR = false; //Set true to enable button to clear stored states/localStorage
 const LOGIN_URL = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/login";
@@ -14,6 +15,7 @@ export const LoginView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const log = logIt;
 
   const onLoggedIn = (user, token) => {
     dispatch(setUser(user));
@@ -25,14 +27,14 @@ export const LoginView = () => {
     dispatch(setUser(null));
     dispatch(setToken(null));
     dispatch(setMovies([]));
-    console.log("DEBUG BUTTON|login-view.jsx|...cleared localStorage and user/token/movies");
+    log(LOG_LEVEL_DEBUG, "DEBUG BUTTON|login-view.jsx|...cleared localStorage and user/token/movies");
   };
 
   //Handler for form submit
   const handleLoginSubmit = (event) => {
     event.preventDefault();
 
-    console.log("login-view.jsx | Starting handleLoginSubmit()");
+    log(LOG_LEVEL_DEBUG, "login-view.jsx | Starting handleLoginSubmit()");
 
     const loginData = {
       Username: username,
@@ -48,25 +50,25 @@ export const LoginView = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("login-view.jsx | Login response: ", data);
+        log(LOG_LEVEL_DEBUG, "login-view.jsx | Login response: ", data);
         if (data.user) {
           localStorage.setItem("user", JSON.stringify(data.user));
           localStorage.setItem("token", data.token);
           onLoggedIn(data.user, data.token);
-          console.log("login-view.jsx|Login successful.");
+          log(LOG_LEVEL_DEBUG, "login-view.jsx|Login successful.");
         } else {
           alert("No such user");
         }
       })
       .catch((e) => {
         alert("Something went wrong");
-        console.log("login-view.jsx | Something went wrong :", e);
-        console.error("login-view.jsx | Error during authentication :", e);
+        log(LOG_LEVEL_ERROR, "login-view.jsx | Error during authentication :", e);
 
+        log(LOG_LEVEL_ERROR, "login-view.jsx | Cleanup - clearing localStorage...");
         localStorage.clear();
-        console.error("login-view.jsx | dispatch(setUser(null))...");
+        log(LOG_LEVEL_ERROR, "login-view.jsx | dispatch(setUser(null))...");
         dispatch(setUser(null));
-        console.error("login-view.jsx | dispatch(setToken(null))...");
+        log(LOG_LEVEL_ERROR, "login-view.jsx | dispatch(setToken(null))...");
         dispatch(setToken(null));
       });
   };
@@ -78,8 +80,7 @@ export const LoginView = () => {
 
     //Update state if we have valid stored user/token
     if (storedUser && storedToken) {
-      console.log("login-view.jsx|localStorage user:", storedUser);
-      console.log("login-view.jsx|localStorage token:", storedToken);
+      log(LOG_LEVEL_DEBUG, "login-view.jsx|localStorage user & token found");
       onLoggedIn(storedUser, storedToken);
     }
   }, []); //Empty dependency array ensures this runs only once after the initial render

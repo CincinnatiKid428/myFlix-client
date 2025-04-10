@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 
+import logIt, { LOG_LEVEL_ERROR, LOG_LEVEL_INFO, LOG_LEVEL_DEBUG } from "../../util/log-it";
+
 import { MoviesList } from "../movies-list/movies-list";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
@@ -16,10 +18,7 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 const API_GET_ALL_MOVIES = 'https://fast-taiga-09096-54ce00eca848.herokuapp.com/movies'; //move to environment var later
 
 const MainView = () => {
-
-  //const storedUser = JSON.parse(localStorage.getItem("user"));
-  //const storedToken = localStorage.getItem("token");
-
+  const log = logIt;
   const dispatch = useDispatch();
 
   const [loadingMovies, setLoadingMovies] = useState(true); //State: Movies loading - conditional for rendering views
@@ -30,12 +29,13 @@ const MainView = () => {
 
   //API call to get list of all movies from remote Heroku server running movie_api app
   useEffect(() => {
-    console.log("main-view.jsx | Starting useEffect() hook...");
+
+    log(LOG_LEVEL_DEBUG, "main-view.jsx|Starting useEffect() hook...");
 
     async function fetchMovieData() {
 
       if (!token) {
-        console.log("Skipping fetch until authenticated user logged in...");
+        log(LOG_LEVEL_DEBUG, "main-view.jsx|Skipping fetch until authenticated user logged in...");
         return;
       }
 
@@ -50,7 +50,7 @@ const MainView = () => {
             }
           });
           const responseJSON = await response.json();
-          console.log("main-view.jsx | Return from movie_api:", responseJSON);
+          log(LOG_LEVEL_DEBUG, "main-view.jsx|Return from movie_api:", responseJSON);
 
           if (responseJSON) {
             dispatch(setMovies(responseJSON));
@@ -58,7 +58,7 @@ const MainView = () => {
             dispatch(setMovies([]));
           }
         } catch (e) {
-          console.error("main-view.jsx|Error in API call:", e);
+          log(LOG_LEVEL_ERROR, "main-view.jsx|Error in API call:", e);
         } finally {
           setLoadingMovies(false);
         }
@@ -68,7 +68,7 @@ const MainView = () => {
     fetchMovieData();
   }, [token]);
 
-  //If movies are loading don't render the regular view, render loading spinner...
+  //Show spinner if loading yet
   if (!movies && loadingMovies) {
     return (
       <>

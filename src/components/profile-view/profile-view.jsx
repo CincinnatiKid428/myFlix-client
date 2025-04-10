@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { UpdateUser } from "./update-user";
 import { FavoriteMoviesView } from "./favorite-movies-view";
+import logIt, { LOG_LEVEL_ERROR, LOG_LEVEL_INFO, LOG_LEVEL_DEBUG } from "../../util/log-it";
 
 //Image imports - Matinee images created using www.recraft.ai and are owned by Recraft.
 import matinee4Transparent from "../../img/matinee4-transparent.png";
@@ -32,20 +33,23 @@ function formatUserBday(bday) {
 }
 
 export const ProfileView = () => {
-  console.log("profile-view.jsx | Starting");
 
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const movies = useSelector((state) => state.movies.list);
   const dispatch = useDispatch();
+  const log = logIt;
+
+  log(LOG_LEVEL_DEBUG, "profile-view.jsx | Starting");
 
   const onLoggedOut = () => {
+    log(LOG_LEVEL_DEBUG, "profile-view.jsx|Logging user out, clearing localStorage...");
     localStorage.clear();
-    console.log("profile-view.jsx|dispatch(setUser(null))...");
+    log(LOG_LEVEL_DEBUG, "profile-view.jsx|dispatch(setUser(null))...");
     dispatch(setUser(null));
-    console.log("profile-view.jsx|dispatch(setToken(null))...");
+    log(LOG_LEVEL_DEBUG, "profile-view.jsx|dispatch(setToken(null))...");
     dispatch(setToken(null));
-    console.log("profile-view.jsx|Logout complete.");
+    log(LOG_LEVEL_DEBUG, "profile-view.jsx|Logout complete.");
   };
 
   //Handles account removal with user confirmation required before DELETE call
@@ -64,14 +68,14 @@ export const ProfileView = () => {
         .then((response) => {
           if (response.ok) {
             alert("Account removal successful");
-            console.log(`profile-view.jsx|handleDeleteAcct() | Successful delete, removed user ${user.Username}`, response);
-            onLoggedOut(); //Logout and clear all the local storage & state variables
+            log(LOG_LEVEL_INFO, `profile-view.jsx|handleDeleteAcct()|Successful delete, removed user ${user.Username}`, response);
+            onLoggedOut(); //Logout user and clear all the local storage & state variables
           } else {
             alert("Delete failed, please try again.");
           }
         })
         .catch((e) => {
-          console.error("profile-view.jsx|handleDeleteAcct()  | Error during delete submit : ", e);
+          (LOG_LEVEL_ERROR, "profile-view.jsx|handleDeleteAcct()|Error during delete submit : ", e);
         });
     } else alert("Your account was not removed.");
 
