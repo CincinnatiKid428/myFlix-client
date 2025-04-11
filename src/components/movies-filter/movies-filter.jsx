@@ -10,6 +10,7 @@ export const MoviesFilter = () => {
 
   return (
     <Form.Control
+      id="searchBar"
       type="text"
       placeholder="Search..."
       value={filter}
