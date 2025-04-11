@@ -34,6 +34,16 @@ Users selecting Profile from the navbar will be shown their accout information, 
 
 A list of the user's favorite movies will follow the account information/update section:
 ![Matinee profile favorite movies](/src/img/screenshot-ProfileView2.png)
+
+## Logging with *Matinee*
+Logging for this application is done through a utility module `/util/log-it.js` and will log messages according to an environment variable which sets a log level.  This variable is `SYS_LOG_LEVEL` and should be assigned a value from 0-3 where the values correspond to :
+- 0 : Error
+- 1 : Info
+- 2 : Debug
+- 3 : Log
+  
+For example, setting `SYS_LOG_LEVEL` to 2 will allow logging for Error, Info and Debug levels.  A value of 3 will show ALL logging messages.  Some browsers will not show Debug logging by default when inspecting a page, but can be allowed if verbose logging is enabled in the console settings.  *Note: The default value will be 1 allowing only Error and Info logging into the console log.*
+
 ## Technologies Used
 - React
 - React-Bootstrap
