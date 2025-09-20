@@ -10,7 +10,7 @@ See https://fast-taiga-09096-54ce00eca848.herokuapp.com/documentation for the ba
 - Allows for persistent login should the user close the browser and navigate back to the app without logout
 - Displays list of movies with an image & title that can be clicked for more information about the movie
 - Allows users to get additional information about genre and director when viewing details about a specific movie
-- Allows users to update account information (passowrd, email & birthdate)
+- Allows users to update account information (password, email & birthdate)
 - Allows users to add/remove movies from a favorites list
 - Allows users to deregister their account
 ## Usage
