@@ -11,9 +11,11 @@ const DB_FAVORITES_URI = "https://fast-taiga-09096-54ce00eca848.herokuapp.com/mo
 
 export const MovieCard = ({ movie, prev }) => {
 
+  //Get state variables from Redux
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const movies = useSelector((state) => state.movies.list);
+
   const dispatch = useDispatch();
   const log = logIt;
 
@@ -91,16 +93,21 @@ export const MovieCard = ({ movie, prev }) => {
       <Link to={movieViewRouteURL} >
         <Card.Img variant="top" src={movie.ImageURL} />
       </Link>
-      <Card.Body className="d-flex flex-column">
+      <Card.Body className="d-flex flex-column movie-card-bg-color">
         <Link to={movieViewRouteURL} >
           <Card.Title style={{ color: "#000000" }}>{movie.Title}</Card.Title>
         </Link >
+
+        <Button
+          variant="link"
+          className="favorite-button movie-view-favorite"
+          onClick={isFavorite ? handleRemoveFav : handleAddFav}
+          aria-pressed={isFavorite}
+        >
+          <i className={`bi bi-heart-fill ${isFavorite ? 'text-danger' : 'text-muted'}`} />
+        </Button>
+
       </Card.Body>
-      {isFavorite ? (
-        <Button variant="danger" className="btn-sm mt-auto w-auto" onClick={handleRemoveFav}>Remove Favorite</Button>
-      ) : (
-        <Button variant="success" className="btn-sm mt-auto w-auto" onClick={handleAddFav}>Add Favorite</Button>
-      )}
     </Card >
 
   );

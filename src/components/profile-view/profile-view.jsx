@@ -85,6 +85,7 @@ export const ProfileView = () => {
     <>
       {window.scrollTo({ top: 0, left: 0, behavior: 'instant' })}
       <Row className="d-flex justify-content-center mt-2" style={{ border: debugBorder }}>
+
         <Col sm={10} md={6} style={{ border: debugBorder }}>
           <div className="align-self-center ps-2" style={{ backgroundColor: "#ffffff" }}>
             <p>Username : {user.Username}</p>

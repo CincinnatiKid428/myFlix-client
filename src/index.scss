@@ -1,16 +1,23 @@
 $primary: #ffb52d;
+//$body-bg: #FFF;
 $body-bg: #ffdea0;
 
 $input-bg: #FFF;
 //$input-border-color: #000;
 
 .custom-navbar {
-  background-color: #fac665
+  background-color: #fac665;
 }
 
 .img-rounded-corners {
   border-radius: 10px
 }
+
+.movie-card-bg-color {
+  background-color: #FFF;
+}
+
+
 
 .movie-view-info-field {
   text-decoration: underline;
@@ -23,4 +30,77 @@ $input-bg: #FFF;
   word-wrap: break-word;
 }
 
+
+
 @import '~bootstrap/scss/bootstrap.scss';
+
+/* ----- MoiveCard Component Favorite Toggle ----- */
+.favorite-button {
+  height: 30px;
+  width: 30px;
+  padding: 0;
+  font-size: larger;
+  background-color: #FFFFFF;
+  border: none;
+  -webkit-tap-highlight-color: #FFFFFF;
+  /*
+  width: fit-content;
+  padding-left: 2px;
+  padding-right: 2px;
+*/
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2px;
+}
+
+.favorite-button.btn-link {
+  color: inherit;
+}
+
+.favorite-button.btn-link:hover,
+.favorite-button.btn-link:focus,
+.favorite-button.btn-link:active,
+.favorite-button.btn-link:focus-visible,
+.favorite-button.btn-link:active:focus {
+  background-color: #FFFFFF;
+  border: none;
+  box-shadow: none;
+  color: inherit;
+  text-decoration: none;
+}
+
+.favorite-button.btn-link:active {
+  transform: scale(1.2);
+  transition: 0.1s ease;
+}
+
+/* ----- MoiveView styling for favorite toggle ----- */
+
+/* Wrapper must be relative */
+.movie-image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Image styling (optional polish) 
+.movie-image-wrapper img {
+  border-radius: 5px;
+  max-width: 100%;
+  display: block;
+}
+*/
+
+.movie-view-favorite {
+  /* Positions the heart */
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 2;
+
+  // height: 35px;
+  // width: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

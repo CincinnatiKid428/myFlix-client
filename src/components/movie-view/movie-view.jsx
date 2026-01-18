@@ -129,8 +129,21 @@ export const MovieView = ({ prev }) => {
     <>
       <Row>
         <Col xs={12} md={5} className="d-flex justify-content-center" style={{ border: debugBorder }}>
-          <img className="mt-3" src={movie.ImageURL} style={{ borderRadius: '5px', maxWidth: "100%" }} />
+          <div className="movie-image-wrapper">
+            <img className="mt-3" src={movie.ImageURL} style={{ borderRadius: '5px', maxWidth: "100%" }} />
+
+            <Button
+              variant="link"
+              className="favorite-button movie-view-favorite"
+              onClick={isFavorite ? handleRemoveFav : handleAddFav}
+              aria-pressed={isFavorite}
+            >
+              <i className={`bi bi-heart-fill ${isFavorite ? 'text-danger' : 'text-muted'}`} />
+            </Button>
+
+          </div>
         </Col>
+
         <Col xs={12} md={7} className="mt-3" style={{ border: debugBorder }}>
           <div>
             <span className="movie-view-info-field">Title:</span>
@@ -185,11 +198,9 @@ export const MovieView = ({ prev }) => {
             <Link to={prev}>
               <Button className="btn-md" type="button">Back</Button>
             </Link>
-            {isFavorite ? (
-              <Button variant="danger" className="btn-md" onClick={handleRemoveFav}>Remove Favorite</Button>
-            ) : (
-              <Button variant="success" className="btn-md" onClick={handleAddFav}>Add Favorite</Button>
-            )}
+
+
+
           </div>
 
         </Col>

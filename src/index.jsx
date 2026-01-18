@@ -5,7 +5,7 @@ import { createRoot } from 'react-dom/client';
 import Container from "react-bootstrap/Container";
 import MainView from './components/main-view/main-view';
 
-//import "bootstrap/dist/css/bootstrap.min.css"; //needs to be before scss import
+import 'bootstrap-icons/font/bootstrap-icons.css'; //icons for fav toggle in MovieCard component
 import "./index.scss";
 
 // Main component (will eventually use all the others)
