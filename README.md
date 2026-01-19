@@ -21,12 +21,16 @@ or they can use the navbar menu to go to a singup page to create an account:
 ![Matinee signup screen](/src/img/screenshot-SignupView.png)
 
 ### MainView
-After authentication, users will be presented with a view of a list of movie cards, a search bar filter, new navbar menu options to view Home (MainView), Profile or Logout. Each movie card can be clicked to get more specific information about the movie and each card has a button to add/remove that movie from the user's favorite movies.
-![Matinee home screen](/src/img/screenshot-MainView.png)
+After authentication, users will be presented with a view of a list of movie cards, a search bar filter, new navbar menu options to view Home (MainView), Profile or Logout. Each movie card can be clicked to get more specific information about the movie and each card has a heart-shaped favorite button to add/remove that movie from the user's favorite movies.
+
+<img width="1150" height="1150" alt="image" src="https://github.com/user-attachments/assets/7dca5957-a35d-49ef-9502-5d672470257f" />
+
 
 ### MovieView
-After clicking a movie card, movie-specific information will be displayed with the option to gain additional genre info (via Tooltip) and director info (via Offcanvas). Movies can be added/removed to/from the favorites list and there will be a list of similar movies by genre listed after the movie info.
-![Matinee movie info view](/src/img/screenshot-MovieView.png)
+After clicking a movie card, movie-specific information will be displayed with the option to gain additional genre info (via Tooltip) and director info (via Offcanvas). Movies can be added/removed to/from the favorites list by toggling the heart-shaped button in the bottom right corner of the movie poster images and there will be a list of similar movies by genre listed after the movie info.
+
+<img width="1152" height="600" alt="image" src="https://github.com/user-attachments/assets/3f1a92eb-ecf7-411d-9a73-56fc39c410aa" />
+
 
 ### ProfileView
 Users selecting Profile from the navbar will be shown their accout information, offer the delete account button and have the option to update their info using the update section. *Note: All fields must be filled to complete an account info update, even if you enter the same value as stored in the database:*
